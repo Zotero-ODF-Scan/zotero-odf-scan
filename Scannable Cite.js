@@ -20,6 +20,10 @@ function doExport() {
     while (item = Zotero.nextItem()) {
         Zotero.write("{|");
         var library_id = item.libraryID ? item.libraryID : 0;
+	//this breaks the select functionality for groups, but makes the cite scannable (group library IDs are different for zotero select and URI)
+	if (item.uri.indexOf("/groups/")!=-1){
+		library_id = item.uri.match(/groups\/(\d+)\//)[1];			
+	}
         var titleS = (item.title) ? item.title : "(no title)";
      	if (item.creators.length >0){
   		var creatorsS = item.creators[0].lastName;
