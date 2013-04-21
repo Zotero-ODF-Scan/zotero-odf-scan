@@ -19,7 +19,7 @@ function doExport() {
     var item;
     while (item = Zotero.nextItem()) {
         Zotero.write("{|");
-        var library_id = item.LibraryID ? item.LibraryID : 0;
+        var library_id = item.libraryID ? item.libraryID : 0;
         var titleS = (item.title) ? item.title : "(no title)";
      	if (item.creators.length >0){
   		var creatorsS = item.creators[0].lastName;
