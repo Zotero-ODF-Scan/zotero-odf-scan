@@ -15,37 +15,43 @@
 	"lastUpdated": "2013-04-16 11:10:08"
 }
 
+// legal types are weird
+var LEGAL_TYPES = ["patent","case","statute","bill","treaty","regulation","gazette"];
+var Mem = function () {
+    var isLegal = false;
+	var lst = [];
+    this.init = function (item) { lst = []; isLegal = (LEGAL_TYPES.indexOf(item.itemType)>-1)};
+	this.set = function (str, punc, slug) { if (!punc) {punc=""}; if (str) {lst.push((str + punc))} else if (!isLegal) {lst.push(slug)}};
+	this.setlaw = function (str, punc) { if (!punc) {punc=""}; if (str && isLegal) {lst.push(str + punc)}};
+	this.get = function () { return lst.join(" ") };
+}
+var mem = new Mem();
+var memdate = new Mem();
+
 function doExport() {
     var item;
     while (item = Zotero.nextItem()) {
-    	var isLegalType = legalTypeItem(item);
+        mem.init(item);
         Zotero.write("{ |");
         var library_id = item.LibraryID ? item.LibraryID : 0;
-	// Ignore empty title on legal types
-	var titleS = (item.title) ? item.title : "(no title)";
-	// Ignore empty creator on legal types
-	if (item.creators.length >0){
-  		var creatorsS = item.creators[0].lastName;
-        	if (item.creators.length > 2) creatorsS += " et al.";
-        	else if (item.creators.length == 2) creatorsS += " &amp; " + item.creators[1].lastName;
-	}
-	else if (!isLegalType) {
-		var creatorsS = "anon."
-	}
-	// Include authority on legal types
-	if (isLegalType) {
-		var authorityS
-	}
-	// Include volume, reporter and page on legal types
-	
-        var date = Zotero.Utilities.strToDate(item.date);
+		if (item.creators.length >0){
+  			mem.set(item.creators[0].lastName,",");
+        	if (item.creators.length > 2) mem.set("et al.", ",");
+        	else if (item.creators.length == 2) mem.set("&amp; " + item.creators[1].lastName, ",");
+		}
+        else {
+			mem.set(false, ",","anon.");
+        }
+		mem.set(item.title,",","(no title)");
+        mem.setlaw(item.authority, ",");
+        mem.setlaw(item.volume);
+        mem.setlaw(item.reporter);
+        mem.setlaw(item.pages);
+        memdate.setlaw(item.court,",");
+	    var date = Zotero.Utilities.strToDate(item.date);
         var dateS = (date.year) ? date.year : item.date;
-        Zotero.write(creatorsS + ", " + titleS + ", " + dateS + "| | |");
+        memdate.set(dateS,"","no date");
+        Zotero.write(" " + mem.get() + " (" + memdate.get() + ") | | |");
         Zotero.write("zotero://select/items/" + library_id + "_" + item.key + "}");
     }
-}
-
-function legalTypeItem (item) {
-	var legal_types = ["legislation","legal_case","patent","bill","treaty","regulation"];
-	return (legal_types.indexOf(item.type) > -1);
 }
