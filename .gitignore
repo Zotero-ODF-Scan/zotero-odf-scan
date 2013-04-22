@@ -35,3 +35,9 @@ nosetests.xml
 .pydevproject
 /README.md~
 /zotero-odfscan.py~
+*~
+release.sh
+build.sh
+install.bak
+update.bak
+rdf-odf-scan.xpi
