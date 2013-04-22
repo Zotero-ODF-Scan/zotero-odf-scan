@@ -1,0 +1,8 @@
+content   rtf-odf-scan-for-zotero                 chrome/content/
+skin      rtf-odf-scan-for-zotero   default   chrome/skin/
+locale    rtf-odf-scan-for-zotero   en-US         chrome/locale/en-US/
+
+contract	@mystery-lab/RtfOdfScanForZotero;1 	{487b2bd0-9436-13e0-9fd8-0901210c9a43}
+
+overlay   chrome://zotero/content/zoteroPane.xul   chrome://rtf-odf-scan-for-zotero/content/overlay.xul
+
