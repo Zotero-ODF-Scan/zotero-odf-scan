@@ -71,7 +71,7 @@ var Zotero_RTFScan = new function() {
 		}
 		return l10n;
 	}
-    
+	
 	
 	/** INTRO PAGE UI **/
 	
@@ -165,17 +165,17 @@ var Zotero_RTFScan = new function() {
 				leafName = leafName.substr(0, dotIndex);
 			}
 			var suffix = _getString(fileType + "Scan.scannedFileSuffix" + outputMode);
-            if (outputMode) {
-			    othersuffix = "";
-			    if (outputMode === "tocitations") {
-				    othersuffix = " " + _getString(fileType + "Scan.scannedFileSuffixtomarkers");
-			    } else if (outputMode === "tomarkers") {
-				    othersuffix = " " + _getString(fileType + "Scan.scannedFileSuffixtocitations");
-			    }
-			    if (leafName.length > othersuffix.length && othersuffix === leafName.slice(othersuffix.length * -1)) {
-				    leafName = leafName.slice(0, othersuffix.length * -1);
-			    }
-            }
+			if (outputMode) {
+				othersuffix = "";
+				if (outputMode === "tocitations") {
+					othersuffix = " " + _getString(fileType + "Scan.scannedFileSuffixtomarkers");
+				} else if (outputMode === "tomarkers") {
+					othersuffix = " " + _getString(fileType + "Scan.scannedFileSuffixtocitations");
+				}
+				if (leafName.length > othersuffix.length && othersuffix === leafName.slice(othersuffix.length * -1)) {
+					leafName = leafName.slice(0, othersuffix.length * -1);
+				}
+			}
 			fp.defaultString = leafName+" "+ suffix +"."+fileExt;
 		} else {
 			fp.defaultString = "Untitled." + fileExt;
@@ -205,16 +205,16 @@ var Zotero_RTFScan = new function() {
 	function _refreshPath() {
 		var fileType = Zotero.Prefs.get("rtfScan.fileType");
 		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
-        if (Zotero.Prefs.get(fileType + "Scan.lastInputFile" + outputMode)) {
-		    document.getElementById("input-path").value = Zotero.Prefs.get(fileType + "Scan.lastInputFile" + outputMode);
-        } else {
-            document.getElementById("input-path").value = _getString("rtfScan.file.noneSelected.label");
-        }
-        if (Zotero.Prefs.get(fileType + "Scan.lastOutputFile" + outputMode)) {
-		    document.getElementById("output-path").value = Zotero.Prefs.get(fileType + "Scan.lastOutputFile" + outputMode);
-        } else {
-            document.getElementById("input-path").value = _getString("rtfScan.file.noneSelected.label");
-        }
+		if (Zotero.Prefs.get(fileType + "Scan.lastInputFile" + outputMode)) {
+			document.getElementById("input-path").value = Zotero.Prefs.get(fileType + "Scan.lastInputFile" + outputMode);
+		} else {
+			document.getElementById("input-path").value = _getString("rtfScan.file.noneSelected.label");
+		}
+		if (Zotero.Prefs.get(fileType + "Scan.lastOutputFile" + outputMode)) {
+			document.getElementById("output-path").value = Zotero.Prefs.get(fileType + "Scan.lastOutputFile" + outputMode);
+		} else {
+			document.getElementById("input-path").value = _getString("rtfScan.file.noneSelected.label");
+		}
 	}
 	
 	/** SCAN PAGE UI **/
@@ -538,7 +538,8 @@ var Zotero_RTFScan = new function() {
 						item.uri = ['http://zotero.org/users/' + Zotero.userID + '/items/' + myidlst[1]];
 						item.uris = item.uri.slice();
 					} else {
-						item.uri = ['http://zotero.org/groups/' + myidlst[0] + '/items/' + myidlst[1]]
+						var groupID = Zotero.Groups.getGroupIDFromLibraryID(myidlst[0]);
+						item.uri = ['http://zotero.org/groups/' + groupID + '/items/' + myidlst[1]]
 						item.uris = item.uri.slice();
 					}
 				} else {
