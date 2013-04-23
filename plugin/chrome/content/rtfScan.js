@@ -259,14 +259,14 @@ var Zotero_RTFScan = new function() {
 		var checkStringRex = /(<[^\/>][^>]*>)*{[^<>\|]*|[^<>\|]*|[^<>\|]*|[^<>\|]*|[^<>\|]*}(<\/[^>]*>)*/;
 		var openTagSplitter = /(<[^\/>][^>]*>)/;
 		var closeTagSplitter = /(<\/[^>]*>)/;
-		var rexSingleton = /<[^>]*\/>]/;
-		var rexSpace = /<text:s\/>/;
+		var rexSingleton = /<[^>]*\/>]/g;
+		var rexSpace = /<text:s\/>/g;
 		var rexPlainTextLinks = /({[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*})/;
 		var rexWrappedLinks = /(<[^>]*xlink:href=\"[^\"]*\"[^>]*>\s*{[^|}]*\|[^|}]*\|[^|}]*\|[^|}]*}\s*<[^>]*>)/;
 		var rexNativeLinks = /(<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*[^>]*\/>[^<]*<text:reference-mark-end[^>]*\/>)/;
 		var rexCite = /({[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*})/;
 
-		var rexFixMarkupBold = /\*\*(.*?)\*\*/;
+		var rexFixMarkupBold = /[\*][\*](.*?)[\*][\*]/;
 		var rexFixMarkupItalic = /\*(.*?)\*/;
 
 		var rexTextAll = /{\s*([^|}]*)\|\s*([^|}]*)\s*\|\s*([^|}]*)\s*\|([^|}]*?)\s*\|\s*([^|}]*)\s*}/g;
@@ -320,7 +320,7 @@ var Zotero_RTFScan = new function() {
 					} else {
 						// If tags are mismatched the file is corrupt.
 						// Do not make the situation worse.
-						throw "Mismatched tags. Original document is corrupt. Aborting."
+						throw "Mismatched tags: "+m[2]+" "+m[4]+". Original document is corrupt. Aborting."
 					}
 				} else {
 					break;
@@ -571,8 +571,8 @@ var Zotero_RTFScan = new function() {
 		}
 
 		ODFConv.prototype.fixMarkup = function (str) {
-			str = str.replace(rexFixMarkupBold, "&lt;b&gt;\\1&lt;/b&gt;");
-			str = str.replace(rexFixMarkupItalic, "&lt;b&gt;\\1&lt;/b&gt;");
+			str = str.replace(rexFixMarkupBold, "&lt;b&gt;$1&lt;/b&gt;");
+			str = str.replace(rexFixMarkupItalic, "&lt;i&gt;$1&lt;/i&gt;");
 			return str;
 		}
 
