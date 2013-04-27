@@ -10,8 +10,8 @@ function cleanup () {
   trap "" EXIT
   trap "" SIGINT
   reset -I
-  cp install.rdf install.bak
-  cp update.rdf update.bak
+  rm -f update.rdf
+  rm -f about.xul
 
   #hg revert chrome/content/about.xul
   exit 0
@@ -24,8 +24,8 @@ function finish () {
   trap "" EXIT
   trap "" SIGINT
   reset -I
-  cp install.rdf install.bak
-  cp update.rdf update.bak
+  rm -f update.rdf
+  rm -f about.xul
   exit 0
 }
 trap finish EXIT
@@ -149,6 +149,7 @@ cp update.rdf rtf-odf-scan-for-zotero.rdf
 cp updateInfo.xhtml rtf-odf-scan-for-zotero.xhtml
 zip rtf-odf-scan-for-zotero.zip rtf-odf-scan-for-zotero.*
 mv rtf-odf-scan-for-zotero.zip ..
+rm rtf-odf-scan-for-zotero.*
 git commit -m "Pre-release update" -a
 cd ..
 git push
