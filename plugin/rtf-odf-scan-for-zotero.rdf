@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAEWqkTLO2FCjgNZB0ghuVQhfaKEUsQOM3bGTqdF9q7yfJPOvhZ1TMgfV3W0QmoBWohC3NaLID+IFeClWbKb7cMBAq028n6et8ynh7oGJhHgAnHpV+uY8cl8tXZodO4CyzmxAy1szbAvYk+PFlM6wuv8KVI+HB7sDAV3uwHe/33Og">
-    <NS1:updates RDF:resource="rdf:#$FPlpF3"/>
+  <RDF:Description RDF:about="rdf:#$lTstv"
+                   NS1:version="0.1.1">
+    <NS1:targetApplication RDF:resource="rdf:#$oTstv"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$JPlpF3"
+  <RDF:Description RDF:about="rdf:#$oTstv"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
                    NS1:maxVersion="21.*"
                    NS1:updateLink="http://citationstylist.org/wp-content/uploads/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://citationstylist.org/wp-content/uploads/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:f7061593179ef6956206cf74244028fc1c4b1d67" />
-  <RDF:Description RDF:about="rdf:#$GPlpF3"
-                   NS1:version="0.1.3">
-    <NS1:targetApplication RDF:resource="rdf:#$JPlpF3"/>
-  </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$FPlpF3">
-    <RDF:li RDF:resource="rdf:#$GPlpF3"/>
+                   NS1:updateHash="sha1:db18259818b09f4569193629b10eab8dd04fe774" />
+  <RDF:Seq RDF:about="rdf:#$kTstv">
+    <RDF:li RDF:resource="rdf:#$lTstv"/>
   </RDF:Seq>
+  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAE4PBEKffD0J1sKkyYP/yi/MT2vcpNoS31RhF61N3lICJG/38PtHQp6fMS5X5ojxvCqYZ8HeFb15meJVj8HrJfg9i9YtSNk5jYoThkDHAB/V1tt1grwstGOZxYVWUztGrTMmnehSevdmxlO7FevWwLbhzhQNfYA61d9dcFJRoqx6">
+    <NS1:updates RDF:resource="rdf:#$kTstv"/>
+  </RDF:Description>
 </RDF:RDF>
