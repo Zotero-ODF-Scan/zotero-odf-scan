@@ -149,7 +149,9 @@ cp update.rdf rtf-odf-scan-for-zotero.rdf
 cp updateInfo.xhtml rtf-odf-scan-for-zotero.xhtml
 zip rtf-odf-scan-for-zotero.zip rtf-odf-scan-for-zotero.*
 mv rtf-odf-scan-for-zotero.zip ..
-rm rtf-odf-scan-for-zotero.*
+rm -f rtf-odf-scan-for-zotero.*
+rm -f install.bak  update.bak  updateInfo.xhtml  update.rdf
+rm -f rtf-odf-scan-for-zotero.zip
 git commit -m "Pre-release update" -a
 cd ..
 git push
