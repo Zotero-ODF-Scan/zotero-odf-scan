@@ -147,14 +147,14 @@ fi
 ### Send the new xpi to the distro site
 cp update.rdf rtf-odf-scan-for-zotero.rdf
 cp updateInfo.xhtml rtf-odf-scan-for-zotero.xhtml
-cp rtf-odf-scan-for-zotero.rdf  ..
-cp rtf-odf-scan-for-zotero.xhtml  ..
-cp rtf-odf-scan-for-zotero.xpi  ..
+zip rtf-odf-scan-for-zotero.zip rtf-odf-scan-for-zotero.*
+mv rtf-odf-scan-for-zotero.zip ..
 git commit -m "Pre-release update" -a
+cd ..
+git push
 git checkout gh-pages
-#cp rtf-odf-scan-for-zotero.rdf  ..
-#cp rtf-odf-scan-for-zotero.xhtml  ..
-#cp rtf-odf-scan-for-zotero.xpi  ..
-#scp rtf-odf-scan-for-zotero.rdf rtf-odf-scan-for-zotero.xhtml rtf-odf-scan-for-zotero.xpi gsl-nagoya-u.net:/http/pub
+unzip rtf-odf-scan-for-zotero.zip
+git commit -m "Install release files in gh-pages" -a
+git push
 
 echo Done
