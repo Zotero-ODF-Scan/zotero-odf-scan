@@ -36,8 +36,8 @@ nosetests.xml
 /README.md~
 /zotero-odfscan.py~
 *~
-release.sh
-build.sh
 install.bak
 update.bak
-rdf-odf-scan.xpi
+rtf-odf-scan-for-zotero.xpi
+update.rdf
+updateInfo.xhtml
