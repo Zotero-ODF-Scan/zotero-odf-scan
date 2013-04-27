@@ -40,4 +40,5 @@ release.sh
 build.sh
 install.bak
 update.bak
-rdf-odf-scan.xpi
+rtf-odf-scan-for-zotero.xpi
+version_count.txt
