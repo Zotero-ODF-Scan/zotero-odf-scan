@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Seq RDF:about="rdf:#$2yBi+2">
-    <RDF:li RDF:resource="rdf:#$3yBi+2"/>
-  </RDF:Seq>
-  <RDF:Description RDF:about="rdf:#$3yBi+2"
-                   NS1:version="0.1.5">
-    <NS1:targetApplication RDF:resource="rdf:#$6yBi+2"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$6yBi+2"
+  <RDF:Description RDF:about="rdf:#$WTAjy2"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
                    NS1:maxVersion="21.*"
-                   NS1:updateLink="http://adam3smith.github.io/zotero-tools/rtf-odf-scan-for-zotero.xpi"
-                   NS1:updateInfoURL="http://adam3smith.github.io/zotero-tools/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:efa64558201b9d2881d53430557cc60ba4a48a3c" />
-  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAABjc8nGFUJD11XLBMw/JeeKEeVB1wI31Im6QF1Rsuqy69A16GgKGNZS3bUZZuWFksN+D7mVClaUfIqJUPGvDoSE4CTc4cR4x8m3fV9mp/xTGdWz8Bp8ainKl41lIazG1Qtzcz8i1vgq1fCsgDIFQStzFqiIXzz3K0gHspMIbp89">
-    <NS1:updates RDF:resource="rdf:#$2yBi+2"/>
+                   NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
+                   NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
+                   NS1:updateHash="sha1:a548a1f001893976a0a2e24357a6ab671e733377" />
+  <RDF:Description RDF:about="rdf:#$TTAjy2"
+                   NS1:version="0.1.5">
+    <NS1:targetApplication RDF:resource="rdf:#$WTAjy2"/>
   </RDF:Description>
+  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAG1ucdXAwXk8foe0ub4U1DyvIcs+/GCFz8lKU/60myjXV/vQ0LIWnYQj5ldFbvrGg/hl/B0NyjFbMNrjAN09ag6c88OS7l6QbOERyTTYD24qZfufcKd56YSD42wrXGVChXAgyC1X/0bV/DAUdYD2HrJfxLKlPkgTWLgPpuyMB2CW">
+    <NS1:updates RDF:resource="rdf:#$STAjy2"/>
+  </RDF:Description>
+  <RDF:Seq RDF:about="rdf:#$STAjy2">
+    <RDF:li RDF:resource="rdf:#$TTAjy2"/>
+  </RDF:Seq>
 </RDF:RDF>
