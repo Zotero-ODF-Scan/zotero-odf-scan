@@ -1,6 +1,10 @@
 Zotero.scannableciteTranslator = {
 
 	init: function () {
+		if (!Zotero.Translators.get("248bebf1-46ab-4067-9f93-ec3d2960d0cd")){
+			Zotero.debug("Scannable Cite Translator not found. Setting Pref to false");
+			Zotero.Prefs.set("odfScan.installedTranslator", false);
+		}
 		if (!Zotero.Prefs.get("odfScan.installedTranslator")) {
 			Zotero.debug("Installing Scannable Cite Translator");
 
@@ -35,3 +39,4 @@ Zotero.scannableciteTranslator = {
 window.addEventListener('load', function (e) {
 	Zotero.scannableciteTranslator.init();
 }, false);
+
