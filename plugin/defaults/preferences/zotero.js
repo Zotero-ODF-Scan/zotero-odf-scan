@@ -5,5 +5,7 @@ pref("extensions.zotero.odfScan.lastInputFiletocitations", "");
 pref("extensions.zotero.odfScan.lastOutputFiletocitations", "");
 pref("extensions.zotero.odfScan.lastInputFiletomarkers", "");
 pref("extensions.zotero.odfScan.lastOutputFiletomarkers", "");
+pref("extensions.zotero.odfScan.installedTranslator", false);
 pref("extensions.zotero.rtfScan.fileType", "rtf");
 pref("extensions.zotero.rtfScan.outputMode", "");
+

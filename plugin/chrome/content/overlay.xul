@@ -6,5 +6,5 @@
   <command id="cmd_zotero_rtfScan" oncommand="window.openDialog('chrome://rtf-odf-scan-for-zotero/content/rtfScan.xul', 'rtfScan', 'chrome,centerscreen')"/>
 
   <menuitem id="zotero-tb-actions-rtfScan" label="&zotero.toolbar.rtfOdfScan.label;" command="cmd_zotero_rtfScan"/>
-
+ <script src="chrome://rtf-odf-scan-for-zotero/content/include.js"/>
 </overlay>
