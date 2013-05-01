@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+#set -e
 
 # Go through the release steps for rtf-odf-scan-for-zotero
 
@@ -152,9 +152,9 @@ mv rtf-odf-scan-for-zotero.zip ..
 rm -f rtf-odf-scan-for-zotero.*
 rm -f install.bak  update.bak  updateInfo.xhtml  update.rdf
 rm -f rtf-odf-scan-for-zotero.zip
-set +e
+#set +e
 git commit -m "Pre-release update" -a
-set -e
+#set -e
 cd ..
 git push
 git checkout gh-pages
