@@ -284,8 +284,10 @@ function install(data, reason) {
         }
         
         var data = splitTranslator(data);
-        // Will have to get the AddonManager to handle this, unfortunately.
-		//Zotero.Translators.save(data.header, data.code);
+        var Zotero = Components.classes["@zotero.org/Zotero;1"]
+	        .getService(Components.interfaces.nsISupports)
+	        .wrappedJSObject;
+        Zotero.Translators.save(data.header, data.code);
         dump("XXX Saved translator\n");
 
     });
