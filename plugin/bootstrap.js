@@ -253,7 +253,7 @@ function shutdown(data, reason) {
 function install(data, reason) {
     Components.utils.import("resource://gre/modules/FileUtils.jsm");
     Components.utils.import("resource://gre/modules/NetUtil.jsm");
-    var file = FileUtils.getFile('ProfD',['extensions','rtf-odf-scan-for-zotero@mystery-lab.com','chrome','content','Scannable Cite.js']);
+    var file = FileUtils.getFile('ProfD',['extensions','rtf-odf-scan-for-zotero@mystery-lab.com','resource','translators','Scannable Cite.js']);
     NetUtil.asyncFetch(file, function(inputStream, status) {
         if (!Components.isSuccessCode(status)) {
             // Handle error!
@@ -262,10 +262,6 @@ function install(data, reason) {
         // The file data is contained within inputStream.
         // You can read it into a string with
         var data = NetUtil.readInputStreamToString(inputStream, inputStream.available());
-
-        // Something to split off the balanced squiggly braces.
-        // Something to JSON parse the header.
-        // Something to load the thing.
 
         var splitTranslator = function (data) {
             var nest_level = 0;
