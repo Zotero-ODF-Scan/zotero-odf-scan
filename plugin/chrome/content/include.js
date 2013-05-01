@@ -5,7 +5,7 @@ var Zotero = Components.classes["@zotero.org/Zotero;1"]
 				.wrappedJSObject;
 
 // Use the bibliography code from the application
-if (!Zotero_File_Interface_Bibliography) {
+if ("undefined" === typeof Zotero_File_Interface_Bibliography) {
     const loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
         .getService(Components.interfaces.mozIJSSubScriptLoader);
     loader.loadSubScript("chrome://zotero/content/bibliography.js");
