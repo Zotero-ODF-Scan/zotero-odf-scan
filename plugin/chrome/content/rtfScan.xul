@@ -9,7 +9,6 @@
 	id="zotero-rtfScan">
 	
 	<script src="include.js"/>
-	<script src="bibliography.js"/>
 	<script src="rtfScan.js"/>
 	
 	<wizardpage id="intro-page" label="&zotero.rtfScan.introPage.label;"
