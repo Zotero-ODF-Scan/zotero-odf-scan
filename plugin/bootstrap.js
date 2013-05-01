@@ -50,6 +50,10 @@ function watchWindows(callback) {
                     window.setTimeout(function(contentWindow,tabCallbackInfo,windowID,contentWindowID,callback) {
                         var menuElem = contentWindow.document.getElementById('zotero-tb-actions-rtfScan');
                         if (!menuElem) return;
+                        // Children are Zotero tab instances and only one can exist
+                        for (var key in tabCallbackInfo[windowID].children) {
+                            delete tabCallbackInfo[windowID].children[key];
+                        }
                         tabCallbackInfo[windowID].children[contentWindowID] = true;
                         callback(contentWindow);
                     }, 1000, contentWindow,tabCallbackInfo,windowID,contentWindowID,callback);
