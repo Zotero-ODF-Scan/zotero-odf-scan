@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$rvD4K3"
+  <RDF:Seq RDF:about="rdf:#$djcKJ3">
+    <RDF:li RDF:resource="rdf:#$ejcKJ3"/>
+  </RDF:Seq>
+  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAHGv7wOboJj9D0zO9q3jFZNnCCN4c+NlKVS3to5qy1DAcF4bQctku6T8VFPumsYfS/CWPcDy4vGWcOC7x3kFqGUjchBsIbnKkbkKd9/zNSZOkjJ0HIcdgPYekMHZHD6ASNQnFhIYmPHM9N81zOoaWnQiietNyFn0mTEXC1E9VbZl">
+    <NS1:updates RDF:resource="rdf:#$djcKJ3"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$hjcKJ3"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
                    NS1:maxVersion="21.*"
                    NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:627a8e3f289130e93342d96c923e5a61947bf56c" />
-  <RDF:Seq RDF:about="rdf:#$nvD4K3">
-    <RDF:li RDF:resource="rdf:#$ovD4K3"/>
-  </RDF:Seq>
-  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAH1XcqUYxysF1RagAgNrIMVkefoUM70+/sTs2gQHWeCQ4ZiUPAK91Rav5FC47UGQ+FLRGbWlWoBQDaWE1+6JRaKh+/XGeM11p5HAtH2lRcjuMXFoOrx2/GQfuzVru3IGye783OcDhuvl6kUgWuANy6EQnr4KSCvI/ZzoAmbqkKM0">
-    <NS1:updates RDF:resource="rdf:#$nvD4K3"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$ovD4K3"
+                   NS1:updateHash="sha1:c9d7eaa2a5c531cd3ecb7ba708eaa43f60c3953f" />
+  <RDF:Description RDF:about="rdf:#$ejcKJ3"
                    NS1:version="0.1.5">
-    <NS1:targetApplication RDF:resource="rdf:#$rvD4K3"/>
+    <NS1:targetApplication RDF:resource="rdf:#$hjcKJ3"/>
   </RDF:Description>
 </RDF:RDF>
