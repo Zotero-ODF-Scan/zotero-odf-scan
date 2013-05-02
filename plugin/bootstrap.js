@@ -16,7 +16,8 @@ function watchWindows(callback) {
         try {
             // Now that the window has loaded, only handle browser windows
             let {documentElement} = window.document;
-            if (documentElement.getAttribute("windowtype") == "navigator:browser") {
+            if (documentElement.getAttribute("windowtype") == "navigator:browser"
+                || documentElement.getAttribute("windowtype") === "zotero:basicViewer") {
                 var menuElem = window.document.getElementById('zotero-tb-actions-rtfScan');
                 if (!menuElem) return;
                 var cmdElem = window.document.getElementById("cmd_zotero_rtfScan");
