@@ -15,42 +15,35 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>RTF/ODF-Scan for Zotero</h1>
-        <p>Bringing Zotero to a Word Processor Near You</p>
-
-        <p class="view"><a href="https://github.com/Zotero-ODF-Scan/zotero-odf-scan">View the Project on GitHub <small>Zotero-ODF-Scan/zotero-odf-scan</small></a></p>
-
+        <h1>RTF/ODF-Scan<br />for Zotero</h1>
+        <p>Bringing Zotero Citations<br /> to a Word Processor Near You</p>
 
         <ul>
-          <li><a href="rtf-odf-scan-for-zotero.xpi">Download <strong></strong>Add-on</strong></a></li>
-          <li><a href=""></a></li>
+          <li><a href="rtf-odf-scan-for-zotero.xpi">Download <strong>Add-on</strong></a></li>
           <li><a href="https://github.com/Zotero-ODF-Scan/zotero-odf-scan">View On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
-        <h2>Purpose</h2>
+        <h2>Overview</h2>
 
-<p>RTF/ODF-Scan for Zotero is an add-on for the Zotero reference manager software that allows users to insert citations markers into any document saved as .odt (e.g. by software such as google docs or Scrivener) and then convert those into active Zotero citations. It requires LibreOffice and the Zotero LibreOffice plugin.</p>
+<p>RTF/ODF-Scan for Zotero is an add-on for the Zotero reference manager software that allows users to insert citations markers into any document saved as .odt (e.g. by software such as google docs or Scrivener) and then convert those into active Zotero citations. It requires Zotero, LibreOffice and the Zotero LibreOffice plugin.</p>
 
-<h2>Install</h2>
+<h2>Installation</h2>
 
-<p><strong>RTF/ODF-Scan for Zotero is currently only available for Firefox, not for Zotero Standalone</strong></p>
+<p><em>RTF/ODF-Scan for Zotero is currently only available for Firefox, not for Zotero Standalone</em></p>
 
 <p>Install the software from <a href="rtf-odf-scan-for-zotero.xpi">here</a>. Click "Allow" and then "Install" when prompted. Installation will add a "Scannable Cite" export translator to Zotero and change the "RTF Scan" option to "RTF/ODF Scan".</p>
 
 <h2>Inserting Citations</h2>
 
 <p>First, set the "Default Output Format" to "Scannable Cite" in the Export tab of the <a href="http://www.zotero.org/support/preferences">Zotero Preferences</a>. You can now insert citations by either draging&amp;dropping items or by using ctrl+alt+c (cmd+shift+c on Mac) to copy them to your clipboard and the paste them using ctrl/cmd+v or the right-click context menu.
-A citation will look like this</p>
-
-<p>{ | Smith, The Wealth of Nations, (2012) | | |zotero://select/items/0_WQVBH98K}</p>
+A citation will look like this<br>
+{ | Smith, The Wealth of Nations, (2012) | | |zotero://select/items/0_WQVBH98K}</p>
 
 <p>It is separated into five sections by vertical lines. The first section can contain a prefix of the citation. The second section contains author, title, and year of the cited item. The third section can contain a locator such as a page number, the fourth section can contain a suffix for the citation, and the fifth section contains a unique identifier of the item via a zotero://select link (if you paste that link into Firefox's URL bar and hit return, Zotero will open with the item selected). 
-Let's look at this with an example. This marker </p>
-
-<p><code>{ See | Smith, The Wealth of Nations, (2012) | p. 45 | for an example |zotero://select/items/0_WQVBH98K}</code></p>
-
-<p>would turn into
+Let's look at this with an example. This marker<br>
+{ See | Smith, The Wealth of Nations, (2012) | p. 45 | for an example |zotero://select/items/0_WQVBH98K}<br />
+would turn into
 (See Smith, 2012, p. 45 for an example) when APA is selected as a citation style (see below).</p>
 
 <h3>Affix Mark-up</h3>
@@ -59,33 +52,33 @@ Let's look at this with an example. This marker </p>
 
 <h3>Suppress Author</h3>
 
-<p>To suppress the author &amp;emdash; most typically in the case of a parenthetical citation that is preceded by the author name in the text &amp;emdash; put a minus sign (-) in front of the author as in:<br><code>{ | -Smith, The Wealth of Nations, (2012) | | |zotero://select/items/0_WQVBH98K}</code></p>
+<p>To suppress the author &mdash; most typically in the case of a parenthetical citation that is preceded by the author name in the text &mdash; put a minus sign (-) in front of the author as in:<br>{ | -Smith, The Wealth of Nations, (2012) | | |zotero://select/items/0_WQVBH98K}</p>
 
 <h3>Locators</h3>
 
-<p>This is a list of locators and the labels RTF/ODF-scan will recognize for them. Note that a space is <em>required</em> between locator label and number, i.e. "ch. 6" <strong>not</strong> "ch.6". The actual labels printed in your citations depend on your citation style and locale in Zotero.</p>
+<p>This is a list of locators and the labels RTF/ODF-scan will recognize for them. Note that a space is <em>required</em> between locator label and number, i.e. "ch. 6" <em>not</em> "ch.6". The actual labels printed in your citations depend on your citation style and locale in Zotero.</p>
 
-<p>article: "art."
-chapter: "ch." or "Ch."
-subchapter: "subch."
-column: "col."
-figure: "fig."
-line: "l."
-note: "n."
-issue: "no."
-opus: "op."
-page: "p." or "pp."
-paragraph: "para."
-subparagraph: "subpara."
-part: "pt."
-rule: "r."
-section: "sec."
-subsection: "subsec."
-Section: "Sec."
-sub verbo: "sv."
-schedule: "sch."
-title: "tit."
-verse: "vrs."
+<p>article: "art."<br />
+chapter: "ch." or "Ch."<br />
+subchapter: "subch."<br />
+column: "col."<br />
+figure: "fig."<br />
+line: "l."<br />
+note: "n."<br />
+issue: "no."<br />
+opus: "op."<br />
+page: "p." or "pp."<br />
+paragraph: "para."<br />
+subparagraph: "subpara."<br />
+part: "pt."<br />
+rule: "r."<br />
+section: "sec."<br />
+subsection: "subsec."<br />
+Section: "Sec."<br />
+sub verbo: "sv."<br />
+schedule: "sch."<br />
+title: "tit."<br />
+verse: "vrs."<br />
 volume: "vol."</p>
 
 <h2>Saving and Converting your Document</h2>
@@ -96,14 +89,14 @@ Click "Next" and the plugin will convert your document.</p>
 
 <h2>Setting a Citation Style</h2>
 
-<p>Now open the converted document &amp;emdash; by default it will have (citation) in its file name &amp;emdash; in LibreOffice. You will need the <a href="http://www.zotero.org/support/word_processor_plugin_installation#libreoffice_openofficeorg_neooffice">Zotero LibreOffice plugin</a> installed. In Zotero's LibreOffice plugin toolbar, click on "Set Document Preferences" and choose the citation style. Click OK and Zotero will format all references in your document. If you want a bibliography, move the cursor to the location where it should be inserted and click "Insert Bibliography." The citations in the Libre Office document are "live" &amp;emdash; they will update to changes in your Zotero database and, if you want to, you can change citation styles or add items to your document as if it had been authored using the LibreOffice plugin all along.</p>
+<p>Now open the converted document &mdash; by default it will have (citation) in its file name &mdash; in LibreOffice. You will need the <a href="http://www.zotero.org/support/word_processor_plugin_installation#libreoffice_openofficeorg_neooffice">Zotero LibreOffice plugin</a> installed. In Zotero's LibreOffice plugin toolbar, click on "Set Document Preferences" and choose the citation style. Click OK and Zotero will format all references in your document. If you want a bibliography, move the cursor to the location where it should be inserted and click "Insert Bibliography." The citations in the Libre Office document are "live" &mdash; they will update to changes in your Zotero database and, if you want to, you can change citation styles or add items to your document as if it had been authored using the LibreOffice plugin all along.</p>
 
 <h2>Reverse Conversion</h2>
 
 <p>RTF/ODF Scan can also take an existing ODF document with Zotero citations inserted by the LibreOffice plugin and convert citations to markers. This could be useful if you started writing in LibreOffice but want to switch to a word processor without a dedicated Zotero plugin. For this option, select ODF (to markers) as File type in the conversion dialog.</p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/Zotero-ODF-Scan">Zotero-ODF-Scan</a></p>
+        <p>This project is maintained by <a href="https://citationstylist.org">Frank Bennett</a> and <a href="http://zoteromusings.wordpress.com/">Sebastian Karcher</a> </p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
