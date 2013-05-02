@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$rcM5T1"
+  <RDF:Seq RDF:about="rdf:#$s8JJn2">
+    <RDF:li RDF:resource="rdf:#$t8JJn2"/>
+  </RDF:Seq>
+  <RDF:Description RDF:about="rdf:#$t8JJn2"
                    NS1:version="0.1.5">
-    <NS1:targetApplication RDF:resource="rdf:#$ucM5T1"/>
+    <NS1:targetApplication RDF:resource="rdf:#$w8JJn2"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$ucM5T1"
+  <RDF:Description RDF:about="rdf:#$w8JJn2"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
                    NS1:maxVersion="21.*"
                    NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:915378cf3d4dd593bf9fe067778096df95375616" />
+                   NS1:updateHash="sha1:08486b0b33bc037e1eb25c9ab3b2422831df51fc" />
   <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAKPdJKW9k7uo9luKAIrXUQJfkGHfEjRvVx4kWaedsGekrGe8O2pn7MmhXY0Z4Hpf4EgfmTQV19wg29c+4jWF7z3NasQbEPjRntSY4pc5cR+KfPH/QEb/1kfrI0ysZ7wu669Pnnukdpa2u6+zMc1ZLGOMwolTUg7ZktDpY7TxQZTX">
-    <NS1:updates RDF:resource="rdf:#$qcM5T1"/>
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAMVRpMOOu+UYQm/h2ljkTMZXl3IHHDdd0uzym0lTnskshHDTLh8kpr43f5588Vvswg4mSEUnMSQhuck6qkDdu2W6rtx9iXJ+EA7fGSa4O9nPtjiYsTNauP9XMZLJ0oPEhYDrDkKUTStkiGBfIFBmtyc4DEreZz6mp04J2uzzPuQF">
+    <NS1:updates RDF:resource="rdf:#$s8JJn2"/>
   </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$qcM5T1">
-    <RDF:li RDF:resource="rdf:#$rcM5T1"/>
-  </RDF:Seq>
 </RDF:RDF>
