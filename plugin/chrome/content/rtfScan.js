@@ -255,7 +255,7 @@ var Zotero_RTFScan = new function() {
 		var rexLabels = /^((?:art|ch|Ch|subch|col|fig|l|n|no|op|p|pp|para|subpara|pt|r|sec|subsec|Sec|sv|sch|tit|vrs|vol)\\.)\\s+(.*)/;
 		var rexBalancedTags = /(.*)<([^\/>][-:a-zA-Z0-9]*)[^>]*>([^>]*)<\/([-:a-zA-Z0-9]*)[^>]*>(.*)/;
 		var rexLink = /<[^>]*xlink:href=\"([^\"]*)\"[^>]*>\s*{([^|}]*)\|([^|}]*)\|([^|}]*)\|([^|}]*)}\s*<[^>]*>/;
-		var rexNativeLink = /<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*([^>]*)\s+[^ ]*\/>([^<]*)<text:reference-mark-end[^>]*\/>/;
+		var rexNativeLink = /<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*([^>]*)\s+[^ ]*\/>(.*?)<text:reference-mark-end[^>]*\/>/;
 		var checkStringRex = /(<[^\/>][^>]*>)*{[^<>\|]*|[^<>\|]*|[^<>\|]*|[^<>\|]*|[^<>\|]*}(<\/[^>]*>)*/;
 		var openTagSplitter = /(<[^\/>][^>]*>)/;
 		var closeTagSplitter = /(<\/[^>]*>)/;
@@ -263,7 +263,7 @@ var Zotero_RTFScan = new function() {
 		var rexSpace = /<text:s\/>/g;
 		var rexPlainTextLinks = /({[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*})/;
 		var rexWrappedLinks = /(<[^>]*xlink:href=\"[^\"]*\"[^>]*>\s*{[^|}]*\|[^|}]*\|[^|}]*\|[^|}]*}\s*<[^>]*>)/;
-		var rexNativeLinks = /(<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*[^>]*\/>[^<]*<text:reference-mark-end[^>]*\/>)/;
+		var rexNativeLinks = /(<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*[^>]*\/>.*?<text:reference-mark-end[^>]*\/>)/;
 		var rexCite = /({[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*})/;
 
 		var rexFixMarkupBold = /[\*][\*](.*?)[\*][\*]/;
@@ -305,18 +305,12 @@ var Zotero_RTFScan = new function() {
 			this.newtxt = txt;
 		}
 
-		Fragment.prototype.normalizeStringMarks = function() {
-			// Normalize intended rexText entries
-			//  replace XML space with space
-			this.newtxt = this.newtxt.replace(rexSpace, " ");
-			// replace other singletons with empty string
-			this.newtxt = this.newtxt.replace(rexSingleton, "");
-			// remove balanced braces
+        Fragment.prototype.removeBalancedTags = function (str) {
 			while (true) {
-				var m = this.newtxt.match(rexBalancedTags);
+				var m = str.match(rexBalancedTags);
 				if (m) {
 					if (m[2] === m[4]) {
-						this.newtxt = this.newtxt.replace(rexBalancedTags, "$1$3$5");
+						str = str.replace(rexBalancedTags, "$1$3$5");
 					} else {
 						// If tags are mismatched the file is corrupt.
 						// Do not make the situation worse.
@@ -326,6 +320,17 @@ var Zotero_RTFScan = new function() {
 					break;
 				}
 			}
+            return str;
+        }
+
+		Fragment.prototype.normalizeStringMarks = function() {
+			// Normalize intended rexText entries
+			//  replace XML space with space
+			this.newtxt = this.newtxt.replace(rexSpace, " ");
+			// replace other singletons with empty string
+			this.newtxt = this.newtxt.replace(rexSingleton, "");
+			// remove balanced braces
+			this.newtxt = this.removeBalancedTags(this.newtxt);
 			// move open tags to the end
 			var newlst = [];
 			var lst = this.newtxt.split(openTagSplitter);
@@ -357,7 +362,7 @@ var Zotero_RTFScan = new function() {
 			var m = this.newtxt.match(rexNativeLink);
 			if (m) {
 				var m_citation = m[1];
-				var m_plaintext = m[2];
+				var m_plaintext = this.removeBalancedTags(m[2]);
 				var replacement = "";
 				var obj_txt = m_citation.replace("&quot;", '"', "g");
 				var obj = JSON.parse(obj_txt);
