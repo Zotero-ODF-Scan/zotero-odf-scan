@@ -288,6 +288,8 @@ function install(data, reason) {
 	        .getService(Components.interfaces.nsISupports)
 	        .wrappedJSObject;
         Zotero.Translators.save(data.header, data.code);
+	//re-initialize Zotero translators so Scannable Cite shows up right away
+	Zotero.Translators.init()
         dump("XXX Saved translator\n");
 
     });
