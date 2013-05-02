@@ -382,7 +382,8 @@ var Zotero_RTFScan = new function() {
 						var m_uri = uri.match(/\/(users|groups)\/([0-9]*)\/items\/([a-zA-Z0-9]*)/);
 						if (m_uri) {
 							if (m_uri[1] === "groups") {
-								key.push(m_uri[2]);
+								var libraryID = Zotero.Groups.getLibraryIDFromGroupID(m_uri[2]);
+								key.push(libraryID);
 							} else {
 								key.push("0");
 							}
