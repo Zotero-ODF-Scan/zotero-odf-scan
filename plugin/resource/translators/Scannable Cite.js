@@ -34,21 +34,21 @@ function doExport() {
         mem.init(item);
         Zotero.write("{ |");
         var library_id = item.libraryID ? item.libraryID : 0;
-	if (item.creators.length >0){
-  	    mem.set(item.creators[0].lastName,",");
+        if (item.creators.length >0){
+            mem.set(item.creators[0].lastName,",");
             if (item.creators.length > 2) mem.set("et al.", ",");
             else if (item.creators.length == 2) mem.set("&amp; " + item.creators[1].lastName, ",");
-	}
-        else {
-	    mem.set(false, ",","anon.");
         }
-	mem.set(item.title,",","(no title)");
+        else {
+            mem.set(false, ",","anon.");
+        }
+        mem.set(item.title,",","(no title)");
         mem.setlaw(item.authority, ",");
         mem.setlaw(item.volume);
         mem.setlaw(item.reporter);
         mem.setlaw(item.pages);
         memdate.setlaw(item.court,",");
-	var date = Zotero.Utilities.strToDate(item.date);
+        var date = Zotero.Utilities.strToDate(item.date);
         var dateS = (date.year) ? date.year : item.date;
         memdate.set(dateS,"","no date");
         Zotero.write(" " + mem.get() + " (" + memdate.get() + ") | | |");
