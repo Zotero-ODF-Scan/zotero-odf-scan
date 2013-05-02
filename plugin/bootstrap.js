@@ -29,44 +29,47 @@ function watchWindows(callback) {
                     oldRtfScanCommand:cmdElem.getAttribute("oncommand"),
                     children: {}
                 }
-                var tabContainer = window.gBrowser.tabContainer;
+                if (window.gBrowser && window.gBrowser.tabContainer) {
 
-                // Tab monitor callback wrapper. Sets aside enough information
-                // to shut down listeners on plugin uninstall or disable. Tabs in
-                // which Zotero/MLZ are not detected are sniffed at, then ignored
-                function tabSelect (event) {
+                    var tabContainer = window.gBrowser.tabContainer;
 
-                    // Capture a pointer to this tab window for use in the setTimeout,
-                    // and make a note of the tab windowID (needed for uninstall)
-                    var contentWindow = window.content;
-	                var windowUtils = contentWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-		                .getInterface(Components.interfaces.nsIDOMWindowUtils);
-	                var contentWindowID = windowUtils.outerWindowID;
+                    // Tab monitor callback wrapper. Sets aside enough information
+                    // to shut down listeners on plugin uninstall or disable. Tabs in
+                    // which Zotero/MLZ are not detected are sniffed at, then ignored
+                    function tabSelect (event) {
 
-                    // Only once for per tab in this browser window
-                    if (tabCallbackInfo[windowID].children[contentWindowID]) return;
+                        // Capture a pointer to this tab window for use in the setTimeout,
+                        // and make a note of the tab windowID (needed for uninstall)
+                        var contentWindow = window.content;
+	                    var windowUtils = contentWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+		                    .getInterface(Components.interfaces.nsIDOMWindowUtils);
+	                    var contentWindowID = windowUtils.outerWindowID;
 
-                    // Allow a little time for the window to start. If recognition
-                    // fails on tab open, a later select will still pick it up
-                    window.setTimeout(function(contentWindow,tabCallbackInfo,windowID,contentWindowID,callback) {
-                        var menuElem = contentWindow.document.getElementById('zotero-tb-actions-rtfScan');
-                        if (!menuElem) return;
-                        // Children are Zotero tab instances and only one can exist
-                        for (var key in tabCallbackInfo[windowID].children) {
-                            delete tabCallbackInfo[windowID].children[key];
-                        }
-                        tabCallbackInfo[windowID].children[contentWindowID] = true;
-                        callback(contentWindow);
-                    }, 1000, contentWindow,tabCallbackInfo,windowID,contentWindowID,callback);
-                }
+                        // Only once for per tab in this browser window
+                        if (tabCallbackInfo[windowID].children[contentWindowID]) return;
 
-                // Modify tabs
-                // tabOpen event implies tabSelect, so this is enough
-                tabContainer.addEventListener("TabSelect", tabSelect, false);
+                        // Allow a little time for the window to start. If recognition
+                        // fails on tab open, a later select will still pick it up
+                        window.setTimeout(function(contentWindow,tabCallbackInfo,windowID,contentWindowID,callback) {
+                            var menuElem = contentWindow.document.getElementById('zotero-tb-actions-rtfScan');
+                            if (!menuElem) return;
+                            // Children are Zotero tab instances and only one can exist
+                            for (var key in tabCallbackInfo[windowID].children) {
+                                delete tabCallbackInfo[windowID].children[key];
+                            }
+                            tabCallbackInfo[windowID].children[contentWindowID] = true;
+                            callback(contentWindow);
+                        }, 1000, contentWindow,tabCallbackInfo,windowID,contentWindowID,callback);
+                    }
 
-                // Function to remove listener on uninstall
-                tabCallbackInfo[windowID].removeListener = function () {
-                    tabContainer.removeEventListener("TabSelect", tabSelect);
+                    // Modify tabs
+                    // tabOpen event implies tabSelect, so this is enough
+                    tabContainer.addEventListener("TabSelect", tabSelect, false);
+
+                    // Function to remove listener on uninstall
+                    tabCallbackInfo[windowID].removeListener = function () {
+                        tabContainer.removeEventListener("TabSelect", tabSelect);
+                    }
                 }
 
                 // Modify the chrome window itself
