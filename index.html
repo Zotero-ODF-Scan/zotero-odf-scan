@@ -1,39 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="RTF/ODF-Scan for Zotero : Bringing Zotero to a Word Processor Near You" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>RTF/ODF-Scan for Zotero by Zotero-ODF-Scan</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>RTF/ODF-Scan for Zotero</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Zotero-ODF-Scan/zotero-odf-scan">View on GitHub</a>
-
-          <h1 id="project_title">RTF/ODF-Scan for Zotero</h1>
-          <h2 id="project_tagline">Bringing Zotero to a Word Processor Near You</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Zotero-ODF-Scan/zotero-odf-scan/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Zotero-ODF-Scan/zotero-odf-scan/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+    <div class="wrapper">
+      <header>
         <h1>RTF/ODF-Scan for Zotero</h1>
+        <p>Bringing Zotero to a Word Processor Near You</p>
 
-<h2>Purpose</h2>
+        <p class="view"><a href="https://github.com/Zotero-ODF-Scan/zotero-odf-scan">View the Project on GitHub <small>Zotero-ODF-Scan/zotero-odf-scan</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Zotero-ODF-Scan/zotero-odf-scan/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Zotero-ODF-Scan/zotero-odf-scan/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Zotero-ODF-Scan/zotero-odf-scan">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>Purpose</h2>
 
 <p>RTF/ODF-Scan for Zotero is an add-on for the Zotero reference manager software that allows users to insert citations markers into any document saved as .odt (e.g. by software such as google docs or Scrivener) and then convert those into active Zotero citations. It requires LibreOffice and the Zotero LibreOffice plugin.</p>
 
@@ -53,11 +48,10 @@ A citation will look like this</p>
 <p>It is separated into five sections by vertical lines. The first section can contain a prefix of the citation. The second section contains author, title, and year of the cited item. The third section can contain a locator such as a page number, the fourth section can contain a suffix for the citation, and the fifth section contains a unique identifier of the item via a zotero://select link (if you paste that link into Firefox's URL bar and hit return, Zotero will open with the item selected). 
 Let's look at this with an example. This marker </p>
 
-<p>{ See | Smith, The Wealth of Nations, (2012) | p. 45 | for an example |zotero://select/items/0_WQVBH98K}</p>
+<p><code>{ See | Smith, The Wealth of Nations, (2012) | p. 45 | for an example |zotero://select/items/0_WQVBH98K}</code></p>
 
-<p>would turn into</p>
-
-<p>(See Smith, 2012, p. 45 for an example) when APA is selected as a citation style (see below).</p>
+<p>would turn into
+(See Smith, 2012, p. 45 for an example) when APA is selected as a citation style (see below).</p>
 
 <h3>Affix Mark-up</h3>
 
@@ -65,36 +59,34 @@ Let's look at this with an example. This marker </p>
 
 <h3>Suppress Author</h3>
 
-<p>To suppress the author &amp;emdash; most typically in the case of a parenthetical citation that is preceded by the author name in the text &amp;emdash; put a minus sign (-) in front of the author as in:  </p>
-
-<p>{ | -Smith, The Wealth of Nations, (2012) | | |zotero://select/items/0_WQVBH98K}</p>
+<p>To suppress the author &amp;emdash; most typically in the case of a parenthetical citation that is preceded by the author name in the text &amp;emdash; put a minus sign (-) in front of the author as in:<br><code>{ | -Smith, The Wealth of Nations, (2012) | | |zotero://select/items/0_WQVBH98K}</code></p>
 
 <h3>Locators</h3>
 
 <p>This is a list of locators and the labels RTF/ODF-scan will recognize for them. Note that a space is <em>required</em> between locator label and number, i.e. "ch. 6" <strong>not</strong> "ch.6". The actual labels printed in your citations depend on your citation style and locale in Zotero.</p>
 
-<p>article: "art."\
-chapter: "ch." or "Ch."\
-subchapter: "subch."\
-column: "col."\
-figure: "fig."\
-line: "l."\
-note: "n."\
-issue: "no."\
-opus: "op."\
-page: "p." or "pp."\
-paragraph: "para."\
-subparagraph: "subpara."\
-part: "pt."\
-rule: "r."\
-section: "sec."\
-subsection: "subsec."\
-Section: "Sec."\
-sub verbo: "sv."\
-schedule: "sch."\
-title: "tit."\
-verse: "vrs."\
-volume: "vol."\</p>
+<p>article: "art."
+chapter: "ch." or "Ch."
+subchapter: "subch."
+column: "col."
+figure: "fig."
+line: "l."
+note: "n."
+issue: "no."
+opus: "op."
+page: "p." or "pp."
+paragraph: "para."
+subparagraph: "subpara."
+part: "pt."
+rule: "r."
+section: "sec."
+subsection: "subsec."
+Section: "Sec."
+sub verbo: "sv."
+schedule: "sch."
+title: "tit."
+verse: "vrs."
+volume: "vol."</p>
 
 <h2>Saving and Converting your Document</h2>
 
@@ -110,17 +102,12 @@ Click "Next" and the plugin will convert your document.</p>
 
 <p>RTF/ODF Scan can also take an existing ODF document with Zotero citations inserted by the LibreOffice plugin and convert citations to markers. This could be useful if you started writing in LibreOffice but want to switch to a word processor without a dedicated Zotero plugin. For this option, select ODF (to markers) as File type in the conversion dialog.</p>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">RTF/ODF-Scan for Zotero maintained by <a href="https://github.com/Zotero-ODF-Scan">Zotero-ODF-Scan</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Zotero-ODF-Scan">Zotero-ODF-Scan</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-
+    <script src="javascripts/scale.fix.js"></script>
     
-
   </body>
 </html>
