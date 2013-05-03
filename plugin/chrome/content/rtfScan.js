@@ -79,8 +79,8 @@ var Zotero_RTFScan = new function() {
 	 * Called when the first page is shown; loads target file from preference, if one is set
 	 */
 	this.introPageShowing = function() {
-		var fileType = Zotero.Prefs.get("rtfScan.fileType");
-		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
+		var fileType = Zotero.Prefs.get("ODFScan.fileType");
+		var outputMode = Zotero.Prefs.get("ODFScan.outputMode");
 		var mode_string = [fileType];
 		if (outputMode) {
 			mode_string.push(outputMode);
@@ -98,10 +98,10 @@ var Zotero_RTFScan = new function() {
 	 */
 	this.introPageAdvanced = function() {
 		// get file type
-		var fileType = Zotero.Prefs.get("rtfScan.fileType");
-		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
-		Zotero.Prefs.set(fileType + "Scan.lastInputFile" + outputMode, inputFile.path);
-		Zotero.Prefs.set(fileType + "Scan.lastOutputFile" + outputMode, outputFile.path);
+		var fileType = Zotero.Prefs.get("ODFScan.fileType");
+		var outputMode = Zotero.Prefs.get("ODFScan.outputMode");
+		Zotero.Prefs.set("ODFScan."+fileType+".lastInputFile" + outputMode, inputFile.path);
+		Zotero.Prefs.set("ODFScan."+fileType+".lastOutputFile" + outputMode, outputFile.path);
 	}
 	
 	/**
@@ -111,12 +111,12 @@ var Zotero_RTFScan = new function() {
 		// Hide any error message
 		document.getElementById("odf-file-error-message").setAttribute("hidden", "true");
 		// get file type
-		var fileType = Zotero.Prefs.get("rtfScan.fileType");
+		var fileType = Zotero.Prefs.get("ODFScan.fileType");
 		// display file picker
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
 		var fp = Components.classes["@mozilla.org/filepicker;1"]
 				.createInstance(nsIFilePicker);
-		fp.init(window, _getString(fileType + "Scan.openTitle"), nsIFilePicker.modeOpen);
+		fp.init(window, _getString("ODFScan.openTitle"), nsIFilePicker.modeOpen);
 		
 		var fileExt = fileType;
 		if (fileType === 'odf') {
@@ -124,11 +124,11 @@ var Zotero_RTFScan = new function() {
 		} else {
 			fp.appendFilters(nsIFilePicker.filterAll);
 		}
-		fp.appendFilter(_getString(fileType + "Scan." + fileType), "*." + fileExt);
+		fp.appendFilter(_getString("ODFScan." + fileType), "*." + fileExt);
 		
 		// Set directory if possible
-		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
-		var inputPath = Zotero.Prefs.get(fileType + "Scan.lastInputFile" + outputMode);
+		var outputMode = Zotero.Prefs.get("ODFScan.outputMode");
+		var inputPath = Zotero.Prefs.get("ODFScan."+fileType+".lastInputFile" + outputMode);
 		if (inputPath) {
 			if (!inputFile) {
 				inputFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
@@ -148,8 +148,8 @@ var Zotero_RTFScan = new function() {
 	 * Called to select the output file
 	 */
 	this.chooseOutputFile = function() {
-		var fileType = Zotero.Prefs.get("rtfScan.fileType");
-		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
+		var fileType = Zotero.Prefs.get("ODFScan.fileType");
+		var outputMode = Zotero.Prefs.get("ODFScan.outputMode");
 		var fileExt = fileType;
 		if (fileType === "odf") {
 			fileExt = "odt";
@@ -157,34 +157,23 @@ var Zotero_RTFScan = new function() {
 		const nsIFilePicker = Components.interfaces.nsIFilePicker;
 		var fp = Components.classes["@mozilla.org/filepicker;1"]
 				.createInstance(nsIFilePicker);
-		fp.init(window, _getString(fileType + "Scan.saveTitle"), nsIFilePicker.modeSave);
-		fp.appendFilter(_getString(fileType + "Scan." + fileType), "*." + fileExt);
+		fp.init(window, _getString("ODFScan.saveTitle"), nsIFilePicker.modeSave);
+		fp.appendFilter(_getString("ODFScan." + fileType), "*." + fileExt);
 		if(inputFile) {
 			var leafName = inputFile.leafName;
 			var dotIndex = leafName.lastIndexOf(".");
 			if(dotIndex != -1) {
 				leafName = leafName.substr(0, dotIndex);
 			}
-			var suffix = _getString(fileType + "Scan.scannedFileSuffix" + outputMode);
-			if (outputMode) {
-				othersuffix = "";
-				if (outputMode === "tocitations") {
-					othersuffix = " " + _getString(fileType + "Scan.scannedFileSuffixtomarkers");
-				} else if (outputMode === "tomarkers") {
-					othersuffix = " " + _getString(fileType + "Scan.scannedFileSuffixtocitations");
-				}
-				if (leafName.length > othersuffix.length && othersuffix === leafName.slice(othersuffix.length * -1)) {
-					leafName = leafName.slice(0, othersuffix.length * -1);
-				}
-			}
+			var suffix = _getString("ODFScan."+fileType+".scannedFileSuffix" + outputMode);
 			fp.defaultString = leafName+" "+ suffix +"."+fileExt;
 		} else {
 			fp.defaultString = "Untitled." + fileExt;
 		}
 		
 		// Set directory if possible
-		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
-		var outputPath = Zotero.Prefs.get(fileType + "Scan.lastOutputFile" + outputMode);
+		var outputMode = Zotero.Prefs.get("ODFScan.outputMode");
+		var outputPath = Zotero.Prefs.get("ODFScan."+fileType+".lastOutputFile" + outputMode);
 		if (outputPath) {
 			if (!outputFile) {
 				outputFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
@@ -206,17 +195,17 @@ var Zotero_RTFScan = new function() {
 	 */
 	function _updatePath() {
 		document.documentElement.canAdvance = inputFile && outputFile;
-		if(inputFile) {
+		if(inputFile && inputFile.path) {
 			document.getElementById("input-path").value = inputFile.path;
 			document.getElementById("choose-output-file").disabled = false;
 		} else {
-			document.getElementById("input-path").value = _getString("rtfScan.file.noneSelected.label");
+			document.getElementById("input-path").value = _getString("ODFScan.file.noneSelected.label");
 			document.getElementById("choose-output-file").disabled = true;
 		}
 		if(outputFile) {
 			document.getElementById("output-path").value = outputFile.path;
 		} else {
-			document.getElementById("output-path").value = _getString("rtfScan.file.noneSelected.label");
+			document.getElementById("output-path").value = _getString("ODFScan.file.noneSelected.label");
 		}
 	}
 	
@@ -232,20 +221,13 @@ var Zotero_RTFScan = new function() {
 		if (!outputFile) {
 			outputFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 		}
-		var fileType = Zotero.Prefs.get("rtfScan.fileType");
-		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
-		var inputPath = Zotero.Prefs.get(fileType + "Scan.lastInputFile" + outputMode);
+		var fileType = Zotero.Prefs.get("ODFScan.fileType");
+		var outputMode = Zotero.Prefs.get("ODFScan.outputMode");
+		var inputPath = Zotero.Prefs.get("ODFScan."+fileType+".lastInputFile" + outputMode);
 		if(inputPath) {
 			document.getElementById("input-path").value = inputPath;
 			inputFile.initWithPath(inputPath);
 		}
-/*
-		var outputPath = Zotero.Prefs.get(fileType + "Scan.lastOutputFile" + outputMode);
-		if(outputPath) {
-			document.getElementById("output-path").value = outputPath;
-			outputFile.initWithPath(outputPath);
-		}
-*/
 		outputFile = null;
 		_updatePath();
 	}
@@ -259,12 +241,12 @@ var Zotero_RTFScan = new function() {
 		// can't advance
 		document.documentElement.canAdvance = false;
 
-		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
+		var outputMode = Zotero.Prefs.get("ODFScan.outputMode");
 
 		document.getElementById("odf-file-error-message").setAttribute("hidden", "true");
 
 		// wait a ms so that UI thread gets updated
-		if (Zotero.Prefs.get('rtfScan.fileType') === 'rtf') {
+		if (Zotero.Prefs.get('ODFScan.fileType') === 'rtf') {
 			window.setTimeout(function() { _scanRTF() }, 1);
 		} else {
 			window.setTimeout(function() { _scanODF(outputMode) }, 1);
@@ -414,7 +396,7 @@ var Zotero_RTFScan = new function() {
 						if ("object" === typeof item.uri) {
 							uri = uri[0];
 						}
-						var m_uri = uri.match(/\/(users|groups)\/([0-9]*)\/items\/([a-zA-Z0-9]*)/);
+						var m_uri = uri.match(/\/(users|groups)\/([0-9]*|local)\/items\/([a-zA-Z0-9]*)/);
 						if (m_uri) {
 							if (m_uri[1] === "groups") {
 								var libraryID = Zotero.Groups.getLibraryIDFromGroupID(m_uri[2]);
@@ -585,7 +567,7 @@ var Zotero_RTFScan = new function() {
 						if (userID === false) {
 							userID = "local";
 						}
-						item.uri = ['http://zotero.org/users/' + Zotero.userID + '/items/' + myidlst[1]];
+						item.uri = ['http://zotero.org/users/' + userID + '/items/' + myidlst[1]];
 						item.uris = item.uri.slice();
 					} else {
 						var groupID = Zotero.Groups.getGroupIDFromLibraryID(myidlst[0]);
@@ -951,7 +933,7 @@ var Zotero_RTFScan = new function() {
 	 * Called when citations page is shown to determine whether user can immediately advance.
 	 */
 	this.citationsPageShowing = function() {
-		if (Zotero.Prefs.get("rtfScan.fileType") === 'rtf') {
+		if (Zotero.Prefs.get("ODFScan.fileType") === 'rtf') {
 			_refreshCanAdvance();
 		} else {
 			// skip this step for ODF conversion
@@ -1069,7 +1051,7 @@ var Zotero_RTFScan = new function() {
 	 * Called when style page is shown to add styles to listbox.
 	 */
 	this.stylePageShowing = function() {
-		if (Zotero.Prefs.get("rtfScan.fileType") === 'rtf') {
+		if (Zotero.Prefs.get("ODFScan.fileType") === 'rtf') {
 			Zotero_File_Interface_Bibliography.init();
 		} else {
 			// skip this step for ODF conversion
@@ -1082,7 +1064,7 @@ var Zotero_RTFScan = new function() {
 	 * Called when style page is hidden to save preferences.
 	 */
 	this.stylePageAdvanced = function() {
-		if (Zotero.Prefs.get("rtfScan.fileType") === 'rtf') {
+		if (Zotero.Prefs.get("ODFScan.fileType") === 'rtf') {
 			Zotero.Prefs.set("export.lastStyle", document.getElementById("style-listbox").selectedItem.value);
 		}
 	}
@@ -1116,15 +1098,15 @@ var Zotero_RTFScan = new function() {
 				}
 			}
 		}
-		Zotero.Prefs.set("rtfScan.fileType", fileType);
-		Zotero.Prefs.set("rtfScan.outputMode", outputMode)
+		Zotero.Prefs.set("ODFScan.fileType", fileType);
+		Zotero.Prefs.set("ODFScan.outputMode", outputMode)
 		_refreshPath();
 	}
 
 	/** FORMAT PAGE UI **/
 	
 	this.formatPageShowing = function() {
-		if (Zotero.Prefs.get("rtfScan.fileType") === 'rtf') {
+		if (Zotero.Prefs.get("ODFScan.fileType") === 'rtf') {
 			// can't advance
 			document.documentElement.canAdvance = false;
 			

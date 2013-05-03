@@ -18,7 +18,7 @@
 		  <caption label="File type"/>
 		  <radiogroup label="Conversion method" id="file-type-selector" orient="horizontal"
 					  onclick="Zotero_RTFScan.fileTypeSwitch(this.selectedItem.value);">
-			<radio id="file-type-selector-rtf" label="RTF" value="rtf"/>
+			<radio id="file-type-selector-rtf-tortf" label="RTF" value="rtf-tortf"/>
 			<radio id="file-type-selector-odf-tocitations" label="ODF (to citations)" value="odf-tocitations"/>
 			<radio id="file-type-selector-odf-tomarkers" label="ODF (to markers)" value="odf-tomarkers"/>
 		  </radiogroup>
