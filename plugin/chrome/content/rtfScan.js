@@ -407,8 +407,8 @@ var Zotero_RTFScan = new function() {
 					if (i === 0 && item["suppress-author"]) {
 						m_plaintext = "-" + m_plaintext;
 					}
-					// get uri, identify as user or group, and fashion zotero://select ref
-					if (item.uri) {
+					if (item.uri && item.uri.length) {
+					    // if has uri, get value, identify as user or group, and fashion zotero://select ref
 						var uri = item.uri
 						var key = [];
 						if ("object" === typeof item.uri) {
@@ -425,7 +425,13 @@ var Zotero_RTFScan = new function() {
 							key.push(m_uri[3]);
 							item.key = key.join("_");
 						}
-					}
+					} else {
+                        // if no uri, assume user library
+                        // (shouldn't really be doing this on item, the semantics differ; but
+                        // we throw the item object away, so no harm done)
+                        // (In any case, we should not reach this.)
+                        item.key = "0_" + item.key;
+                    }
 					for (var j=0,jlen=3;j<jlen;j+=1) {
 						var key = ["prefix","locator","suffix"][j];
 						if ("undefined" === typeof item[key]) {
@@ -575,6 +581,10 @@ var Zotero_RTFScan = new function() {
 					// the real deal. construct uris
 					item.key = myidlst[1];
 					if (myidlst[0] == "0") {
+                        var userID = Zotero.userID;
+                        if (userID === false) {
+                            userID = "local";
+                        }
 						item.uri = ['http://zotero.org/users/' + Zotero.userID + '/items/' + myidlst[1]];
 						item.uris = item.uri.slice();
 					} else {
