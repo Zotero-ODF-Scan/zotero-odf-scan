@@ -1,6 +1,35 @@
 const {classes: Cc, interfaces: Ci, utils: Cu} = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 
+const PREF_BRANCH = "extensions.zotero.";
+const PREFS = {
+    "ODFScan.rtf.lastInputFiletortf":"",
+    "ODFScan.rtf.lastOutputFiletortf":"",
+    "ODFScan.odf.lastInputFiletocitations":"",
+    "ODFScan.odf.lastOutputFiletocitations":"",
+    "ODFScan.odf.lastInputFiletomarkers":"",
+    "ODFScan.odf.lastOutputFiletomarkers":"",
+    "ODFScan.fileType":"rtf",
+    "ODFScan.outputMode":"tortf"
+};
+
+function setDefaultPrefs() {
+  let branch = Services.prefs.getDefaultBranch(PREF_BRANCH);
+  for (let [key, val] in Iterator(PREFS)) {
+    switch (typeof val) {
+      case "boolean":
+        branch.setBoolPref(key, val);
+        break;
+      case "number":
+        branch.setIntPref(key, val);
+        break;
+      case "string":
+        branch.setCharPref(key, val);
+        break;
+    }
+  }
+}
+
 /**
  * Apply a callback to each open and new browser windows.
  *
@@ -239,6 +268,7 @@ function changeButtonText(window) {
  */
 function startup(data, reason) {
     // Shift all open and new browser windows
+    setDefaultPrefs();
     watchWindows(changeButtonText);
 }
 
