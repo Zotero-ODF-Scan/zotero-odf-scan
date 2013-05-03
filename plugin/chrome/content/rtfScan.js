@@ -505,7 +505,6 @@ var Zotero_RTFScan = new function() {
 
 			this.purgeConfig()
 			this.writeZipfileContent()
-			this.workingDir.remove(true);
 			return true;
 		}
 
@@ -638,56 +637,18 @@ var Zotero_RTFScan = new function() {
 			// grab a toolkit for file path manipulation
 			Components.utils.import("resource://gre/modules/FileUtils.jsm");
 			Components.utils.import("resource://gre/modules/NetUtil.jsm");
-			// open the zipfile
+
+			// grab the content.xml and meta.xml out of the input file
 			var zipReader = _getReader();
-			// get entry names
-			var entryNames = _getEntryNames();
-			this.entryNames = entryNames;
-			// open target directory with a random name, and remember the stub
-			var workingDirName = "zotscan" + this.generateRandomString();
-			this.workingDirName = workingDirName;
-			this.workingDir = _setupTargetDir();
-			// fetch content.xml and meta.xml files to memory (will only work up to 0.5 megs)
 			this.content = _getEntryContent("content.xml");
 			this.meta = _getEntryContent("meta.xml");
-			// unpack zipfile into target directory
-			_unpackZipfile();
-
-			function _unpackZipfile () {
-				for (var i=0,ilen=entryNames.length;i<ilen;i+=1) {
-					var fh;
-					if (!entryNames[i].slice(-1)[0]) {
-						_getWorkingDir(entryNames[i].slice(0,-1));
-					} else {
-						file = _getWorkingFile(entryNames[i]);
-						var entryName = entryNames[i].join('/');
-						zipReader.extract(entryName, file);
-					}
-				}
-			}
-
-			function _getWorkingDir (entryNameElements) {
-				var pathStubAsList = [workingDirName].concat(entryNameElements);
-				return FileUtils.getDir("TmpD", pathStubAsList, true);
-			}
-
-			function _getWorkingFile (entryNameElements) {
-				var pathStubAsList = [workingDirName].concat(entryNameElements);
-				var file = FileUtils.getFile("TmpD", pathStubAsList);
-				return file;
-			}
+            zipReader.close();
 
 			function _getEntryContent(fileName) {
 				var inputStream = zipReader.getInputStream(fileName);
 				return Zotero.File.getContents(inputStream);
 			}
 			
-			function _setupTargetDir () {
-				// Use temporary directory with random name. Creates directory
-				// if necessary and returns file object.
-				return FileUtils.getDir("TmpD", [workingDirName], true);
-			}
-
 			function _getReader () {
 				var zipReader = Components.classes["@mozilla.org/libjar/zip-reader;1"]
 					.createInstance(Components.interfaces.nsIZipReader);			
@@ -695,22 +656,6 @@ var Zotero_RTFScan = new function() {
 				return zipReader;
 			}
 
-			function _getEntryNames () {
-				var entries = zipReader.findEntries(null);
-				var entryNames = [];
-				while (entries.hasMore()) {
-					entryNames.push(entries.getNext());
-				}
-				entryNames.sort();
-				// recast as an array for use with nsIFile.
-				// zipfile entry names always use forward slashes:
-				//   http://www.pkware.com/documents/casestudies/APPNOTE.TXT
-				// (section 4.4.17)
-				for (var i=0,ilen=entryNames.length;i<ilen;i+=1) {
-					entryNames[i] = entryNames[i].split('/');
-				}
-				return entryNames;
-			}
 		}
 
 
@@ -721,64 +666,41 @@ var Zotero_RTFScan = new function() {
 
 
 		ODFConv.prototype.writeZipfileContent = function () {
-			var workingDirName = this.workingDirName;
-			// remove content.xml from working directory
-			_removeFile("content.xml");
-			// remove meta.xml from working directory
-			_removeFile("meta.xml");
-			// write our content.xml to working directory
-			_writeToTempFile("content.xml",this.content)
-			// write our meta.xml to working directory
-			_writeToTempFile("meta.xml",this.meta);
+
+            // Remove target file it already exists
+            if (outputFile.exists()) {
+                outputFile.remove(false);
+            }
+
+            // Copy input file to the new location
+            inputFile.copyTo(outputFile.parent,outputFile.leafName);
+
 			// get zip writer
 			zipWriter = _getWriter();
-			// repack zipfile to target
-			_repackZipfile(this.entryNames);
 
-			
-			function _repackZipfile (entryNames) {
-				var now = new Date();
-				for (var i=0,ilen=entryNames.length;i<ilen;i+=1) {
-					var entryName = entryNames[i].join('/');
-					if (entryName.slice(-1) === '/') {
-						zipWriter.addEntryDirectory(entryName, now.value, false);
-					} else {
-						var file = _getFile(entryNames[i]);
-						zipWriter.addEntryFile(entryName, 9, file, false);
-					}
-				}
-				zipWriter.close();
-			}
+            // Remove context.xml and meta.xml
+            zipWriter.removeEntry("content.xml", false);
+            zipWriter.removeEntry("meta.xml", false);
 
-			function _getFile(entryNameElements) {
-				var pathStubAsList = [workingDirName].concat(entryNameElements);
-				var file = FileUtils.getFile("TmpD",pathStubAsList);
-				return file;
-			}
+            // Add our own context.xml and meta.xml
+            _addToZipFile("content.xml",this.content);
+            _addToZipFile("meta.xml",this.meta);
+            zipWriter.close();
 
 			function _getWriter() {
 				var zipWriter = Components.classes["@mozilla.org/zipwriter;1"]
 					.createInstance(Components.interfaces.nsIZipWriter);
-                // 0x02 = Write only
-                // 0x08 = Create file ok
-                // 0x20 = Truncate existing file
-				zipWriter.open(outputFile, 0x02 | 0x08 | 0x20);
+                // 0x02 = Read and Write
+				zipWriter.open(outputFile, 0x04 );
 				return zipWriter;
 			}
 
-			function _writeToTempFile(fileName, data) {
-				var file = FileUtils.getFile("TmpD",[workingDirName,fileName]);
-				var ostream = FileUtils.openSafeFileOutputStream(file)
+			function _addToZipFile(fileName, data) {
 				var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"].
 					createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 				converter.charset = "UTF-8";
 				var istream = converter.convertToInputStream(data);
-				NetUtil.asyncCopy(istream, ostream);
-			}
-
-			function _removeFile (fileName) {
-				var file = FileUtils.getFile("TmpD",[workingDirName,fileName]);
-				file.remove(false);
+                zipWriter.addEntryStream(fileName, 0, 9, istream, false);
 			}
 
 		}
@@ -790,6 +712,7 @@ var Zotero_RTFScan = new function() {
 		    }
         } catch (e) {
             // Just replace the content with an error message?
+            Zotero.debug("ERROR (rtf-odf-scan-for-zotero): "+e);
             document.getElementById("odf-file-error-message").setAttribute("hidden", "false");
             document.documentElement.canRewind = true;
             document.documentElement.rewind();
