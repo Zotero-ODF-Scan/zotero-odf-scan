@@ -108,8 +108,8 @@ var Zotero_RTFScan = new function() {
 	 * Called to select the file to be processed
 	 */
 	this.chooseInputFile = function() {
-        // Hide any error message
-        document.getElementById("odf-file-error-message").setAttribute("hidden", "true");
+		// Hide any error message
+		document.getElementById("odf-file-error-message").setAttribute("hidden", "true");
 		// get file type
 		var fileType = Zotero.Prefs.get("rtfScan.fileType");
 		// display file picker
@@ -126,16 +126,16 @@ var Zotero_RTFScan = new function() {
 		}
 		fp.appendFilter(_getString(fileType + "Scan." + fileType), "*." + fileExt);
 		
-        // Set directory if possible
-        var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
-        var inputPath = Zotero.Prefs.get(fileType + "Scan.lastInputFile" + outputMode);
-        if (inputPath) {
-            if (!inputFile) {
-			    inputFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-                inputFile.initWithPath(inputPath);
-            }
-            fp.displayDirectory = inputFile.parent;
-        }
+		// Set directory if possible
+		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
+		var inputPath = Zotero.Prefs.get(fileType + "Scan.lastInputFile" + outputMode);
+		if (inputPath) {
+			if (!inputFile) {
+				inputFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+				inputFile.initWithPath(inputPath);
+			}
+			fp.displayDirectory = inputFile.parent;
+		}
 
 		var rv = fp.show();
 		if (rv == nsIFilePicker.returnOK || rv == nsIFilePicker.returnReplace) {
@@ -182,16 +182,16 @@ var Zotero_RTFScan = new function() {
 			fp.defaultString = "Untitled." + fileExt;
 		}
 		
-        // Set directory if possible
-        var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
-        var outputPath = Zotero.Prefs.get(fileType + "Scan.lastOutputFile" + outputMode);
-        if (outputPath) {
-            if (!outputFile) {
-			    outputFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-                outputFile.initWithPath(outputPath);
-            }
-            fp.displayDirectory = outputFile.parent;
-        }
+		// Set directory if possible
+		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
+		var outputPath = Zotero.Prefs.get(fileType + "Scan.lastOutputFile" + outputMode);
+		if (outputPath) {
+			if (!outputFile) {
+				outputFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+				outputFile.initWithPath(outputPath);
+			}
+			fp.displayDirectory = outputFile.parent;
+		}
 
 		var rv = fp.show();
 		if (rv == nsIFilePicker.returnOK || rv == nsIFilePicker.returnReplace) {				
@@ -207,17 +207,17 @@ var Zotero_RTFScan = new function() {
 	function _updatePath() {
 		document.documentElement.canAdvance = inputFile && outputFile;
 		if(inputFile) {
-            document.getElementById("input-path").value = inputFile.path;
-            document.getElementById("choose-output-file").disabled = false;
-        } else {
-            document.getElementById("input-path").value = _getString("rtfScan.file.noneSelected.label");
-            document.getElementById("choose-output-file").disabled = true;
-        }
+			document.getElementById("input-path").value = inputFile.path;
+			document.getElementById("choose-output-file").disabled = false;
+		} else {
+			document.getElementById("input-path").value = _getString("rtfScan.file.noneSelected.label");
+			document.getElementById("choose-output-file").disabled = true;
+		}
 		if(outputFile) {
-            document.getElementById("output-path").value = outputFile.path;
-        } else {
-            document.getElementById("output-path").value = _getString("rtfScan.file.noneSelected.label");
-        }
+			document.getElementById("output-path").value = outputFile.path;
+		} else {
+			document.getElementById("output-path").value = _getString("rtfScan.file.noneSelected.label");
+		}
 	}
 	
 	/**
@@ -226,12 +226,12 @@ var Zotero_RTFScan = new function() {
 	 */
 
 	function _refreshPath() {
-        if (!inputFile) {
+		if (!inputFile) {
 			inputFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-        }
-        if (!outputFile) {
+		}
+		if (!outputFile) {
 			outputFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-        }
+		}
 		var fileType = Zotero.Prefs.get("rtfScan.fileType");
 		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
 		var inputPath = Zotero.Prefs.get(fileType + "Scan.lastInputFile" + outputMode);
@@ -246,8 +246,8 @@ var Zotero_RTFScan = new function() {
 			outputFile.initWithPath(outputPath);
 		}
 */
-        outputFile = null;
-	    _updatePath();
+		outputFile = null;
+		_updatePath();
 	}
 	
 	/** SCAN PAGE UI **/
@@ -261,7 +261,7 @@ var Zotero_RTFScan = new function() {
 
 		var outputMode = Zotero.Prefs.get("rtfScan.outputMode");
 
-        document.getElementById("odf-file-error-message").setAttribute("hidden", "true");
+		document.getElementById("odf-file-error-message").setAttribute("hidden", "true");
 
 		// wait a ms so that UI thread gets updated
 		if (Zotero.Prefs.get('rtfScan.fileType') === 'rtf') {
@@ -340,7 +340,7 @@ var Zotero_RTFScan = new function() {
 			this.newtxt = txt;
 		}
 
-        Fragment.prototype.removeBalancedTags = function (str) {
+		Fragment.prototype.removeBalancedTags = function (str) {
 			while (true) {
 				var m = str.match(rexBalancedTags);
 				if (m) {
@@ -355,8 +355,8 @@ var Zotero_RTFScan = new function() {
 					break;
 				}
 			}
-            return str;
-        }
+			return str;
+		}
 
 		Fragment.prototype.normalizeStringMarks = function() {
 			// Normalize intended rexText entries
@@ -408,7 +408,7 @@ var Zotero_RTFScan = new function() {
 						m_plaintext = "-" + m_plaintext;
 					}
 					if (item.uri && item.uri.length) {
-					    // if has uri, get value, identify as user or group, and fashion zotero://select ref
+						// if has uri, get value, identify as user or group, and fashion zotero://select ref
 						var uri = item.uri
 						var key = [];
 						if ("object" === typeof item.uri) {
@@ -426,12 +426,12 @@ var Zotero_RTFScan = new function() {
 							item.key = key.join("_");
 						}
 					} else {
-                        // if no uri, assume user library
-                        // (shouldn't really be doing this on item, the semantics differ; but
-                        // we throw the item object away, so no harm done)
-                        // (In any case, we should not reach this.)
-                        item.key = "0_" + item.key;
-                    }
+						// if no uri, assume user library
+						// (shouldn't really be doing this on item, the semantics differ; but
+						// we throw the item object away, so no harm done)
+						// (In any case, we should not reach this.)
+						item.key = "0_" + item.key;
+					}
 					for (var j=0,jlen=3;j<jlen;j+=1) {
 						var key = ["prefix","locator","suffix"][j];
 						if ("undefined" === typeof item[key]) {
@@ -581,10 +581,10 @@ var Zotero_RTFScan = new function() {
 					// the real deal. construct uris
 					item.key = myidlst[1];
 					if (myidlst[0] == "0") {
-                        var userID = Zotero.userID;
-                        if (userID === false) {
-                            userID = "local";
-                        }
+						var userID = Zotero.userID;
+						if (userID === false) {
+							userID = "local";
+						}
 						item.uri = ['http://zotero.org/users/' + Zotero.userID + '/items/' + myidlst[1]];
 						item.uris = item.uri.slice();
 					} else {
@@ -652,7 +652,7 @@ var Zotero_RTFScan = new function() {
 			var zipReader = _getReader();
 			this.content = _getEntryContent("content.xml");
 			this.meta = _getEntryContent("meta.xml");
-            zipReader.close();
+			zipReader.close();
 
 			function _getEntryContent(fileName) {
 				var inputStream = zipReader.getInputStream(fileName);
@@ -677,30 +677,30 @@ var Zotero_RTFScan = new function() {
 
 		ODFConv.prototype.writeZipfileContent = function () {
 
-            // Remove target file it already exists
-            if (outputFile.exists()) {
-                outputFile.remove(false);
-            }
+			// Remove target file it already exists
+			if (outputFile.exists()) {
+				outputFile.remove(false);
+			}
 
-            // Copy input file to the new location
-            inputFile.copyTo(outputFile.parent,outputFile.leafName);
+			// Copy input file to the new location
+			inputFile.copyTo(outputFile.parent,outputFile.leafName);
 
 			// get zip writer
 			zipWriter = _getWriter();
 
-            // Remove context.xml and meta.xml
-            zipWriter.removeEntry("content.xml", false);
-            zipWriter.removeEntry("meta.xml", false);
+			// Remove context.xml and meta.xml
+			zipWriter.removeEntry("content.xml", false);
+			zipWriter.removeEntry("meta.xml", false);
 
-            // Add our own context.xml and meta.xml
-            _addToZipFile("content.xml",this.content);
-            _addToZipFile("meta.xml",this.meta);
-            zipWriter.close();
+			// Add our own context.xml and meta.xml
+			_addToZipFile("content.xml",this.content);
+			_addToZipFile("meta.xml",this.meta);
+			zipWriter.close();
 
 			function _getWriter() {
 				var zipWriter = Components.classes["@mozilla.org/zipwriter;1"]
 					.createInstance(Components.interfaces.nsIZipWriter);
-                // 0x02 = Read and Write
+				// 0x02 = Read and Write
 				zipWriter.open(outputFile, 0x04 );
 				return zipWriter;
 			}
@@ -710,24 +710,24 @@ var Zotero_RTFScan = new function() {
 					createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
 				converter.charset = "UTF-8";
 				var istream = converter.convertToInputStream(data);
-                zipWriter.addEntryStream(fileName, 0, 9, istream, false);
+				zipWriter.addEntryStream(fileName, 0, 9, istream, false);
 			}
 
 		}
 		var odfConv = new ODFConv();
-        try {
-		    if (odfConv.convert()) {
-			    document.documentElement.canAdvance = true;
-			    document.documentElement.advance();
-		    }
-        } catch (e) {
-            // Just replace the content with an error message?
-            Zotero.debug("ERROR (rtf-odf-scan-for-zotero): "+e);
-            document.getElementById("odf-file-error-message").setAttribute("hidden", "false");
-            document.documentElement.canRewind = true;
-            document.documentElement.rewind();
-            document.documentElement.canAdvance = false;
-        }
+		try {
+			if (odfConv.convert()) {
+				document.documentElement.canAdvance = true;
+				document.documentElement.advance();
+			}
+		} catch (e) {
+			// Just replace the content with an error message?
+			Zotero.debug("ERROR (rtf-odf-scan-for-zotero): "+e);
+			document.getElementById("odf-file-error-message").setAttribute("hidden", "false");
+			document.documentElement.canRewind = true;
+			document.documentElement.rewind();
+			document.documentElement.canAdvance = false;
+		}
 	}
 
 	/**
