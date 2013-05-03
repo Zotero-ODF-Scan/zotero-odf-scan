@@ -1,8 +1,8 @@
-Item History for Zotero is Copyright © 2011
+RTF/ODF Scan for Zotero is Copyright © 2013
 Frank G. Bennett, Jr., Faculty of Law, Nagoya University
 Nagoya, Japan  http://twitter.com/#!/fgbjr
 
-The author distributes the Zotero source code under the GNU Affero 
+The author distributes the source code under the GNU Affero 
 General Public License, version 3 (AGPLv3). The full text of this 
 license is given below.
 

@@ -1,7 +1,6 @@
-zotero-tools
+ODF/RTF Scan for Zotero
 ============
 
-Some tools for Zotero
+RTF/ODF-Scan for Zotero is an add-on for the Zotero reference manager software that allows users to insert citations markers into any document saved as .odt (e.g. by software such as google docs or Scrivener) and then convert those into active Zotero citations.
 
-* Scannable Cite - Zotero Export translator to use with ODF Scan
-* RTF/ODF Scan - Extends Zotero RTF Scan wizard with ODF Scan functionality
+To download the add-on and for instructions see the project [webpage](http://zotero-odf-scan.github.io/zotero-odf-scan/)
