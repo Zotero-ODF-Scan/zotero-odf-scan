@@ -227,6 +227,9 @@ var Zotero_RTFScan = new function() {
 		if(inputPath) {
 			document.getElementById("input-path").value = inputPath;
 			inputFile.initWithPath(inputPath);
+		} else {
+			inputFile = null;
+			document.getElementById("input-path").value = _getString("ODFScan.file.noneSelected.label");
 		}
 		outputFile = null;
 		_updatePath();
@@ -1080,7 +1083,9 @@ var Zotero_RTFScan = new function() {
 		var fileType = mode[0];
 		var outputMode = mode[1];
 		if (!outputMode) {
-			outputMode = "";
+			// Keep things sane
+			mode = "rtf";
+			outputMode = "tortf";
 		}
 		var nodeIdStubs = [
 			"file-type-description",
