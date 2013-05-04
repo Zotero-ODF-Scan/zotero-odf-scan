@@ -8,7 +8,7 @@
   <groupbox align="center" orient="horizontal">
     <vbox>
       <text value="RTF/ODF Scan for Zotero" style="font-weight: bold; font-size: x-large;"/>
-      <text value="&zotero.version; 0.1r5"/>
+      <text value="&zotero.version; 1.0.5"/>
       <separator class="thin"/>
       <hbox>
         <vbox>
