@@ -160,4 +160,8 @@ unzip rtf-odf-scan-for-zotero.zip
 git commit -m "Install release files in gh-pages" -a
 git push
 
+$(REVISION++)
+
+echo $REVISION > version_count.txt
+
 echo Done
