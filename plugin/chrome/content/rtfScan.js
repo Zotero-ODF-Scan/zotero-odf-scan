@@ -556,6 +556,8 @@ var Zotero_RTFScan = new function() {
 							delete item[key];
 						} else {
 							item[key] = item[key].replace("&quot;",'"', "g");
+							item[key] = item[key].replace(/&lt;i&gt;(.*?)&lt;\/i&gt/g, "*$1*");
+							item[key] = item[key].replace(/&lt;b&gt;(.*?)&lt;\/b&gt/g, "**$1**");
 						}
 					}
 				}
@@ -629,6 +631,9 @@ var Zotero_RTFScan = new function() {
 		}
 
 		ODFConv.prototype.readZipfileContent = function () {
+			// Scrub any meta string lying around
+			this.meta = false;
+
 			// grab a toolkit for file path manipulation
 			Components.utils.import("resource://gre/modules/FileUtils.jsm");
 			Components.utils.import("resource://gre/modules/NetUtil.jsm");
@@ -636,7 +641,9 @@ var Zotero_RTFScan = new function() {
 			// grab the content.xml and meta.xml out of the input file
 			var zipReader = _getReader();
 			this.content = _getEntryContent("content.xml");
-			this.meta = _getEntryContent("meta.xml");
+			if (zipReader.hasEntry("meta.xml")) {
+				this.meta = _getEntryContent("meta.xml");
+			}
 			zipReader.close();
 
 			function _getEntryContent(fileName) {
@@ -656,7 +663,9 @@ var Zotero_RTFScan = new function() {
 
 		ODFConv.prototype.purgeConfig = function () {
 			// Scrub configuration from meta.xml
-			this.meta = this.meta.replace(rexPref, "");
+			if (this.meta) {
+				this.meta = this.meta.replace(rexPref, "");
+			}
 		}
 
 
@@ -675,11 +684,15 @@ var Zotero_RTFScan = new function() {
 
 			// Remove context.xml and meta.xml
 			zipWriter.removeEntry("content.xml", false);
-			zipWriter.removeEntry("meta.xml", false);
+			if (this.meta) {
+				zipWriter.removeEntry("meta.xml", false);
+			}
 
 			// Add our own context.xml and meta.xml
 			_addToZipFile("content.xml",this.content);
-			_addToZipFile("meta.xml",this.meta);
+			if (this.meta) {
+				_addToZipFile("meta.xml",this.meta);
+			}
 			zipWriter.close();
 
 			function _getWriter() {
