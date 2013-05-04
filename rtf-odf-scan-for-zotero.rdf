@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAGTljolulBLfjXEOVFyCxi+XQSl5yUb/09Wj7rezG+wU3CWpyeoIyMUuAq8RJtXz63lN66AmtEi3e2J8KB0vuHh8ICWwgEiwq/8j+q9ypxfU9+t2sRuh1GTNDxMSewJMCz67h5H3yOS4sh5lJwdSJlrgUsdEXgt9PO5kPLft2Kaq">
-    <NS1:updates RDF:resource="rdf:#$s8NRS3"/>
-  </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$s8NRS3">
-    <RDF:li RDF:resource="rdf:#$t8NRS3"/>
-  </RDF:Seq>
-  <RDF:Description RDF:about="rdf:#$t8NRS3"
+  <RDF:Description RDF:about="rdf:#$oiTif1"
                    NS1:version="0.1.5">
-    <NS1:targetApplication RDF:resource="rdf:#$w8NRS3"/>
+    <NS1:targetApplication RDF:resource="rdf:#$riTif1"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$w8NRS3"
+  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAMXz0XDjEIkqfh51fp/itO1pubyRZvhGUBbFPSLnsTDCla5WCIU6gwHFxq06iSSsZE7m1tz6zO4oMnyRmapVY5hvhZdJZqFYsROZpeNXp49DfF8XF00q8nCipmLMuwZCxLspedGqcQI9ugWMR0u0AV30yuKKq9Lp4LigGLZvI8Ia">
+    <NS1:updates RDF:resource="rdf:#$niTif1"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$riTif1"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
                    NS1:maxVersion="21.*"
                    NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:7eafe5859255d514123801fb8360d8bbdb79da14" />
+                   NS1:updateHash="sha1:f68c8a2f80fc0e8c27c0b32bc06aa083b9df8521" />
+  <RDF:Seq RDF:about="rdf:#$niTif1">
+    <RDF:li RDF:resource="rdf:#$oiTif1"/>
+  </RDF:Seq>
 </RDF:RDF>
