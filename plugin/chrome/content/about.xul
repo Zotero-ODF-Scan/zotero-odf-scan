@@ -8,7 +8,7 @@
   <groupbox align="center" orient="horizontal">
     <vbox>
       <text value="RTF/ODF Scan for Zotero" style="font-weight: bold; font-size: x-large;"/>
-      <text value="&zotero.version; 1.0.5"/>
+      <text value="&zotero.version; 1.0.6"/>
       <separator class="thin"/>
       <hbox>
         <vbox>
@@ -22,9 +22,9 @@
       <separator class="groove"/>
       <label value="Overview" style="font-weight: bold;"/>
       <separator class="thin"/>
-	  <description style="width: 600px;">
-        RTF/ODF Scan for Zotero introduces an alternative to the RTF Scan
-        feature, based on Open Document Format (ODF), the native
+      <description style="width: 600px;">
+        RTF/ODF Scan for Zotero introduces an alternative to the RDF Scan
+        feature, based on Open Document Format (ODF), for native
         format of LibreOffice Writer. The nickname for the new
         functionality is "ODF Scan". ODF Scan markers can be converted to fully
         functional Zotero citations.
