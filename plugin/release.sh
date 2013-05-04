@@ -152,6 +152,8 @@ mv rtf-odf-scan-for-zotero.zip ..
 rm -f rtf-odf-scan-for-zotero.*
 rm -f install.bak  update.bak  updateInfo.xhtml  update.rdf
 rm -f rtf-odf-scan-for-zotero.zip
+echo $((REVISION++))
+echo $REVISION > version_count.txt
 git commit -m "Pre-release update" -a
 cd ..
 git push
@@ -159,9 +161,5 @@ git checkout gh-pages
 unzip rtf-odf-scan-for-zotero.zip
 git commit -m "Install release files in gh-pages" -a
 git push
-
-echo $((REVISION++))
-
-echo $REVISION > version_count.txt
 
 echo Done
