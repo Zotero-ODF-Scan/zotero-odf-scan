@@ -23,11 +23,10 @@
 	  <label value="Overview" style="font-weight: bold;"/>
       <separator class="thin"/>
 	  <description style="width: 600px;">
-        RTF/ODF Scan for Zotero introduces an alternative to the RDF Scan
-        feature, based on Open Document Format (ODF), for native
+        RTF/ODF Scan for Zotero introduces an alternative to the RTF Scan
+        feature, based on Open Document Format (ODF), the native
         format of LibreOffice Writer. The nickname for the new
-        functionality is "ODF Scan". The primary attraction of the new
-        method is that ODF Scan markers can be converted to fully
+        functionality is "ODF Scan". ODF Scan markers can be converted to fully
         functional Zotero citations.
 	  </description>
       <separator class="thin"/>
@@ -39,10 +38,7 @@
             Install this plugin in Firefox or Zotero Standalone.
 		  </description>
 		  <description style="width: 270px;list-style-type:disc;display:list-item;margin-left:2em;">
-            Install the ODF Scan export translator in Zotero.
-		  </description>
-		  <description style="width: 270px;list-style-type:disc;display:list-item;margin-left:2em;">
-            Select the ODF Scan translator as the default style in Preferences -> Export.
+            Select the Scannable Cite translator as the default style in Preferences -> Export.
 		  </description>
 		</vbox>
 		<vbox>
