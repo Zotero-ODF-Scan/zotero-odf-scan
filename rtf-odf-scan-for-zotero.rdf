@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBABXwb8Boe1wPgKvZZj9OsXHm/Sgq+PoTuT0fSYtUKIY9HPOQioa/a4Fk1APZpsygsPfhexb9swxSgO59X8lErdcnvlmlZONQ9/DiDpzg5fqVsUYWuVZ7HEVN+ju9jGVFeXWWahzXJd8HTcuCDJ1OC9mD22grpWhTLOJloP6QtfuA">
-    <NS1:updates RDF:resource="rdf:#$YtVPV"/>
+  <RDF:Description RDF:about="rdf:#$sy.Nh"
+                   NS1:version="1.0.7">
+    <NS1:targetApplication RDF:resource="rdf:#$vy.Nh"/>
   </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$YtVPV">
-    <RDF:li RDF:resource="rdf:#$ZtVPV"/>
-  </RDF:Seq>
-  <RDF:Description RDF:about="rdf:#$0uVPV"
+  <RDF:Description RDF:about="rdf:#$vy.Nh"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
                    NS1:maxVersion="21.*"
                    NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:84b077a7ad90021418645d1b97863d203bb85abc" />
-  <RDF:Description RDF:about="rdf:#$ZtVPV"
-                   NS1:version="1.0.6">
-    <NS1:targetApplication RDF:resource="rdf:#$0uVPV"/>
+                   NS1:updateHash="sha1:b72e3ac69b4e2ddde78e1e2e7e61898df968bb5d" />
+  <RDF:Seq RDF:about="rdf:#$ry.Nh">
+    <RDF:li RDF:resource="rdf:#$sy.Nh"/>
+  </RDF:Seq>
+  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBALGLeG1UPr4xvpniTP0jFCkCWS7lTk7V8cgd8D87jAps6ueasgRlqAT4+iZq4OBZvGkUagNmK4gVXnPAc8LkBo4bD6c2A9+k1a0+dfxjpl/z/hKIkkIkcaZN0RgYrx0TkaLxv4eS4fhR9nGAwvCWtHYR4G99W5azwqE4rD3Lv6iD">
+    <NS1:updates RDF:resource="rdf:#$ry.Nh"/>
   </RDF:Description>
 </RDF:RDF>
