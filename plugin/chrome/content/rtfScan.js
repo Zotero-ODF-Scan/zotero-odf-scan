@@ -430,6 +430,14 @@ var Zotero_RTFScan = new function() {
 							item.locator = labels[item["label"]] + ". " + item["locator"];
 						}
 					}
+					for (var j=0,jlen=3;j<jlen;j+=1) {
+					var key = ["prefix","suffix","locator"][j];
+						if ("string" === typeof item[key]) {
+							item[key] = item[key].replace("&quot;",'"', "g");
+							item[key] = item[key].replace(/&lt;i&gt;(.*?)&lt;\/i&gt;/g, "*$1*");
+							item[key] = item[key].replace(/&lt;b&gt;(.*?)&lt;\/b&gt;/g, "**$1**");
+						}
+					}
 					replacement += tmplText.replace("%{1}s", item.prefix)
 						.replace("%{2}s", m_plaintext)
 						.replace("%{3}s", item.locator)
@@ -539,9 +547,6 @@ var Zotero_RTFScan = new function() {
 			var placeholder = [];
 			for (var i=m.length-1;i>-1;i+=-1) {
 				var item = {};
-				item.prefix = this.fixMarkup(m[i][0]).replace(/^\s+/,"");
-				item.locator = this.fixMarkup(m[i][2]).replace(/^\s+/,"").replace(/\s+$/,"");
-				item.suffix = this.fixMarkup(m[i][3]).replace(/\s+$/,"");
 				var plaintextcite = m[i][1].replace(/^\s+/,"").replace(/\s+$/,"");
 				if (plaintextcite && plaintextcite[0] === "-") {
 					item["suppress-author"] = true;
@@ -549,18 +554,10 @@ var Zotero_RTFScan = new function() {
 				}
 				placeholder.push(plaintextcite);
 				var link = this.fixMarkup(m[i][4]).replace(/^\s+/,"").replace(/\s+$/,"");
-				for (var j=0,jlen=3;j<jlen;j+=1) {
-					var key = ["prefix","suffix","locator"][j];
-					if ("string" === typeof item[key]) {
-						if (!item[key].replace(/^\s+/,"").replace(/\s+$/,"")) {
-							delete item[key];
-						} else {
-							item[key] = item[key].replace("&quot;",'"', "g");
-							item[key] = item[key].replace(/&lt;i&gt;(.*?)&lt;\/i&gt/g, "*$1*");
-							item[key] = item[key].replace(/&lt;b&gt;(.*?)&lt;\/b&gt/g, "**$1**");
-						}
-					}
-				}
+				
+				item.prefix = this.fixMarkup(m[i][0]).replace(/^\s+/,"");
+				item.locator = this.fixMarkup(m[i][2]).replace(/^\s+/,"").replace(/\s+$/,"");
+				item.suffix = this.fixMarkup(m[i][3]).replace(/\s+$/,"");
 				// extract the key
 				var myid = link.slice(22);
 				var myidlst = myid.split("_");
@@ -596,6 +593,7 @@ var Zotero_RTFScan = new function() {
 						.replace("%{5}s",placeholder)
 						.replace("%{6}s",items)
 						.replace("%{7}s",randstr);
+					Zotero.debug(citation)
 					ret.push(citation);
 					ret.push(lst[i]);
 					items = [];
