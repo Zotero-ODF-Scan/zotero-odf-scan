@@ -1,23 +1,32 @@
-<?xml version="1.0"?>
-<RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
-         xmlns:NC="http://home.netscape.com/NC-rdf#"
-         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$sy.Nh"
-                   NS1:version="1.0.7">
-    <NS1:targetApplication RDF:resource="rdf:#$vy.Nh"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$vy.Nh"
-                   NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-                   NS1:minVersion="17"
-                   NS1:maxVersion="21.*"
-                   NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
-                   NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:b72e3ac69b4e2ddde78e1e2e7e61898df968bb5d" />
-  <RDF:Seq RDF:about="rdf:#$ry.Nh">
-    <RDF:li RDF:resource="rdf:#$sy.Nh"/>
-  </RDF:Seq>
-  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBALGLeG1UPr4xvpniTP0jFCkCWS7lTk7V8cgd8D87jAps6ueasgRlqAT4+iZq4OBZvGkUagNmK4gVXnPAc8LkBo4bD6c2A9+k1a0+dfxjpl/z/hKIkkIkcaZN0RgYrx0TkaLxv4eS4fhR9nGAwvCWtHYR4G99W5azwqE4rD3Lv6iD">
-    <NS1:updates RDF:resource="rdf:#$ry.Nh"/>
-  </RDF:Description>
-</RDF:RDF>
+<?xml version="1.0" encoding="UTF-8"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>rtf-odf-scan-for-zotero@mystery-lab.com</em:id>
+    <em:type>2</em:type>
+    <em:name>RTF/ODF Scan for Zotero</em:name>
+    <em:version>1.0.8</em:version>
+    <em:creator>Frank Bennett</em:creator>
+    <em:contributor></em:contributor>
+    <em:description>Adds convertible citation marker support to Zotero.</em:description>
+    <em:aboutURL>chrome://rtf-odf-scan-for-zotero/content/about.xul</em:aboutURL>
+    <em:optionsURL>chrome://rtf-odf-scan-for-zotero/content/options.xul</em:optionsURL>
+    <em:updateURL>http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.rdf</em:updateURL>
+    <em:bootstrap>true</em:bootstrap>
+    <em:unpack>true</em:unpack>
+    <em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDJqWvOZqiHGp8hLJI92KIp6t1pKP2Q2t+5glUh7JSl+2pdt8y9ANHT1Bx3YrKDi1xwXJ7FNi4mss5XFqEmuJf2TDn02+V6D0hFsNEsSlkCcsznwnCYzeU8GKAhlgjeXz7YPQswLLSk61af/hIhdYUEyYQbxmIAOHDHgMeRcuYJ+QIDAQAB</em:updateKey>
+    <em:targetApplication>
+	  <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- Firefox -->
+        <em:minVersion>17.0</em:minVersion>
+        <em:maxVersion>21.*</em:maxVersion>
+	  </Description>
+    </em:targetApplication>
+    <em:targetApplication>
+	  <Description>
+        <em:id>zotero@chnm.gmu.edu</em:id> <!-- Zotero -->
+        <em:minVersion>3.0</em:minVersion>
+        <em:maxVersion>4.0.*</em:maxVersion>
+	  </Description>
+    </em:targetApplication>
+  </Description>
+</RDF>
