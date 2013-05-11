@@ -1,7 +1,7 @@
 {
 	"translatorID": "248bebf1-46ab-4067-9f93-ec3d2960d0cd",
 	"label": "Scannable Cite",
-	"creator": "Scott Campbell, Avram Lyon, Nathan Schneider, Sebastian Karcher",
+	"creator": "Scott Campbell, Avram Lyon, Nathan Schneider, Sebastian Karcher, Frank Bennett",
 	"target": "html",
 	"minVersion": "3.0",
 	"maxVersion": "",
@@ -42,7 +42,9 @@ function doExport() {
         else {
             mem.set(false, ",","anon.");
         }
-        mem.set(item.title,",","(no title)");
+        if (Zotero.getHiddenPref("ODFScan.export.includeTitle")) {
+            mem.set(item.title,",","(no title)");
+        }
         mem.setlaw(item.authority, ",");
         mem.setlaw(item.volume);
         mem.setlaw(item.reporter);
@@ -52,6 +54,30 @@ function doExport() {
         var dateS = (date.year) ? date.year : item.date;
         memdate.set(dateS,"","no date");
         Zotero.write(" " + mem.get() + " (" + memdate.get() + ") | | |");
-        Zotero.write("zotero://select/items/" + library_id + "_" + item.key + "}");
+        if (Zotero.getHiddenPref("ODFScan.export.useZoteroSelect")) {
+            Zotero.write("zotero://select/items/" + library_id + "_" + item.key + "}");
+        } else {
+            var m = item.uri.match(/http:\/\/zotero\.org\/(users|groups)\/([^\/]+)\/items\/(.+)/);
+            var prefix;
+            var lib;
+            var key;
+            if (m) {
+                if (m[1] === "users") {
+                    prefix = "zu:";
+                    if (m[2] === "local") {
+                        lib = "0";
+                    } else {
+                        lib = m[2];
+                    }
+                } else {
+                    prefix = "zg:";
+                    lib = m[2];
+                }
+            } else {
+                prefix = "zu:";
+                lib = "0";
+            }
+            Zotero.write(prefix + lib + ":" + item.key + "}");
+        }
     }
 }
