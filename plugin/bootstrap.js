@@ -10,7 +10,9 @@ const PREFS = {
     "ODFScan.odf.lastInputFiletomarkers":"",
     "ODFScan.odf.lastOutputFiletomarkers":"",
     "ODFScan.fileType":"rtf",
-    "ODFScan.outputMode":"tortf"
+    "ODFScan.outputMode":"tortf",
+    "ODFScan.export.useZoteroSelect":false,
+    "ODFScan.export.includeTitle":false
 };
 
 function setDefaultPrefs() {
