@@ -270,7 +270,7 @@ var Zotero_RTFScan = new function() {
 
 		var tmplCitation = "<text:reference-mark-start text:name=\"ZOTERO_ITEM {&quot;properties&quot;:{&quot;formattedCitation&quot;:&quot;%{1}s&quot;},&quot;citationItems&quot;:%{2}s} RND%{3}s\"/>%{4}s<text:reference-mark-end text:name=\"ZOTERO_ITEM {&quot;properties&quot;:{&quot;formattedCitation&quot;:&quot;%{5}s&quot;},&quot;citationItems&quot;:%{6}s} RND%{7}s\"/>"
 		var tmplText;
-		if (Zotero.Prefs.get("ODFScan.export.useZoteroSelect")) {
+		if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
 			tmplText = "{ %{1}s | %{2}s | %{3}s | %{4}s |zotero://select/items/%{5}s}";
 		} else {
 			tmplText = "{ %{1}s | %{2}s | %{3}s | %{4}s |o:%{5}s}";

@@ -42,7 +42,7 @@ function doExport() {
         else {
             mem.set(false, ",","anon.");
         }
-        if (Zotero.getHiddenPref("ODFScan.export.includeTitle")) {
+        if (Zotero.getHiddenPref("ODFScan.includeTitle")) {
             mem.set(item.title,",","(no title)");
         }
         mem.setlaw(item.authority, ",");
@@ -54,7 +54,7 @@ function doExport() {
         var dateS = (date.year) ? date.year : item.date;
         memdate.set(dateS,"","no date");
         Zotero.write(" " + mem.get() + " (" + memdate.get() + ") | | |");
-        if (Zotero.getHiddenPref("ODFScan.export.useZoteroSelect")) {
+        if (Zotero.getHiddenPref("ODFScan.useZoteroSelect")) {
             Zotero.write("zotero://select/items/" + library_id + "_" + item.key + "}");
         } else {
             var m = item.uri.match(/http:\/\/zotero\.org\/(users|groups)\/([^\/]+)\/items\/(.+)/);
