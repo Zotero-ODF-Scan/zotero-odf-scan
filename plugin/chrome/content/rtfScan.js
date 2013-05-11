@@ -269,12 +269,7 @@ var Zotero_RTFScan = new function() {
 		document.documentElement.canAdvance = false;
 
 		var tmplCitation = "<text:reference-mark-start text:name=\"ZOTERO_ITEM {&quot;properties&quot;:{&quot;formattedCitation&quot;:&quot;%{1}s&quot;},&quot;citationItems&quot;:%{2}s} RND%{3}s\"/>%{4}s<text:reference-mark-end text:name=\"ZOTERO_ITEM {&quot;properties&quot;:{&quot;formattedCitation&quot;:&quot;%{5}s&quot;},&quot;citationItems&quot;:%{6}s} RND%{7}s\"/>"
-		var tmplText;
-		if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
-			tmplText = "{ %{1}s | %{2}s | %{3}s | %{4}s |zotero://select/items/%{5}s}";
-		} else {
-			tmplText = "{ %{1}s | %{2}s | %{3}s | %{4}s |o:%{5}s}";
-		}
+		var tmplText = "{ %{1}s | %{2}s | %{3}s | %{4}s |%{5}s}";
 
 		var rexPref = /<meta:user-defined meta:name="ZOTERO_PREF[^<]*?<\/meta:user-defined>/;
 		var rexLabels = /^((?:art|ch|Ch|subch|col|fig|l|n|no|op|p|pp|para|subpara|pt|r|sec|subsec|Sec|sv|sch|tit|vrs|vol)\\.)\\s+(.*)/;
@@ -397,6 +392,7 @@ var Zotero_RTFScan = new function() {
 					if (i === 0 && item["suppress-author"]) {
 						m_plaintext = "-" + m_plaintext;
 					}
+					var isUser = false;
 					if (item.uri && item.uri.length) {
 						// if has uri, get value, identify as user or group, and fashion zotero://select ref
 						var uri = item.uri
@@ -407,14 +403,16 @@ var Zotero_RTFScan = new function() {
 						var m_uri = uri.match(/\/(users|groups)\/([0-9]*|local)\/items\/(.+)/);
 						if (m_uri) {
 							if (m_uri[1] === "users") {
-								if (m_uri[2] === "local") {
+								isUser = true;
+								// Here is where the information loss from using zotero://select shines through.
+								if (m_uri[2] === "local" || Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
 									key.push("0");
 								} else {
 									key.push(m_uri[2]);
 								}
 							} else {
 								var libID;
-								if (Zotero.Prefs.get("ODFScan.export.useZoteroSelect")) {
+								if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
 									libID = Zotero.Groups.getLibraryIDFromGroupID(m_uri[2]);
 								} else {
 									libID = m_uri[2];
@@ -422,7 +420,7 @@ var Zotero_RTFScan = new function() {
 								key.push(libID);
 							}
 							key.push(m_uri[3]);
-							if (Zotero.Prefs.get("ODFScan.export.useZoteroSelect")) {
+							if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
 								item.key = key.join("_");
 							} else {
 								item.key = key.join(":");
@@ -433,11 +431,19 @@ var Zotero_RTFScan = new function() {
 						// (shouldn't really be doing this on item, the semantics differ; but
 						// we throw the item object away, so no harm done)
 						// (In any case, we should not reach this.)
-						if (Zotero.Prefs.get("ODFScan.export.useZoteroSelect")) {
+						var isUser = true;
+						if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
 							item.key = "0_" + item.key;
 						} else {
 							item.key = "0:" + item.key;
 						}
+					}
+					if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
+						item.key = "zotero://select/items/" + item.key;
+					} else if (isUser) {
+						item.key = "zu:" + item.key;
+					} else {
+						item.key = "zg:" + item.key;
 					}
 					for (var j=0,jlen=3;j<jlen;j+=1) {
 						var key = ["prefix","locator","suffix"][j];
