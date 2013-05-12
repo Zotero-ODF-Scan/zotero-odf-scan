@@ -1,0 +1,14 @@
+A note-to-self on conversion checks to do before the next release.
+
+(1) Start with a document containing one of each of:
+
+  - A native citation from My Library;
+  - A native citation from a group;
+  - A zotero://select text marker from My Library;
+  - A zotero://select text marker from a group;
+  - A prefixed text marker from My Library;
+  - A prefixed text marker from a group.
+
+(2) Convert the document "to markers" and check the output.
+(3) Convert the document "to citations" and check the output.
+(4) Reverse-convert the "to citations" version and check the output.
