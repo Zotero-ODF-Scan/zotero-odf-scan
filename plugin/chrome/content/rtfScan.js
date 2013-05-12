@@ -320,6 +320,51 @@ var Zotero_RTFScan = new function() {
 					  volume: "vol"
 					 }
 
+		function parseItemIdentifier (identifierString) {
+			// For user items, produces isUser, userID (0 or ID), and key
+			// For group items, produces groupID, libraryID, and key
+			var itemParams = {};
+			if (identifierString.slice(0,22) === "zotero://select/items/") {
+				var substr = identifierString.slice(22);
+				var sublst = substr.split("_");
+				if (sublst.length === 2) {
+					if (sublst[0] === "0") {
+						itemParams.isUser = true;
+						itemParams.userID = Zotero.userID ? Zotero.userID : 0;
+					} else {
+						itemParams.libraryID = sublst[0];
+						itemParams.groupID = Zotero.Groups.getGroupIDFromLibraryID(sublst[0]);
+					}
+					itemParams.key = sublst[1];
+				} else {
+					throw "Bad zotero://select identifier";
+				}
+			} else {
+				// Assuming two-char prefix, like zu: or zg: 
+				// By flagging the app as well as the library type,
+				// we leave the door open on support for eclectic
+				// citation sources (mixing embedded metadata from
+				// Zotero, Papers, Mendeley, etc). Not practical
+				// yet, but one day ...
+				if (identifierString.slice(2,3) === ":") {
+					if (identifierString.slice(1,2) === "u") {
+						itemParams.isUser = true;
+						var sublst = identifierString.slice(3).split(":");
+						if (sublst.length === 2) {
+							itemParams.groupID = sublst[0];
+							itemParams.libraryID = Zotero.Groups.getLibraryIDFromGroupID(sublst[0]);
+						} else {
+							throw "Bad prefixed identifier";
+						}
+						itemParams.key = sublst[1];
+					}
+				} else {
+					throw "Bad prefixed identifier";
+				}
+			}
+			return itemParams;
+		}
+			
 		var Fragment = function(txt) {
 			this.txt = txt;
 			this.newtxt = txt;
@@ -371,10 +416,54 @@ var Zotero_RTFScan = new function() {
 				newlst.push(lst[i]);
 			}
 			this.newtxt = newlst.join("");
+			// Normalize the marker format here.
+			var itemSplit = this.newtxt.split(rexPlainTextLinks);
+			if (itemSplit.length === 3) {
+				var itemParams = parseItemIdentifier(itemSplit[1]);
+				var itemIdentifier = this.constructItemIdentifier(itemParams);
+				itemSplit[1] = itemIdentifier;
+				this.newtxt = itemSplit.join("");
+			}
 		}
 
+		// This form will almost never be used: the zotero://select protocol
+		// is not recognized much.
 		Fragment.prototype.normalizeLinkedMarks = function () {
 			this.newtxt = this.newtxt.replace(rexLink, "{$2|$3|$4|$5|$1}");
+			// Normalize the marker format here.
+			var itemParams = parseItemIdentifier(this.newtxt);
+			var itemSplit = this.newtxt.split(rexPlainTextLinks);
+			if (itemSplit.length === 3) {
+				var itemParams = parseItemIdentifier(itemSplit[1]);
+				var itemIdentifier = this.constructItemIdentifier(itemParams);
+				itemSplit[1] = itemIdentifier;
+				this.newtxt = itemSplit.join("");
+			}
+		}
+
+		Fragment.prototype.constructItemIdentifier = function (itemParams) {
+			var ret;
+			if (Zotero.Prefs("translators.ODFScan.useZoteroSelect")) {
+				ret = "zotero://select/items/";
+				if (itemParams.isUser) {
+					ret += "0";
+				} else {
+					ret += itemParams.libraryID;
+				}
+				ret += "_";
+				ret += itemParams.key;
+			} else {
+				if (itemParams.isUser) {
+					ret = "zu:";
+					ret += itemParams.userID;
+				} else {
+					ret = "zg:"
+					ret += itemParams.groupID;
+				}
+				ret += ":";
+				ret += itemParams.key;
+			}
+			return ret;
 		}
 
 		Fragment.prototype.normalizeNativeMarks = function () {
@@ -392,7 +481,7 @@ var Zotero_RTFScan = new function() {
 					if (i === 0 && item["suppress-author"]) {
 						m_plaintext = "-" + m_plaintext;
 					}
-					var isUser = false;
+					var itemParams = {};
 					if (item.uri && item.uri.length) {
 						// if has uri, get value, identify as user or group, and fashion zotero://select ref
 						var uri = item.uri
@@ -403,48 +492,24 @@ var Zotero_RTFScan = new function() {
 						var m_uri = uri.match(/\/(users|groups)\/([0-9]*|local)\/items\/(.+)/);
 						if (m_uri) {
 							if (m_uri[1] === "users") {
-								isUser = true;
-								// Here is where the information loss from using zotero://select shines through.
-								if (m_uri[2] === "local" || Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
-									key.push("0");
-								} else {
-									key.push(m_uri[2]);
-								}
+								itemParams.isUser = true;
+								// May be "local"
+								itemParams.userID = m_uri[2] === "local" ? 0 : m_uri[2];
 							} else {
 								var libID;
-								if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
-									libID = Zotero.Groups.getLibraryIDFromGroupID(m_uri[2]);
-								} else {
-									libID = m_uri[2];
-								}
-								key.push(libID);
+								itemParams.groupID = m_uri[2];
+								itemParams.libraryID = Zotero.Groups.getLibraryIDFromGroupID(m_uri[2]);
 							}
-							key.push(m_uri[3]);
-							if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
-								item.key = key.join("_");
-							} else {
-								item.key = key.join(":");
-							}
+							itemParams.key = m_uri[3];
 						}
 					} else {
 						// if no uri, assume user library
-						// (shouldn't really be doing this on item, the semantics differ; but
-						// we throw the item object away, so no harm done)
-						// (In any case, we should not reach this.)
-						var isUser = true;
-						if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
-							item.key = "0_" + item.key;
-						} else {
-							item.key = "0:" + item.key;
-						}
+						// (We should not reach this, but just in case)
+						itemParams.isUser = true;
+						itemParams.userID = 0;
+						itemParams.key = item.key;
 					}
-					if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
-						item.key = "zotero://select/items/" + item.key;
-					} else if (isUser) {
-						item.key = "zu:" + item.key;
-					} else {
-						item.key = "zg:" + item.key;
-					}
+					var itemIdentifier = this.constructItemIdentifier(itemParams);
 					for (var j=0,jlen=3;j<jlen;j+=1) {
 						var key = ["prefix","locator","suffix"][j];
 						if ("undefined" === typeof item[key]) {
@@ -470,7 +535,7 @@ var Zotero_RTFScan = new function() {
 						.replace("%{2}s", m_plaintext)
 						.replace("%{3}s", item.locator)
 						.replace("%{4}s", item.suffix)
-						.replace("%{5}s", item.key);
+						.replace("%{5}s", itemIdentifier);
 					count += 1;
 				}
 				this.newtxt = replacement;
@@ -587,49 +652,18 @@ var Zotero_RTFScan = new function() {
 				item.locator = this.fixMarkup(m[i][2]).replace(/^\s+/,"").replace(/\s+$/,"");
 				item.suffix = this.fixMarkup(m[i][3]).replace(/\s+$/,"");
 				// extract the key
-				var params = {};
-				if (link.slice(0,22) === "zotero://select/items/") {
-					params.offset = 22;
-					params.splitter = "_";
-					params.fromZoteroSelect = true;
+				var itemParams = parseItemIdentifier(link);
+
+				// construct uris
+				item.key = myidlst[1];
+				if (itemParams.isUser) {
+					item.uri = ['http://zotero.org/users/' + itemParams.userID + '/items/' + itemParams.key];
+					item.uris = item.uri.slice();
 				} else {
-					// Assuming two-char prefix, like zu: or zg: 
-					// By flagging the app as well as the library type,
-					// we leave the door open on support for eclectic
-					// citation sources (mixing embedded metadata from
-					// Zotero, Papers, Mendeley, etc). Not practical
-					// yet, but one day ...
-					params.offset = 3;
-					params.splitter = ":";
-					params.fromZoteroSelect = false;
-					if (link.slice(1,2) === "u") {
-						params.isUserItem = true;
-					}
+					item.uri = ['http://zotero.org/groups/' + itemParams.groupID + '/items/' + itemParams.key];
+					item.uris = item.uri.slice();
 				}
-				var myid = link.slice(params.offset);
-				var myidlst = myid.split(params.splitter);
-				if (myidlst.length === 2) {
-					// the real deal. construct uris
-					item.key = myidlst[1];
-					if (myidlst[0] == "0" || params.isUserItem) {
-						var userID = Zotero.userID;
-						if (userID === false) {
-							userID = "local";
-						}
-						item.uri = ['http://zotero.org/users/' + userID + '/items/' + myidlst[1]];
-						item.uris = item.uri.slice();
-					} else {
-						var groupID = myidlst[0];
-						if (params.fromZoteroSelect) {
-							groupID = Zotero.Groups.getGroupIDFromLibraryID(myidlst[0]);
-						}
-						item.uri = ['http://zotero.org/groups/' + groupID + '/items/' + myidlst[1]]
-						item.uris = item.uri.slice();
-					}
-				} else {
-					// punt
-					item.key = myidlst[0];
-				}
+				
 				items = [item].concat(items);
 				if (lst[i]) {
 					var placeholder = placeholder.join("; ");
