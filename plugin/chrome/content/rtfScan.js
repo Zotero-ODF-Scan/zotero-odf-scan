@@ -347,19 +347,24 @@ var Zotero_RTFScan = new function() {
 				// Zotero, Papers, Mendeley, etc). Not practical
 				// yet, but one day ...
 				if (identifierString.slice(2,3) === ":") {
+					var sublst = identifierString.slice(3).split(":");
+					if (sublst.length !== 2) {
+						throw "Bad prefixed identifier(1): "+identifierString;
+					}
 					if (identifierString.slice(1,2) === "u") {
 						itemParams.isUser = true;
-						var sublst = identifierString.slice(3).split(":");
-						if (sublst.length === 2) {
-							itemParams.groupID = sublst[0];
-							itemParams.libraryID = Zotero.Groups.getLibraryIDFromGroupID(sublst[0]);
+						if (sublst[0] === "0") {
+							itemParams.userID = Zotero.userID ? Zotero.userID : "0";
 						} else {
-							throw "Bad prefixed identifier";
+							itemParams.userID = sublst[0];
 						}
-						itemParams.key = sublst[1];
+					} else {
+						itemParams.groupID = sublst[0];
+						itemParams.libraryID = Zotero.Groups.getLibraryIDFromGroupID(sublst[0]);
 					}
+					itemParams.key = sublst[1];
 				} else {
-					throw "Bad prefixed identifier";
+					throw "Bad prefixed identifier(2): "+identifierString;
 				}
 			}
 			return itemParams;
@@ -419,9 +424,11 @@ var Zotero_RTFScan = new function() {
 			// Normalize the marker format here.
 			var itemSplit = this.newtxt.split(rexPlainTextLinks);
 			if (itemSplit.length === 3) {
-				var itemParams = parseItemIdentifier(itemSplit[1]);
+				var itemIdentifierSplit = itemSplit[1].split(rexText).slice(1,-1);
+				var itemParams = parseItemIdentifier(itemIdentifierSplit[4]);
 				var itemIdentifier = this.constructItemIdentifier(itemParams);
-				itemSplit[1] = itemIdentifier;
+				itemIdentifierSplit[4] = itemIdentifier;
+				itemSplit[1] = "{" + itemIdentifierSplit.join("|") + "}";
 				this.newtxt = itemSplit.join("");
 			}
 		}
@@ -443,7 +450,7 @@ var Zotero_RTFScan = new function() {
 
 		Fragment.prototype.constructItemIdentifier = function (itemParams) {
 			var ret;
-			if (Zotero.Prefs("translators.ODFScan.useZoteroSelect")) {
+			if (Zotero.Prefs.get("translators.ODFScan.useZoteroSelect")) {
 				ret = "zotero://select/items/";
 				if (itemParams.isUser) {
 					ret += "0";
@@ -655,7 +662,7 @@ var Zotero_RTFScan = new function() {
 				var itemParams = parseItemIdentifier(link);
 
 				// construct uris
-				item.key = myidlst[1];
+				item.key = itemParams.key;
 				if (itemParams.isUser) {
 					item.uri = ['http://zotero.org/users/' + itemParams.userID + '/items/' + itemParams.key];
 					item.uris = item.uri.slice();
