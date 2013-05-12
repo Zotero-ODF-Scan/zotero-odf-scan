@@ -40,16 +40,16 @@
 
 <p>First, set the <q>Default Output Format</q> to <q>Scannable Cite</q> in the Export tab of the <a href="http://www.zotero.org/support/preferences">Zotero Preferences</a>. You can now insert citation markers by either draging&amp;dropping items or by using ctrl+alt+c (cmd+shift+c on Mac) to copy them to your clipboard and the paste them using ctrl/cmd+v or the right-click context menu.
 A citation marker will look like this<br>
-<code>{ | Smith, The Wealth of Nations, (2012) | | |zotero://select/items/0_WQVBH98K}</code></p>
+<code>{ | Smith, (2012) | | |zu:2433:WQVBH98K}</code></p>
 
-<p>It is separated into five sections by vertical lines (<q>pipes</q>). The first section can contain a prefix of the citation. The second section contains author, title, and year of the cited item. The third section can contain a locator such as a page number, the fourth section can contain a suffix for the citation, and the fifth section contains a unique identifier of the item via a zotero://select link (if you paste that link into Firefox's URL bar and hit return, Zotero will open with the item selected). Do not modify the last section of the marker.</p>
+<p>It is separated into five sections by vertical lines (<q>pipes</q>). The first section can contain a prefix of the citation. The second section contains author, title, and year of the cited item. The third section can contain a locator such as a page number, the fourth section can contain a suffix for the citation, and the fifth section contains a unique identifier of the item with a user/group ID and an item ID. Do not modify the last section of the marker.</p>
 Let's look at this for an example. This marker:<br>
-<code>{ See | Smith, The Wealth of Nations, (2012) | p. 45 | for an example |zotero://select/items/0_WQVBH98K}</code>
+<code>{See | Smith, (2012) |p. 45 | for an example |zu:2433:WQVBH98K}</code>
 <p>will turn into<div style="margin-left: 2em;">
 (See Smith, 2012, p. 45 for an example)<br>
 </div></p>
-<p>when APA is selected as a citation style (see below).</p>
-
+<p>when APA is selected as a citation style.</br>
+See <a href="#hidden_preferences">below</a> on how to modify the appearance of markers.</p>
 <h3>Affix Mark-up</h3>
 
 <p>Text in prefixes and suffixes can be formatted in italics or bold using simple mark-up language: To print something in <em>italics</em> put a single asterisk (*) on either side (e.g. *Weltanschauung*), to print something <strong>bold</strong> use two asterisks (e.g. **strongly**)</p>
@@ -57,7 +57,7 @@ Let's look at this for an example. This marker:<br>
 <h3>Suppress Author</h3>
 
 <p>To suppress the author &mdash; most typically in the case of a parenthetical citation that is preceded by the author name in the text &mdash; put a minus sign (-) in front of the author as in:<br>
-<code>{ | -Smith, The Wealth of Nations, (2012) | | |zotero://select/items/0_WQVBH98K}</code></p>
+<code>{ |-Smith, (2012) | | |zu:2433:WQVBH98K}</code></p>
 
 <h3>Locators</h3>
 
@@ -104,6 +104,15 @@ Click <q>Next</q> and the plugin will convert your document.</p>
 <h2>Reverse Conversion</h2>
 
 <p>RTF/ODF Scan can also take an existing ODF document with Zotero citations inserted by the LibreOffice plugin and convert citations to markers. This could be useful if you started writing in LibreOffice but want to switch to a word processor without a dedicated Zotero plugin. For this option, select ODF (to markers) as File type in the conversion dialog.</p>
+
+<h2 id="hidden_preferences">Hidden Preferences</h2>
+You can modify markers with two hidden preferences. See <a href="http://www.zotero.org/support/preferences/hidden_preferences">here</a> for general instructions on accessing hidden preferences. Both of these preferences can be toggled back and forth using right-click --> Toggle in the about:config settings of Firefox/Zotero.
+<p><code>extensions.zotero.translators.ODFScan.includeTitle</code></br> 
+will include the title of the item in the marker (default: false, i.e. only author, (date))</p>
+<p><code>extensions.zotero.translators.ODFScan.useZoteroSelect</code></br>
+will use zotero://select links instead of simple item ids. These have the disadvantage of being longer, but can be used to access Zotero items directly (e.g. by pasting them in Firefox's URL bar). This preference affects both the translator and the markers produced by reverse conversion. (default: false, i.e. citation markers as displayed above). 
+Because of the way library IDs are constructed in Zotero, the group IDs used in the default markers and those in zotero://select differ. Trying to adjust them manually will break ODF scan</p>
+
 
 <h2>Support</h2>
 <p>Please ask any questions and report problems to the <a href="https://forums.zotero.org/discussion/29308/announcing-rtfodf-scan-for-zotero/">RTF/ODF - Scan thread</a> on the Zotero forums.
