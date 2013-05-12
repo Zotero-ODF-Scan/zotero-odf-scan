@@ -1,8 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml"> 
-<h2>RTF/ODF Scan 1.0.8</h2> 
+<h2>RTF/ODF Scan 1.0.9</h2> 
 <ul> 
-<li><b>Date: Mon May 6 13:29:47 2013 -0600</b></br>
+<li><b>Date: Sun May 12 09:32:08 2013 +0900</b></br>
+
+ Pre-release update
+
+</li><li><b>Date: Sun May 12 07:20:47 2013 +0900</b></br>
+
+ Fix up some unfinished business with prefixed conversions.
+
+</li><li><b>Date: Sat May 11 11:50:10 2013 -0600</b></br>
+
+ make preferences readable from translators
+
+</li><li><b>Date: Sat May 11 16:49:23 2013 +0900</b></br>
+
+ Recognize both zu: and zg: prefixes in refs, and generate prefix or zotero://select form according to pref
+
+</li><li><b>Date: Sat May 11 16:46:07 2013 +0900</b></br>
+
+ Recognize includeTitle and useZoteroSelect prefs in translator
+
+</li><li><b>Date: Sat May 11 16:44:39 2013 +0900</b></br>
+
+ Add prefs useZoteroSelect and includeTitle, both defaulting to false
+
+</li><li><b>Date: Mon May 6 13:33:23 2013 -0600</b></br>
+
+ pre-release updates
+
+</li><li><b>Date: Mon May 6 13:29:47 2013 -0600</b></br>
 
  fix markup conversion in both directions
 
@@ -13,204 +41,6 @@
 </li><li><b>Date: Sun May 5 09:56:42 2013 +0900</b></br>
 
  Small tweak to wizard intro page
-
-</li><li><b>Date: Sun May 5 06:37:30 2013 +0900</b></br>
-
- In release.sh, bump version in master
-
-</li><li><b>Date: Sun May 5 06:34:10 2013 +0900</b></br>
-
- Pre-release update
-
-</li><li><b>Date: Sat May 4 15:25:01 2013 -0600</b></br>
-
- merge conflict
-
-</li><li><b>Date: Sat May 4 15:19:27 2013 -0600</b></br>
-
- fix up about - this time also the template so it's not getting overwritten
-
-</li><li><b>Date: Sun May 5 05:24:48 2013 +0900</b></br>
-
- Bump version count, fix another bug in release script
-
-</li><li><b>Date: Sun May 5 05:22:59 2013 +0900</b></br>
-
- Pre-release update
-
-</li><li><b>Date: Sun May 5 05:21:28 2013 +0900</b></br>
-
- Merge branch 'master' of github.com:Zotero-ODF-Scan/zotero-odf-scan
-
-</li><li><b>Date: Sun May 5 05:20:58 2013 +0900</b></br>
-
- Don't handle meta.xml if it doesn't exist, and reverse-convert italic and boldface markup
-
-</li><li><b>Date: Sat May 4 13:20:40 2013 -0600</b></br>
-
- update README and about.xul
-
-</li><li><b>Date: Sat May 4 10:47:08 2013 +0900</b></br>
-
- Fix version numbers
-
-</li><li><b>Date: Sat May 4 10:25:11 2013 +0900</b></br>
-
- Fix syntax error in release.sh
-
-</li><li><b>Date: Sat May 4 10:23:15 2013 +0900</b></br>
-
- Pre-release update
-
-</li><li><b>Date: Sat May 4 10:22:12 2013 +0900</b></br>
-
- Increment the version number on each release
-
-</li><li><b>Date: Sat May 4 10:21:57 2013 +0900</b></br>
-
- Fix version indication in about screen.
-
-</li><li><b>Date: Sat May 4 10:15:29 2013 +0900</b></br>
-
- Fix up the about screen a little
-
-</li><li><b>Date: Sat May 4 08:45:33 2013 +0900</b></br>
-
- Properly void out inputFile when switching modes
-
-</li><li><b>Date: Sat May 4 08:20:50 2013 +0900</b></br>
-
- Merge branch 'master' of github.com:Zotero-ODF-Scan/zotero-odf-scan
-
-</li><li><b>Date: Sat May 4 08:20:10 2013 +0900</b></br>
-
- Be consistent about branch naming and XUL selector element IDs
-
-</li><li><b>Date: Sat May 4 08:18:21 2013 +0900</b></br>
-
- Remove prefs. These were not being installed by bootstrap anyway.
-
-</li><li><b>Date: Sat May 4 08:16:59 2013 +0900</b></br>
-
- Ephemeral prefs for bootstrap
-
-</li><li><b>Date: Fri May 3 15:41:09 2013 -0600</b></br>
-
- update readme and license (which was still for Item History :)
-
-</li><li><b>Date: Sat May 4 06:35:37 2013 +0900</b></br>
-
- Fix indenting
-
-</li><li><b>Date: Sat May 4 06:34:45 2013 +0900</b></br>
-
- Use local not false for unsynced userID
-
-</li><li><b>Date: Fri May 3 18:54:35 2013 +0900</b></br>
-
- Remove a large amount of convoluted code that did not play well with Windows
-
-</li><li><b>Date: Fri May 3 08:25:41 2013 +0900</b></br>
-
- Make path selection work a little more smoothly, better error handling
-
-</li><li><b>Date: Fri May 3 08:24:32 2013 +0900</b></br>
-
- Avoid setting tab listener in Standalone
-
-</li><li><b>Date: Thu May 2 19:09:27 2013 +0900</b></br>
-
- Convert groupID to libraryID when composing markers from citations
-
-</li><li><b>Date: Thu May 2 18:31:52 2013 +0900</b></br>
-
- Fix indenting in translator distro file
-
-</li><li><b>Date: Thu May 2 18:29:37 2013 +0900</b></br>
-
- Restore indenting
-
-</li><li><b>Date: Thu May 2 18:23:51 2013 +0900</b></br>
-
- Merge branch 'master' of github.com:Zotero-ODF-Scan/zotero-odf-scan
-
-</li><li><b>Date: Thu May 2 18:23:27 2013 +0900</b></br>
-
- Allow tag markup in visible text of native citation.
-
-</li><li><b>Date: Thu May 2 18:22:58 2013 +0900</b></br>
-
- Try for zotero:basicViewer in Standalone
-
-</li><li><b>Date: Wed May 1 20:23:00 2013 -0600</b></br>
-
- two small bug fixes:
- - add Zotero.Translators.init() to bootstrap.js so Scannable Cite works right after install
- - fix libraryID (from LibraryID) in Scannable Cite
-
-</li><li><b>Date: Thu May 2 07:44:13 2013 +0900</b></br>
-
- Back to status quo ante
-
-</li><li><b>Date: Thu May 2 07:41:45 2013 +0900</b></br>
-
- Another, more reckles shot at allowing release of content fully checked in
-
-</li><li><b>Date: Thu May 2 07:40:05 2013 +0900</b></br>
-
- Allow release of content fully checked in
-
-</li><li><b>Date: Thu May 2 07:30:42 2013 +0900</b></br>
-
- Allow filenames with spaces in xpi build
-
-</li><li><b>Date: Thu May 2 07:26:18 2013 +0900</b></br>
-
- Remove reference to local bibliography.js
-
-</li><li><b>Date: Thu May 2 07:18:18 2013 +0900</b></br>
-
- Include the attic in the repo
-
-</li><li><b>Date: Thu May 2 07:17:51 2013 +0900</b></br>
-
- Move some files to the attic
-
-</li><li><b>Date: Thu May 2 07:12:42 2013 +0900</b></br>
-
- Fix a small startup bug
-
-</li><li><b>Date: Thu May 2 07:06:50 2013 +0900</b></br>
-
- Include Zotero and the original bibliography.js
-
-</li><li><b>Date: Thu May 2 06:57:30 2013 +0900</b></br>
-
- Move translator to resource fork, remove some unused files
-
-</li><li><b>Date: Thu May 2 06:47:37 2013 +0900</b></br>
-
- Stop a very small memory leak (on integer for each Zotero window closed)
-
-</li><li><b>Date: Thu May 2 00:53:26 2013 +0900</b></br>
-
- Pre-release update
-
-</li><li><b>Date: Thu May 2 00:52:28 2013 +0900</b></br>
-
- Add bootstrap to install RDF template
-
-</li><li><b>Date: Thu May 2 00:46:04 2013 +0900</b></br>
-
- Pre-release update
-
-</li><li><b>Date: Thu May 2 00:41:44 2013 +0900</b></br>
-
- Bootstrap with translator install
-
-</li><li><b>Date: Thu May 2 00:02:36 2013 +0900</b></br>
-
- Bootstrap version, initial code. Translator does not yet install, but plugin seems to work smoothly.
 
 </ul> 
 </html>
