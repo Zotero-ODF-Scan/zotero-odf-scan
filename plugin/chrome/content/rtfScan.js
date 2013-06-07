@@ -633,14 +633,15 @@ var Zotero_RTFScan = new function() {
 				items = [item].concat(items);
 				if (lst[i]) {
 					var placeholder = placeholder.join("; ");
+					var escapedPlaceholder = placeholder.replace('"', '\\&quot;', 'g');
 					var items = JSON.stringify(items);
 					items = items.replace('"', '&quot;', "g");
 					var randstr = this.generateRandomString();
-					var citation = tmplCitation.replace("%{1}s", placeholder)
+					var citation = tmplCitation.replace("%{1}s", escapedPlaceholder)
 						.replace("%{2}s",items)
 						.replace("%{3}s",randstr)
 						.replace("%{4}s",placeholder)
-						.replace("%{5}s",placeholder)
+						.replace("%{5}s",escapedPlaceholder)
 						.replace("%{6}s",items)
 						.replace("%{7}s",randstr);
 					Zotero.debug(citation)
