@@ -25,12 +25,13 @@ var Mem = function () {
     this.setlaw = function (str, punc) { if (!punc) {punc=""}; if (str && isLegal) {lst.push(str + punc)}};
     this.get = function () { return lst.join(" ") };
 }
-var mem = new Mem();
-var memdate = new Mem();
+
 
 function doExport() {
     var item;
     while (item = Zotero.nextItem()) {
+	var mem = new Mem();
+	var memdate = new Mem();
         mem.init(item);
         Zotero.write("{ |");
         var library_id = item.libraryID ? item.libraryID : 0;
