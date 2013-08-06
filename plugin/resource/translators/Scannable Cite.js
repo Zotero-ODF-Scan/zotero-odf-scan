@@ -40,7 +40,7 @@ function doExport() {
         else {
             mem.set(false, ",","anon.");
         }
-        if (Zotero.getHiddenPref("ODFScan.includeTitle")) {
+        if (Zotero.getHiddenPref("ODFScan.includeTitle") || item.creators.length === 0) {
             mem.set(item.title,",","(no title)");
         }
         mem.setlaw(item.authority, ",");
