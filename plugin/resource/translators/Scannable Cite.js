@@ -16,22 +16,20 @@
 }
 
 // legal types are weird
-var LEGAL_TYPES = ["patent","case","statute","bill","treaty","regulation","gazette"];
-var Mem = function () {
-    var isLegal = false;
+var LEGAL_TYPES = ["bill","case","gazette","hearing","patent","regulation","statute","treaty"];
+var Mem = function (item) {
     var lst = [];
-    this.init = function (item) { lst = []; isLegal = (LEGAL_TYPES.indexOf(item.itemType)>-1)};
+    var isLegal = isLegal = (LEGAL_TYPES.indexOf(item.itemType)>-1);
     this.set = function (str, punc, slug) { if (!punc) {punc=""}; if (str) {lst.push((str + punc))} else if (!isLegal) {lst.push(slug)}};
     this.setlaw = function (str, punc) { if (!punc) {punc=""}; if (str && isLegal) {lst.push(str + punc)}};
     this.get = function () { return lst.join(" ") };
 }
-var mem = new Mem();
-var memdate = new Mem();
 
 function doExport() {
     var item;
     while (item = Zotero.nextItem()) {
-        mem.init(item);
+        var mem = new Mem(item);
+        var memdate = new Mem(item);
         Zotero.write("{ |");
         var library_id = item.libraryID ? item.libraryID : 0;
         if (item.creators.length >0){
