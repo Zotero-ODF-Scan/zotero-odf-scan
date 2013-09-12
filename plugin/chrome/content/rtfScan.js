@@ -285,6 +285,8 @@ var Zotero_RTFScan = new function() {
 		var rexWrappedLinks = /(<[^>]*xlink:href=\"[^\"]*\"[^>]*>\s*{[^|}]*\|[^|}]*\|[^|}]*\|[^|}]*}\s*<[^>]*>)/;
 		var rexNativeLinks = /(<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*[^>]*\/>.*?<text:reference-mark-end[^>]*\/>)/;
 		var rexCite = /({[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*})/;
+		var rexCiteExtended = /(<text:span[^>]*>{[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*}<\/text:span>)/;
+		var rexCiteExtendedParts = /(<text:span[^>]*>)({[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*})(<\/text:span>)/;
 
 		var rexFixMarkupBold = /[\*][\*](.*?)[\*][\*]/;
 		var rexFixMarkupItalic = /\*(.*?)\*/;
@@ -539,12 +541,20 @@ var Zotero_RTFScan = new function() {
 			this.content = [lst[i].txt for (i in lst)].join("");
 		}
 
-		ODFConv.prototype.tidy = function (lst) {
+		ODFConv.prototype.tidy = function () {
 			// Eliminate empty balance spans between cites
 			var lst = this.content.split(rexCite);
-			for (var i=0,ilen=lst.length;i<ilen;i+=2) {
+			for (var i=2,ilen=lst.length;i<ilen;i+=2) {
 				if (lst[i].match(rexEmptyBalanceSpan)) {
 					lst[i] = "";
+				}
+			}
+			// Remove simple spans surrounding cites
+			var lst = this.content.split(rexCiteExtended);
+			for (var i=1,ilen=lst.length;i<ilen;i+=2) {
+				var m = lst[i].match(rexCiteExtendedParts);
+				if (m) {
+					lst[i] = m[2];
 				}
 			}
 			this.content = lst.join("");
