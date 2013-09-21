@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Seq RDF:about="rdf:#$SdflX1">
-    <RDF:li RDF:resource="rdf:#$TdflX1"/>
+  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAGQISlpl5zX2hhD5MEVRp+jQ4zoy8HCBOPEnJTvvOdnDToauMmFAwEbqKvXe76FGuhVN2Da+kaZCPPQLeP056dRenIglZFBps0c2uqX6LLTTnHmMFAKdmPl/0akgPRsSje2PoHIx7JPKRnPEhXSSW6KywwGTclGyATXpeYp465yQ">
+    <NS1:updates RDF:resource="rdf:#$I4EZo3"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$J4EZo3"
+                   NS1:version="1.0.12">
+    <NS1:targetApplication RDF:resource="rdf:#$M4EZo3"/>
+  </RDF:Description>
+  <RDF:Seq RDF:about="rdf:#$I4EZo3">
+    <RDF:li RDF:resource="rdf:#$J4EZo3"/>
   </RDF:Seq>
-  <RDF:Description RDF:about="rdf:#$WdflX1"
+  <RDF:Description RDF:about="rdf:#$M4EZo3"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
-                   NS1:maxVersion="21.*"
+                   NS1:maxVersion="24.*"
                    NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:9653368bc6943238e391d627101e85554906b6f1" />
-  <RDF:Description RDF:about="rdf:#$TdflX1"
-                   NS1:version="1.0.11">
-    <NS1:targetApplication RDF:resource="rdf:#$WdflX1"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAMc2rSLBTQeQdnZJtLV2Dkn2r3UKvHPdHnlTNtynLfZiwXDiu4+PYuNGxxwleqtGnnCeehgFhdxXXQxI+UTnvVY+4gAtyR8Ytpy0zBd2dx/yk6SVS1/6S9j9ERhAR8eVZ2HYFqa3zQ7AFi2zOYMMvR1tLhDvZLAM9LlFomwqaLgi">
-    <NS1:updates RDF:resource="rdf:#$SdflX1"/>
-  </RDF:Description>
+                   NS1:updateHash="sha1:1f7cf35d6d7cb8e20e43fe4ca4496a6f57e6c3fd" />
 </RDF:RDF>
