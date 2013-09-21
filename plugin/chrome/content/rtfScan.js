@@ -285,8 +285,9 @@ var Zotero_RTFScan = new function() {
 		var rexWrappedLinks = /(<[^>]*xlink:href=\"[^\"]*\"[^>]*>\s*{[^|}]*\|[^|}]*\|[^|}]*\|[^|}]*}\s*<[^>]*>)/;
 		var rexNativeLinks = /(<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*[^>]*\/>.*?<text:reference-mark-end[^>]*\/>)/;
 		var rexCite = /({[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*})/;
-		var rexCiteExtended = /(<text:span[^>]*>{[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*}<\/text:span>)/;
+		var rexCiteExtended = /(<\/?text:span[^>]*>{[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*}<\/?text:span[^>]*>)/;
 		var rexCiteExtendedParts = /(<text:span[^>]*>)({[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*})(<\/text:span>)/;
+		var rexCiteExtendedPartsReverse = /(<\/text:span>)({[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*})(<text:span[^>]*>)/;
 
 		var rexFixMarkupBold = /[\*][\*](.*?)[\*][\*]/;
 		var rexFixMarkupItalic = /\*(.*?)\*/;
@@ -479,10 +480,13 @@ var Zotero_RTFScan = new function() {
 			}
 		}
 
-		Fragment.prototype.finalize = function () {
+		Fragment.prototype.finalize = function (msg) {
 			var m = this.newtxt.match(checkStringRex);
 			if (m) {
 				this.txt = this.newtxt;
+				if (msg) {
+					dump("XXX [" + msg + "]: " + this.txt+"\n");
+				}
 			}
 		}
 
@@ -553,6 +557,10 @@ var Zotero_RTFScan = new function() {
 			var lst = this.content.split(rexCiteExtended);
 			for (var i=1,ilen=lst.length;i<ilen;i+=2) {
 				var m = lst[i].match(rexCiteExtendedParts);
+				if (m) {
+					lst[i] = m[2];
+				}
+				m = lst[i].match(rexCiteExtendedPartsReverse);
 				if (m) {
 					lst[i] = m[2];
 				}
