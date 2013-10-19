@@ -653,6 +653,7 @@ var Zotero_RTFScan = new function() {
 					var placeholder = placeholder.join("; ");
 					var escapedPlaceholder = placeholder.replace('"', '\\&quot;', 'g');
 					var items = JSON.stringify(items);
+					items = items.replace("\\\\&quot;", "\\&quot;", "g");
 					items = items.replace('"', '&quot;', "g");
 					var randstr = this.generateRandomString();
 					var citation = tmplCitation.replace("%{1}s", escapedPlaceholder)
@@ -662,7 +663,7 @@ var Zotero_RTFScan = new function() {
 						.replace("%{5}s",escapedPlaceholder)
 						.replace("%{6}s",items)
 						.replace("%{7}s",randstr);
-					Zotero.debug(citation)
+					//Zotero.debug(citation)
 					ret.push(citation);
 					ret.push(lst[i]);
 					items = [];
@@ -678,6 +679,8 @@ var Zotero_RTFScan = new function() {
 		ODFConv.prototype.fixMarkup = function (str) {
 			str = str.replace(rexFixMarkupBold, "&lt;b&gt;$1&lt;/b&gt;");
 			str = str.replace(rexFixMarkupItalic, "&lt;i&gt;$1&lt;/i&gt;");
+			str = str.replace('&quot;', "\\&quot;", "g");
+			str = str.replace('"', "\\&quot;", "g");
 			return str;
 		}
 
@@ -863,7 +866,7 @@ var Zotero_RTFScan = new function() {
 			
 			// only add each citation once
 			if(citationItemIDs[citationString]) continue;
-			Zotero.debug("Found citation "+citationString);
+			//Zotero.debug("Found citation "+citationString);
 			
 			// for each individual match, look for an item in the database
 			var s = new Zotero.Search;
@@ -887,7 +890,7 @@ var Zotero_RTFScan = new function() {
 			if(title) s.addCondition("title", "contains", title);
 			s.addCondition("date", "is", date);
 			var ids = s.search();
-			Zotero.debug("Mapped to "+ids);
+			//Zotero.debug("Mapped to "+ids);
 			citationItemIDs[citationString] = ids;
 			
 			if(!ids) {	// no mapping found
@@ -1236,10 +1239,10 @@ var Zotero_RTFScan = new function() {
 			
 			cslCitations.push(cslCitation);
 		}
-		Zotero.debug(cslCitations);
+		//Zotero.debug(cslCitations);
 		
 		itemIDs = [itemID for(itemID in itemIDs)];
-		Zotero.debug(itemIDs);
+		//Zotero.debug(itemIDs);
 		
 		// prepare the list of rendered citations
 		var citationResults = style.rebuildProcessorState(cslCitations, "rtf");
@@ -1249,7 +1252,7 @@ var Zotero_RTFScan = new function() {
 		var lastEnd = 0;
 		for(var i=0; i<citations.length; i++) {
 			var citation = citationResults[i][2];
-			Zotero.debug("Formatted "+citation);
+			//Zotero.debug("Formatted "+citation);
 			
 			// if using notes, we might have to move the note after the punctuation
 			if(isNote && citations[i].start != 0 && contents[citations[i].start-1] == " ") {
