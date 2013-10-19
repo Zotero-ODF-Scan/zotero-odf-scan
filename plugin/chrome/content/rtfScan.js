@@ -496,6 +496,9 @@ var Zotero_RTFScan = new function() {
 			this.rands = {};
 			this.readZipfileContent();
 
+			// Wipe out any font definitions in the style, they can mess things up pretty badly
+			this.content = this.content.replace(/\s+fo:font-family="[^"]*"/g, "");
+            
 			// Matches plain text links
 			var lst = this.content.split(rexPlainTextLinks);
 			for (var i=0,ilen=lst.length;i<ilen;i+=1) {
