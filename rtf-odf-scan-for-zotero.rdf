@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Seq RDF:about="rdf:#$LLuAR2">
-    <RDF:li RDF:resource="rdf:#$MLuAR2"/>
-  </RDF:Seq>
-  <RDF:Description RDF:about="rdf:#$MLuAR2"
-                   NS1:version="1.0.13">
-    <NS1:targetApplication RDF:resource="rdf:#$PLuAR2"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBADxzPWQek1BT0/fuD556Od5R6seL2vXa/CXf4IumlGBzisuy2l3dr4zcRwc+h9jUO/EFiREydo0KLHpSYhJH287T6swG/6gTc70+Xw6GmV0SSE1+NZsZMP0Kr9VxR9JkK+HIN1c4jk0rR63xsZA9Nud82bq5ltClC8ifiMa69zf6">
-    <NS1:updates RDF:resource="rdf:#$LLuAR2"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$PLuAR2"
+  <RDF:Description RDF:about="rdf:#$omXzY2"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
                    NS1:maxVersion="24.*"
                    NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:8059bcc714fd5a7ddd1337d28ebbcb18064203da" />
+                   NS1:updateHash="sha1:1b46360971a94a74bd7bc0dcce738ec99a97b781" />
+  <RDF:Description RDF:about="rdf:#$lmXzY2"
+                   NS1:version="1.0.15">
+    <NS1:targetApplication RDF:resource="rdf:#$omXzY2"/>
+  </RDF:Description>
+  <RDF:Seq RDF:about="rdf:#$kmXzY2">
+    <RDF:li RDF:resource="rdf:#$lmXzY2"/>
+  </RDF:Seq>
+  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAARt/F74/ehxR/EJVQzLYQNynj5vGzF+1zCTDkKGtxX5c1Y7v2yt90uth/1t5yR990OeXpvpLJM0xkTlzWv86xVDf3B+uY9EmbJYJvNQ35XZ/jFPkX98auHEQmvA7W9C2Oiz1VC/eGIwjvkOy6L4LM08oO9k55bE6FSKeZFjnrHi">
+    <NS1:updates RDF:resource="rdf:#$kmXzY2"/>
+  </RDF:Description>
 </RDF:RDF>
