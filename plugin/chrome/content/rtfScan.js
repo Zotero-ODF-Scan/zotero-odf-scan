@@ -279,7 +279,7 @@ var Zotero_RTFScan = new function() {
 		var checkStringRex = /(<[^\/>][^>]*>)*{[^<>\|]*|[^<>\|]*|[^<>\|]*|[^<>\|]*|[^<>\|]*}(<\/[^>]*>)*/;
 		var openTagSplitter = /(<[^\/>][^>]*>)/;
 		var closeTagSplitter = /(<\/[^>]*>)/;
-		var rexSingleton = /<[^>]*\/>]/g;
+		var rexSingleton = /<[^>]*\/>/g;
 		var rexSpace = /<text:s\/>/g;
 		var rexPlainTextLinks = /({[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*})/;
 		var rexWrappedLinks = /(<[^>]*xlink:href=\"[^\"]*\"[^>]*>\s*{[^|}]*\|[^|}]*\|[^|}]*\|[^|}]*}\s*<[^>]*>)/;
