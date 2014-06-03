@@ -274,7 +274,7 @@ var Zotero_RTFScan = new function() {
 		var rexPref = /<meta:user-defined meta:name="ZOTERO_PREF[^<]*?<\/meta:user-defined>/;
 		var rexLabels = /^((?:art|ch|Ch|subch|col|fig|l|n|no|op|p|pp|para|subpara|pt|r|sec|subsec|Sec|sv|sch|tit|vrs|vol)\\.)\\s+(.*)/;
 		var rexBalancedTags = /(.*)<([^\/>][-:a-zA-Z0-9]*)[^>]*>([^>]*)<\/([-:a-zA-Z0-9]*)[^>]*>(.*)/;
-		var rexLink = /<[^>]*xlink:href=\"([^\"]*)\"[^>]*>\s*{([^|}]*)\|([^|}]*)\|([^|}]*)\|([^|}]*)}\s*<[^>]*>/;
+		var rexLink = /(<[^>]*xlink:href=\"([^\"]*)\"[^>]*>)\s*{([^\|}]*)\|([^\|}]*)\|([^\|}]*)\|([^\|}]*)}\s*(<[^>]*>)/;
 		var rexNativeLink = /<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*([^>]*)\s+[^ ]*\/>(.*?)<text:reference-mark-end[^>]*\/>/;
 		var checkStringRex = /(<[^\/>][^>]*>)*{[^<>\|]*|[^<>\|]*|[^<>\|]*|[^<>\|]*|[^<>\|]*}(<\/[^>]*>)*/;
 		var openTagSplitter = /(<[^\/>][^>]*>)/;
@@ -282,7 +282,7 @@ var Zotero_RTFScan = new function() {
 		var rexSingleton = /<[^>]*\/>/g;
 		var rexSpace = /<text:s\/>/g;
 		var rexPlainTextLinks = /({[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*})/;
-		var rexWrappedLinks = /(<[^>]*xlink:href=\"[^\"]*\"[^>]*>\s*{[^|}]*\|[^|}]*\|[^|}]*\|[^|}]*}\s*<[^>]*>)/;
+		var rexWrappedLinks = /(<[^>]*xlink:href=\"[^\"]*\"[^>]*>\s*{[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*}\s*<[^>]*>)/;
 		var rexNativeLinks = /(<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*[^>]*\/>.*?<text:reference-mark-end[^>]*\/>)/;
 		var rexCite = /({[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*})/;
 		var rexCiteExtended = /(<\/?text:span[^>]*>{[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*}<\/?text:span[^>]*>)/;
@@ -377,7 +377,7 @@ var Zotero_RTFScan = new function() {
 		}
 
 		Fragment.prototype.normalizeLinkedMarks = function () {
-			this.newtxt = this.newtxt.replace(rexLink, "{$2|$3|$4|$5|$1}");
+			this.newtxt = this.newtxt.replace(rexLink, "{$1$3|$4|$5|$6|$2$7}");
 		}
 
 		Fragment.prototype.normalizeNativeMarks = function () {
@@ -499,17 +499,6 @@ var Zotero_RTFScan = new function() {
 			// Wipe out any font definitions in the style, they can mess things up pretty badly
 			this.content = this.content.replace(/\s+fo:font-family="[^"]*"/g, "");
             
-			// Matches plain text links
-			var lst = this.content.split(rexPlainTextLinks);
-			for (var i=0,ilen=lst.length;i<ilen;i+=1) {
-				lst[i] = new Fragment(lst[i]);
-			}
-			for (var i=lst.length-2;i>-1;i+=-2) {
-				lst[i].normalizeStringMarks();
-				lst[i].finalize();
-			}
-			this.rejoin(lst);
-
 			// Matches wrapped text links
 			var lst = this.content.split(rexWrappedLinks);
 			for (var i=0,ilen=lst.length;i<ilen;i+=1) {
@@ -518,6 +507,17 @@ var Zotero_RTFScan = new function() {
 			for (var i=lst.length-2;i>-1;i+=-2) {
 				lst[i].normalizeLinkedMarks();
 				lst[i].finalize()
+			}
+			this.rejoin(lst);
+
+			// Matches plain text links
+			var lst = this.content.split(rexPlainTextLinks);
+			for (var i=0,ilen=lst.length;i<ilen;i+=1) {
+				lst[i] = new Fragment(lst[i]);
+			}
+			for (var i=lst.length-2;i>-1;i+=-2) {
+				lst[i].normalizeStringMarks();
+				lst[i].finalize();
 			}
 			this.rejoin(lst);
 
