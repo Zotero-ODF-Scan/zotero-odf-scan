@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$B9QOO"
+  <RDF:Description RDF:about="rdf:#$NBpdl2"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
-                   NS1:maxVersion="24.*"
+                   NS1:maxVersion="31.*"
                    NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:2458725ace13d15598d32885588f03c3a2109129" />
-  <RDF:Seq RDF:about="rdf:#$x9QOO">
-    <RDF:li RDF:resource="rdf:#$y9QOO"/>
-  </RDF:Seq>
-  <RDF:Description RDF:about="rdf:#$y9QOO"
-                   NS1:version="1.0.16">
-    <NS1:targetApplication RDF:resource="rdf:#$B9QOO"/>
+                   NS1:updateHash="sha1:de1055158e87d69d0a26e0aba02dd3955a925001" />
+  <RDF:Description RDF:about="rdf:#$KBpdl2"
+                   NS1:version="1.0.17">
+    <NS1:targetApplication RDF:resource="rdf:#$NBpdl2"/>
   </RDF:Description>
+  <RDF:Seq RDF:about="rdf:#$JBpdl2">
+    <RDF:li RDF:resource="rdf:#$KBpdl2"/>
+  </RDF:Seq>
   <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAAv+L2CC+K5cvS1ZCZIiUcShVwO64LC584Ks2xHnfthWqAOoOIn7X1VXEpmAPR6bbZ9EEvmrjYeffSbNMx23MIc1u1fb870GVx1qZUWhCtThVkr1YaOGpB9cRI+1BnvJfCyQOAiDDFwq2eix4SBrrkef5ra25X84/mBEA/zS1J+3">
-    <NS1:updates RDF:resource="rdf:#$x9QOO"/>
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBACD+D5pfUTM1AUqMU320Rl7gsIIDQpgyXWj9/301H2Uri+SQMS/58Rwmlj8RQ+x5tFDZfNC/CMDjN9En6zI+WBaXDHwNkmGHXmHlHgz8NHmAlurCUmRiJ7Y+KMOKJ71WoB58vdo+IiXGhB/iO0g3p74FwY7eY3pXcXSxSAWMvc49">
+    <NS1:updates RDF:resource="rdf:#$JBpdl2"/>
   </RDF:Description>
 </RDF:RDF>
