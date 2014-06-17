@@ -275,6 +275,7 @@ var Zotero_RTFScan = new function() {
 		var rexLabels = /^((?:art|ch|Ch|subch|col|fig|l|n|no|op|p|pp|para|subpara|pt|r|sec|subsec|Sec|sv|sch|tit|vrs|vol)\\.)\\s+(.*)/;
 		var rexBalancedTags = /(.*)<([^\/>][-:a-zA-Z0-9]*)[^>]*>([^>]*)<\/([-:a-zA-Z0-9]*)[^>]*>(.*)/;
 		var rexLink = /(<[^>]*xlink:href=\"([^\"]*)\"[^>]*>)\s*{([^\|}]*)\|([^\|}]*)\|([^\|}]*)\|([^\|}]*)}\s*(<[^>]*>)/;
+		var rexLink2 = /(<[^>]*xlink:href=\"([^\"]*)\"[^>]*>)\s*(?:<[^\/>]+>)\s*{([^\|}]*)\|([^\|}]*)\|([^\|}]*)\|([^\|}]*)}\s*(?:<\/[^\/>]+>)\s*(<[^>]*>)/;
 		var rexNativeLink = /<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*([^>]*)\s+[^ ]*\/>(.*?)<text:reference-mark-end[^>]*\/>/;
 		var checkStringRex = /(<[^\/>][^>]*>)*{[^<>\|]*|[^<>\|]*|[^<>\|]*|[^<>\|]*|[^<>\|]*}(<\/[^>]*>)*/;
 		var openTagSplitter = /(<[^\/>][^>]*>)/;
@@ -282,7 +283,7 @@ var Zotero_RTFScan = new function() {
 		var rexSingleton = /<[^>]*\/>/g;
 		var rexSpace = /<text:s\/>/g;
 		var rexPlainTextLinks = /({[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*})/;
-		var rexWrappedLinks = /(<[^>]*xlink:href=\"[^\"]*\"[^>]*>\s*{[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*}\s*<[^>]*>)/;
+		var rexWrappedLinks = /(<[^>]*xlink:href=\"[^\"]*\"[^>]*>\s*(?:<[^\/>]+>)\s*{[^\|}]*\|[^\|}]*\|[^\|}]*\|[^\|}]*}\s*(?:<\/[^\/>]+>)\s*\s*<[^>]*>)/;
 		var rexNativeLinks = /(<text:reference-mark-start[^>]*ZOTERO_ITEM\s+(?:CSL_CITATION\s+)*[^>]*\/>.*?<text:reference-mark-end[^>]*\/>)/;
 		var rexCite = /({[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*})/;
 		var rexCiteExtended = /(<\/?text:span[^>]*>{[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*\|[^<>\|]*}<\/?text:span[^>]*>)/;
@@ -378,6 +379,7 @@ var Zotero_RTFScan = new function() {
 
 		Fragment.prototype.normalizeLinkedMarks = function () {
 			this.newtxt = this.newtxt.replace(rexLink, "{$1$3|$4|$5|$6|$2$7}");
+			this.newtxt = this.newtxt.replace(rexLink2, "{$1$3|$4|$5|$6|$2$7}");
 		}
 
 		Fragment.prototype.normalizeNativeMarks = function () {
