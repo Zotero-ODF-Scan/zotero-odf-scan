@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-  <RDF:Description RDF:about="rdf:#$mQY9h"
+  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAJFdYuNtFbkU3ipipxxgNnrMOEme9zBoRwI9SyLOVo8yItflES3kKRi3aQKyi86zcwE3W6jR4iRp/XcUMk7bBxRiYTv9cqzjmgh0mbcCGHNg/Wa2c6KD4P/iL4eK6nkw2A1EjSRp3bEXqYTpi6ZLTgazDFeJ8/Cc3LKkNfTxbu3C">
+    <NS1:updates RDF:resource="rdf:#$smBzc2"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$tmBzc2"
+                   NS1:version="1.0.19">
+    <NS1:targetApplication RDF:resource="rdf:#$wmBzc2"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$wmBzc2"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
                    NS1:maxVersion="31.*"
                    NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:832a2f0a53e6b19212c0e279d1ab492dccd35655" />
-  <RDF:Description RDF:about="rdf:#$jQY9h"
-                   NS1:version="1.0.18">
-    <NS1:targetApplication RDF:resource="rdf:#$mQY9h"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBABKBE9nvU7Q+PRR4/sT6lnSoh7wI/DR8+eA8iwblSYmfdbEwfyo5yjxFvyQhAAEtc1fKtqd4zcOKdwn8yzKTRbOhyHGOUav+D2laR0aFgbLhBIFmF//lq6Uci2IhQm/71dRyms/9SZzceHKtAL8r5zAwqWvJ1XasZ9quG8NCqX4L">
-    <NS1:updates RDF:resource="rdf:#$iQY9h"/>
-  </RDF:Description>
-  <RDF:Seq RDF:about="rdf:#$iQY9h">
-    <RDF:li RDF:resource="rdf:#$jQY9h"/>
+                   NS1:updateHash="sha1:cf7acb200fa288dffcc08e38e9bb52f7b212615d" />
+  <RDF:Seq RDF:about="rdf:#$smBzc2">
+    <RDF:li RDF:resource="rdf:#$tmBzc2"/>
   </RDF:Seq>
 </RDF:RDF>
