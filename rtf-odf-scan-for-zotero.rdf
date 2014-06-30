@@ -2,22 +2,22 @@
 <RDF:RDF xmlns:NS1="http://www.mozilla.org/2004/em-rdf#"
          xmlns:NC="http://home.netscape.com/NC-rdf#"
          xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Seq RDF:about="rdf:#$+AC1p2">
+    <RDF:li RDF:resource="rdf:#$0BC1p2"/>
+  </RDF:Seq>
   <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
-                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAJFdYuNtFbkU3ipipxxgNnrMOEme9zBoRwI9SyLOVo8yItflES3kKRi3aQKyi86zcwE3W6jR4iRp/XcUMk7bBxRiYTv9cqzjmgh0mbcCGHNg/Wa2c6KD4P/iL4eK6nkw2A1EjSRp3bEXqYTpi6ZLTgazDFeJ8/Cc3LKkNfTxbu3C">
-    <NS1:updates RDF:resource="rdf:#$smBzc2"/>
+                   NS1:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAC6LKUGFBmuvDgg2bZENgrdfr1Eq9jHBNlaV6KBsCu0L5bG71tghbFCLKfsp/6+DRyaWu88iTgEZmXkh8AdRaz3DzqBzFFNk3mcjoFASP3CVFzmcsxCYlmIsUaDc4K2CH/gd8gh5287rH5HjtIU1ponJfPZOGW3dlihpmxrXCWbr">
+    <NS1:updates RDF:resource="rdf:#$+AC1p2"/>
   </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$tmBzc2"
-                   NS1:version="1.0.19">
-    <NS1:targetApplication RDF:resource="rdf:#$wmBzc2"/>
-  </RDF:Description>
-  <RDF:Description RDF:about="rdf:#$wmBzc2"
+  <RDF:Description RDF:about="rdf:#$3BC1p2"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
                    NS1:maxVersion="31.*"
                    NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
-                   NS1:updateHash="sha1:cf7acb200fa288dffcc08e38e9bb52f7b212615d" />
-  <RDF:Seq RDF:about="rdf:#$smBzc2">
-    <RDF:li RDF:resource="rdf:#$tmBzc2"/>
-  </RDF:Seq>
+                   NS1:updateHash="sha1:83185bebcc7233553e256c6c98d17dc435108140" />
+  <RDF:Description RDF:about="rdf:#$0BC1p2"
+                   NS1:version="1.0.20">
+    <NS1:targetApplication RDF:resource="rdf:#$3BC1p2"/>
+  </RDF:Description>
 </RDF:RDF>
