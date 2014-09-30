@@ -37,11 +37,15 @@
 <p>Download the add-on by right-clicking on the <q>Download Add-on</q> button to the left and <q>Save link as...</q> Then, in Standalone, go to Tools --> Add-ons, click on the little tools icon, and select <q>Install from File.</q> Browse to the downloaded <q>rtf-odf-scan-for-zotero.xpi</q> file and select it. Installation will add a <q>Scannable Cite</q> export translator to Zotero and change the <q>RTF Scan</q> option to <q>RTF/ODF Scan.</q></p>
 
 <h2>Inserting Citations</h2>
-
+<h3>From Zotero Client</h3>
 <p>First, set the <q>Default Output Format</q> to <q>Scannable Cite</q> in the Export tab of the <a href="http://www.zotero.org/support/preferences">Zotero Preferences</a>. You can now insert citation markers by either draging&amp;dropping items or by using ctrl+alt+c (cmd+shift+c on Mac) to copy them to your clipboard and the paste them using ctrl/cmd+v or the right-click context menu.
-A citation marker will look like this<br>
-<code>{ | Smith, (2012) | | |zu:2433:WQVBH98K}</code></p>
 
+<h3>From zotero.org</h3>
+<p>To generate citation markers directly from zotero.org, use the Scannable Cite bookmarklet. Drag and drop the following link to your bookmarks bar: <a href="javascript:(function(){%22undefined%22==typeof%20BookmarkletLoader%26%26(BookmarkletLoader=new%20function(){this.loading={},this.run=function(o,n){if(!this.loading[o]){if(window[o])return%20void%20window[o].run();var%20e=this,t=document.createElement(%22script%22);t.src=n,t.addEventListener(%22load%22,function(){delete%20e.loading[o],window[o].run()}),this.loading[o]=!0,document.body.appendChild(t)}}}),BookmarkletLoader.run(%22ZoteroRtfOdfScan%22,%22//zotero-odf-scan.github.io/zotero-odf-scan/bookmarklet/bookmarklet.js%22)})();">Cite Item(s)</a>. Click the bookmarklet when viewing a single item on zotero.org and a dialog will appear with the citation marker that you can then copy and paste into your document. The bookmarklet will also work when viewing a list of items on zotero.org. Use the checkboxes next to the items to select which refernces you want to cite and click the bookmarklet.</p>
+
+<h2>Citation Marker</h2>
+<p>A citation marker will look like this<br>
+<code>{ | Smith, (2012) | | |zu:2433:WQVBH98K}</code></p>
 <p>It is separated into five sections by vertical lines (<q>pipes</q>). The first section can contain a prefix of the citation. The second section contains author, title, and year of the cited item. The third section can contain a locator such as a page number, the fourth section can contain a suffix for the citation, and the fifth section contains a unique identifier of the item with a user/group ID and an item ID. Do not modify the last section of the marker.</p>
 Let's look at this for an example. This marker:<br>
 <code>{See | Smith, (2012) |p. 45 | for an example |zu:2433:WQVBH98K}</code>
