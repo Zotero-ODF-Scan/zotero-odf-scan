@@ -485,7 +485,7 @@ var Zotero_RTFScan = new function() {
 		Fragment.prototype.finalize = function (msg) {
 			var m = this.newtxt.match(checkStringRex);
 			if (m) {
-				this.txt = this.newtxt;
+				this.txt = this.newtxt.replace("\n"," ","g");
 				if (msg) {
 					dump("XXX [" + msg + "]: " + this.txt+"\n");
 				}
@@ -541,8 +541,9 @@ var Zotero_RTFScan = new function() {
 				this.composeCitations();
 			}
 
-			this.purgeConfig()
-			this.writeZipfileContent()
+			this.purgeStyles();
+			this.purgeConfig();
+			this.writeZipfileContent();
 			return true;
 		}
 
@@ -787,6 +788,69 @@ var Zotero_RTFScan = new function() {
 			}
 
 		}
+
+		ODFConv.prototype.purgeStyles = function () {
+
+			var decodeXML = Components.classes["@mozilla.org/xmlextras/domparser;1"]
+				.createInstance(Components.interfaces.nsIDOMParser);
+			var encodeXML = new XMLSerializer();
+
+			var doc = decodeXML.parseFromString(this.content,'application/xml');
+			var noteBodies = doc.getElementsByTagName("text:note-body");
+			var stylesUsedInNotes = {};
+
+			collectNoteStyles();
+			fixStyleNodes();
+			this.content = encodeXML.serializeToString(doc,'application/xml');
+
+			function collectNoteStyles () {
+				for (var i=0,ilen=noteBodies.length;i<ilen;i++) {
+					var node = noteBodies[i];
+					inspectNote(node);
+				}
+			}
+			
+			function inspectNote(node) {
+				if (node.hasAttribute("text:style-name")) {
+					var styleName = node.getAttribute("text:style-name").toString();
+					if (styleName !== "Footnote") {
+						stylesUsedInNotes[styleName] = true;
+					}
+				}
+				for (var i=0,ilen=node.childNodes.length;i<ilen;i++) {
+					var child = node.childNodes[i];
+					if (!child.tagName) continue;
+					inspectNote(child);
+				}
+			}
+			
+			function fixStyleNodes() {
+				var styleNodes = doc.getElementsByTagName("style:style");
+				for (var i=0,ilen=styleNodes.length;i<ilen;i++) {
+					var styleNode = styleNodes[i];
+					var styleName = styleNode.getAttribute("style:name").toString();
+					if (stylesUsedInNotes[styleName]) {
+						fixStyleNode(styleNode);
+					}
+				}
+			}
+
+			function fixStyleNode(node) {
+				var textPropertyNodes = node.getElementsByTagName("style:text-properties");
+				for (var i=0,ilen=textPropertyNodes.length;i<ilen;i++) {
+					var textPropertyNode = textPropertyNodes[i];
+					var unwantedAttributes = ["style:font-name","fo:font-size","style:font-size-asian"];
+					for (var j=0,jlen=unwantedAttributes.length;j<jlen;j++) {
+						var attributeName = unwantedAttributes[j];
+						if (textPropertyNode.hasAttribute(attributeName)) {
+							textPropertyNode.removeAttribute(attributeName);
+						}
+					}
+				}
+			}
+			
+		}
+		
 		var odfConv = new ODFConv();
 		try {
 			if (odfConv.convert()) {
