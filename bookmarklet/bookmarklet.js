@@ -25,38 +25,27 @@
 
 // This will become a global object
 var ZoteroRtfOdfScan = new function() {
+	this.alert = function(msg) {
+		// TODO: use Zotero UI
+		window.alert(msg);
+	};
+	
 	this.produceODFMarker = function(items) {
 		var str = '';
 		for (var i=0; i<items.length; i++) {
-			str += '{|' + this.generateCitation(this.lib[items[i]]) + '|||'
+			str += '{|' + this.generateCitation(this.lib[items[i]]) + '|||z'
 				+ this.libPrefix + ':' + this.libraryID + ':' + items[i] + '}';
 		}
-		window.prompt("Copy to clipboard: Ctrl/Cmd+C, Enter", str);
+		
+		// TODO: use Zotero UI
+		window.prompt("Copy to clipboard\n", str);
 	};
 		
 	this.generateCitation = function(item) {
 		if (!item) return '';
 		
-		var str = '', creators = { authors: [], editors: [] };
-		for (var i=0; i<item.creators.length; i++) {
-			if (item.creators[i].creatorType == 'author') {
-				creators.authors.push(item.creators[i].lastName);
-			} else if (item.creators[i].creatorType == 'editor') {
-				creators.editors.push(item.creators[i].lastName);
-			}
-		}
-		
-		if (creators.authors.length) creators = creators.authors;
-		else creators = creators.editors;
-		
-		if (creators.length) {
-			str += creators[0];
-			if (creators.length > 2) {
-				str += ' et al.';
-			} else if (creators.length == 2) {
-				str += ' & ' + creators[1]
-			}
-		} else if (item.title) {
+		var str = item.creatorSummary;
+		if (!str && item.title) {
 			var title = item.title;
 			// Trim off last incomplete word up to 50 chars
 			var maxLength = 30;
@@ -67,8 +56,10 @@ var ZoteroRtfOdfScan = new function() {
 				}
 				title += '...';
 			}
-			str += '"' + title + '"';
-		} else {
+			str = '"' + title + '"';
+		}
+		
+		if (!str) {
 			return '';
 		}
 		
@@ -80,47 +71,26 @@ var ZoteroRtfOdfScan = new function() {
 	};
 	
 	this.run = function() {
-		var itemsDiv = document.getElementById('library-items-div');
-		var config;
-		if (!itemsDiv || !(config = itemsDiv.getAttribute('data-loadconfig'))) {
-			window.alert("This bookmarklet only works on library pages on zotero.org");
+		// Make sure we're on a supported page
+		try {
+			var lib = Zotero.ui.getAssociatedLibrary();
+		} catch (e) {
+			this.alert("This bookmarklet only works on library pages on zotero.org");
 			return;
 		}
 		
-		try { config = JSON.parse(config); }
-		catch(e) { window.alert("Could not parse library configuration"); return; }
+		// From here on out it should be safe to use Zotero's web library API 
 		
-		this.libraryID = config.libraryID;
-		this.libPrefix = config.libraryType == "group" ? 'zg' : 'zu';
+		this.libraryID = lib.libraryID;
+		this.libPrefix = lib.libraryType == 'group' ? 'g' : 'u';
+		this.lib = lib.items.itemObjects;
 		
-		try {
-			this.lib = Zotero.libraries[this.libPrefix.substr(1) + this.libraryID].items.itemObjects;
-		} catch(e) {
-			this.lib = {};
+		var selectedItems = Zotero.ui.getSelectedItemKeys();
+		if (!selectedItems.length) {
+			this.alert("First select some items.");
+			return;
 		}
 		
-		var itemDetails = document.getElementById('item-details-div');
-		if (itemDetails && itemDetails.offsetParent) {
-			// Single visible item
-			try { var id = itemDetails.getElementsByTagName('table')[0].getAttribute('data-itemkey') }
-			catch(e) { window.alert("Error getting item key"); return }
-		
-			this.produceODFMarker([id]);
-		} else {
-			// Get selected items
-			var items = document.evaluate('//tr[@data-itemkey]', document, null, XPathResult.ANY_TYPE, null);
-			var item, selectedItems = [];
-			while (item = items.iterateNext()) {
-				if (item.getElementsByClassName('itemKey-checkbox')[0].checked) {
-					selectedItems.push(item.getAttribute('data-itemkey'));
-				}
-			}
-			
-			if (selectedItems.length) {
-				this.produceODFMarker(selectedItems);
-			} else {
-				window.alert("First select some items");
-			}
-		}
+		this.produceODFMarker(selectedItems);
 	};
 };
