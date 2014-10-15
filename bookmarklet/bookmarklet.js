@@ -33,7 +33,7 @@ var ZoteroRtfOdfScan = new function() {
 	this.produceODFMarker = function(items) {
 		var str = '';
 		for (var i=0; i<items.length; i++) {
-			str += '{|' + this.generateCitation(this.lib[items[i]]) + '|||z'
+			str += '{ |' + this.generateCitation(this.lib[items[i]]) + '| | |z'
 				+ this.libPrefix + ':' + this.libraryID + ':' + items[i] + '}';
 		}
 		
