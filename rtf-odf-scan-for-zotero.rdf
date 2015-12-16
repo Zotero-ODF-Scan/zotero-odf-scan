@@ -6,7 +6,7 @@
     <RDF:li RDF:resource="rdf:#$Trvu41"/>
   </RDF:Seq>
   <RDF:Description RDF:about="rdf:#$Trvu41"
-                   NS1:version="1.0.22">
+                   NS1:version="1.0.23">
     <NS1:targetApplication RDF:resource="rdf:#$Wrvu41"/>
   </RDF:Description>
   <RDF:Description RDF:about="urn:mozilla:extension:rtf-odf-scan-for-zotero@mystery-lab.com"
@@ -16,7 +16,7 @@
   <RDF:Description RDF:about="rdf:#$Wrvu41"
                    NS1:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    NS1:minVersion="17"
-                   NS1:maxVersion="31.*"
+                   NS1:maxVersion="43.*"
                    NS1:updateLink="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xpi"
                    NS1:updateInfoURL="http://Zotero-ODF-Scan.github.io/zotero-odf-scan/rtf-odf-scan-for-zotero.xhtml"
                    NS1:updateHash="sha1:9727669ae4e0a48758d73716074f1cd00c19000d" />
