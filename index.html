@@ -46,33 +46,40 @@
   <dt>RTF/ODF-Scan</dt>
   <dd>Download the add-on by clicking the <q>Download Add-on</q> button to the left. On the next page, right-click the download link to the .xpi file (e.g. "zotero-odf-scan-v1.0.32-fx.xpi") and select <q>Save Link As...</q>. Then, in Standalone, go to Tools --> Add-ons, click the gear icon, and select <q>Install Add-on From File...</q>, and select the downloaded .xpi file.</dd>
   <dt>Zotero LibreOffice plugin</dt>
-  <dd>On its first run, Zotero Standalone will automatically install the Zotero LibreOffice plugin. If necessary, the plugin can be reinstalled from the <a href="https://www.zotero.org/support/preferences/cite">Zotero preferences</a>.</dd>
+  <dd>On its first run, Zotero Standalone will automatically install the Zotero LibreOffice plugin. If necessary, the plugin can be reinstalled from the Cite tab of the <a href="https://www.zotero.org/support/preferences/cite">Zotero preferences</a>.</dd>
 </dl>
 
 <h3>LibreOffice</h3>
 <p>Even if you don't use LibreOffice as your word processor, you'll still need this free and open source program for the conversion of RTF/ODF-Scan's plain-text citation markers into active Zotero citations. Obtain a copy at the <a href="https://www.libreoffice.org/">LibreOffice website</a>.</p>
 
-<h2>Inserting Citations</h2>
-<h3>From Zotero Client</h3>
-<p>First, set the <q>Default Output Format</q> to <q>Scannable Cite</q> in the Export tab of the <a href="http://www.zotero.org/support/preferences">Zotero Preferences</a>. You can now insert citation markers by either dragging&amp;dropping items or by using ctrl+alt+c (cmd+shift+c on Mac) to copy them to your clipboard and the paste them using ctrl/cmd+v or the right-click context menu.
+<h2>Inserting Citation Markers</h2>
+<h3>From the Zotero Client</h3>
+<p>To generate citation markers in Zotero for Firefox or Zotero Standalone, first set the <q>Default Output Format</q> for Quick Copy to <q>Scannable Cite</q> in the Export tab of the <a href="http://www.zotero.org/support/preferences">Zotero Preferences</a>. You can now insert citation markers into your document in two easy ways:</p>
 
-<h3>From zotero.org</h3>
-<p>To generate citation markers directly from zotero.org, use the Scannable Cite bookmarklet. Drag and drop the following link to your bookmarks bar: <a href="javascript:(function(){%22undefined%22==typeof%20BookmarkletLoader%26%26(BookmarkletLoader=new%20function(){this.loading={},this.run=function(o,n){if(!this.loading[o]){if(window[o])return%20void%20window[o].run();var%20e=this,t=document.createElement(%22script%22);t.src=n,t.addEventListener(%22load%22,function(){delete%20e.loading[o],window[o].run()}),this.loading[o]=!0,document.body.appendChild(t)}}}),BookmarkletLoader.run(%22ZoteroRtfOdfScan%22,%22//zotero-odf-scan.github.io/zotero-odf-scan/bookmarklet/bookmarklet.js%22)})();">Cite Item(s)</a>. Click the bookmarklet when viewing a single item on zotero.org and a dialog will appear with the citation marker that you can then copy and paste into your document. The bookmarklet will also work when viewing a list of items on zotero.org. Use the checkboxes next to the items to select which references you want to cite and click the bookmarklet.</p>
+<ul>
+  <li>Drag items from your Zotero library and drop them onto your document</li>
+  <li>Select items and press Ctrl+Alt+C (Cmd+Shift+C on macOS) to copy the citation markers to your clipboard and press Ctrl+V (Cmd+V) to paste them into your document</li>
+</ul>
 
-<h2>Citation Marker</h2>
-<p>A citation marker will look like this<br>
-<code>{ | Smith, (2012) | | |zu:2433:WQVBH98K}</code></p>
-<p>It is separated into five sections by vertical lines (<q>pipes</q>). The first section can contain a prefix of the citation. The second section contains author, title, and year of the cited item. The third section can contain a locator such as a page number, the fourth section can contain a suffix for the citation, and the fifth section contains a unique identifier of the item with a user/group ID and an item ID. Do not modify the last section of the marker.</p>
-Let's look at this for an example. This marker:<br>
-<code>{See | Smith, (2012) |p. 45 | for an example |zu:2433:WQVBH98K}</code>
-<p>will turn into<div style="margin-left: 2em;">
-(See Smith, 2012, p. 45 for an example)<br>
-</div></p>
-<p>when APA is selected as a citation style.</br>
-See <a href="#hidden_preferences">below</a> on how to modify the appearance of markers.</p>
-<h3>Affix Mark-up</h3>
+<h3>From the Zotero Website</h3>
+<p>It is also possible to generate citation markers directly from personal or group libraries on <a href="https://www.zotero.org/">www.zotero.org</a> using the <q>Cite Item(s)</q> bookmarklet. To install the bookmarklet, drag and drop the following link to your bookmarks bar:</p>
+<p><a href="javascript:(function(){%22undefined%22==typeof%20BookmarkletLoader%26%26(BookmarkletLoader=new%20function(){this.loading={},this.run=function(o,n){if(!this.loading[o]){if(window[o])return%20void%20window[o].run();var%20e=this,t=document.createElement(%22script%22);t.src=n,t.addEventListener(%22load%22,function(){delete%20e.loading[o],window[o].run()}),this.loading[o]=!0,document.body.appendChild(t)}}}),BookmarkletLoader.run(%22ZoteroRtfOdfScan%22,%22//zotero-odf-scan.github.io/zotero-odf-scan/bookmarklet/bookmarklet.js%22)})();">Cite Item(s)</a></p>
 
-<p>Text in prefixes and suffixes can be formatted in italics or bold using simple mark-up language: To print something in <em>italics</em> put a single asterisk (*) on either side (e.g. *Weltanschauung*), to print something <strong>bold</strong> use two asterisks (e.g. **strongly**)</p>
+<p>If you click the installed bookmarklet when viewing a single item in an online Zotero library, a dialog box will appear with the citation marker for that item, which you can then copy and paste into your document. The bookmarklet also works for single or multiple items when you're viewing an item listing. First check the checkboxes next to the items you wish to cite, and click the bookmarklet.</p>
+
+<h2>Working with Citation Markers</h2>
+<p>Citation markers look like this:</p>
+<p><code>{ | Smith, (2012) | | |zu:2433:WQVBH98K}</code></p>
+<p>Each marker is separated into five sections, separated by vertical lines (<q>pipes</q>). The first section may contain a citation prefix. The second section contains the authors (or title) and year of the cited item. The third section may contain a locator, such as a page number. The fourth section may contain a citation suffix. Finally, the fifth section contains a unique item identifier (consisting of a user/group ID and an item ID).</p>
+You are free to change the first four sections (but never modify the identifier section). If we add a citation prefix, locator, and suffix to the above marker, we get:</p>
+<p><code>{See | Smith, (2012) |p. 45 | for an example |zu:2433:WQVBH98K}</code></p>
+<p>will can later be turned into, with e.g. the APA citation style:</p>
+<p><blockquote>(See Smith, 2012, p. 45 for an example)</blockquote></p>
+
+<p>See <a href="#hidden_preferences">below</a> on how to modify the appearance of markers.</p>
+<h3>Formatting Prefixes and Suffixes</h3>
+
+<p>Text in prefixes and suffixes can be formatted in <em>italics</em> with single asterisks on either side (e.g. *Weltanschauung*), or in <strong>bold</strong> with double asterisks (e.g. **strongly**).</p>
 
 <h3>Suppress Author</h3>
 
