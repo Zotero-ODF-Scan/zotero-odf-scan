@@ -70,53 +70,134 @@
 <h2>Working with Citation Markers</h2>
 <p>Citation markers look like this:</p>
 <p><code>{ | Smith, (2012) | | |zu:2433:WQVBH98K}</code></p>
-<p>Each marker is separated into five sections, separated by vertical lines (<q>pipes</q>). The first section may contain a citation prefix. The second section contains the authors (or title) and year of the cited item. The third section may contain a locator, such as a page number. The fourth section may contain a citation suffix. Finally, the fifth section contains a unique item identifier (consisting of a user/group ID and an item ID).</p>
-You are free to change the first four sections (but never modify the identifier section). If we add a citation prefix, locator, and suffix to the above marker, we get:</p>
+<p>Each marker is separated into five sections, separated by vertical lines (<q>pipes</q>). The first section may contain a citation prefix. The second section contains the authors (or title) and year of the cited item; this section only exists to show you which item is cited by the citation marker. The third section may contain a locator, such as a page number. The fourth section may contain a citation suffix. Finally, the fifth section contains a unique item identifier (consisting of a user/group ID and an item ID).</p>
+<p>You are free to change the first four sections, but be careful to never modify the identifier section. If we add a citation prefix, locator, and suffix to the above marker, we get:</p>
 <p><code>{See | Smith, (2012) |p. 45 | for an example |zu:2433:WQVBH98K}</code></p>
 <p>will can later be turned into, with e.g. the APA citation style:</p>
-<p><blockquote>(See Smith, 2012, p. 45 for an example)</blockquote></p>
+<blockquote>(See Smith, 2012, p. 45 for an example)</blockquote>
 
-<p>See <a href="#hidden_preferences">below</a> on how to modify the appearance of markers.</p>
 <h3>Formatting Prefixes and Suffixes</h3>
 
-<p>Text in prefixes and suffixes can be formatted in <em>italics</em> with single asterisks on either side (e.g. *Weltanschauung*), or in <strong>bold</strong> with double asterisks (e.g. **strongly**).</p>
+<p>Text in citation prefixes and suffixes can be formatted in <em>italics</em> with single asterisks on either side (e.g. *Weltanschauung*), or in <strong>bold</strong> with double asterisks (e.g. **strongly**).</p>
 
 <h3>Suppress Author</h3>
 
-<p>To suppress the author &mdash; most typically in the case of a parenthetical citation that is preceded by the author name in the text &mdash; put a minus sign (-) in front of the author as in:<br>
-<code>{ |-Smith, (2012) | | |zu:2433:WQVBH98K}</code></p>
+<p>You can suppress the author in the active Zotero citation by putting a minus sign (-) at the start of the second section of the citation marker.<p>
+<p><code>{ |-Smith, (2012) | | |zu:2433:WQVBH98K}</code></p>
+<p>This allows you to write "Smith (2012)" (where you write "Smith " by hand, and "(2012)" represents the Zotero citation).</p>
 
 <h3>Locators</h3>
 
-<p>This is a list of locators and the labels RTF/ODF-scan will recognize for them. Note that a space is <em>required</em> between locator label and number, i.e. <q>ch. 6</q> <em>not</em> <q>ch.6</q>. The actual labels printed in your citations depend on your citation style and locale in Zotero.</p>
+<p>The following locator labels are automatically recognized and reformatted according to the citation style and locale selected in Zotero. Note that you <em>must</em> included a space between locator label and number (e.g. <q>ch. 6</q> instead of <q>ch.6</q>).</p>
 
-<p>article: "art."<br />
-chapter: "ch." or "Ch."<br />
-subchapter: "subch."<br />
-column: "col."<br />
-figure: "fig."<br />
-line: "l."<br />
-note: "n."<br />
-issue: "no."<br />
-opus: "op."<br />
-page: "p." or "pp."<br />
-paragraph: "para."<br />
-subparagraph: "subpara."<br />
-part: "pt."<br />
-rule: "r."<br />
-section: "sec."<br />
-subsection: "subsec."<br />
-Section: "Sec."<br />
-sub verbo: "sv."<br />
-schedule: "sch."<br />
-title: "tit."<br />
-verse: "vrs."<br />
-volume: "vol."</p>
+<table>
+  <tr>
+    <th>Locator</th>
+    <th>Recognized label(s)</th>
+  </tr>
+  <tr>
+    <td>article</td>
+    <td>"art."</td>
+  </tr>
+  <tr>
+    <td>chapter</td>
+    <td>"ch." or "Ch."</td>
+  </tr>
+  <tr>
+    <td>subchapter</td>
+    <td>"subch."</td>
+  </tr>
+  <tr>
+    <td>column</td>
+    <td>"col."</td>
+  </tr>
+  <tr>
+    <td>figure</td>
+    <td>"fig."</td>
+  </tr>
+  <tr>
+    <td>line</td>
+    <td>"l."</td>
+  </tr>
+  <tr>
+    <td>note</td>
+    <td>"n."</td>
+  </tr>
+  <tr>
+    <td>issue</td>
+    <td>"no."</td>
+  </tr>
+  <tr>
+    <td>opus</td>
+    <td>"op."</td>
+  </tr>
+  <tr>
+    <td>page</td>
+    <td>"p." or "pp."</td>
+  </tr>
+  <tr>
+    <td>paragraph</td>
+    <td>"para."</td>
+  </tr>
+  <tr>
+    <td>subparagraph</td>
+    <td>"subpara."</td>
+  </tr>
+  <tr>
+    <td>part</td>
+    <td>"pt."</td>
+  </tr>
+  <tr>
+    <td>rule</td>
+    <td>"r."</td>
+  </tr>
+  <tr>
+    <td>section</td>
+    <td>"sec."</td>
+  </tr>
+  <tr>
+    <td>subsection</td>
+    <td>"subsec."</td>
+  </tr>
+  <tr>
+    <td>Section</td>
+    <td>"Sec."</td>
+  </tr>
+  <tr>
+    <td>sub verbo</td>
+    <td>"sv."</td>
+  </tr>
+  <tr>
+    <td>schedule</td>
+    <td>"sch."</td>
+  </tr>
+  <tr>
+    <td>title</td>
+    <td>"tit."</td>
+  </tr>
+  <tr>
+    <td>verse</td>
+    <td>"vrs."</td>
+  </tr>
+  <tr>
+    <td>volume</td>
+    <td>"vol."</td>
+  </tr>
+</table>
 
-<h3>Multiple Source Citations</h3>
+<h3>Multiple Item Citations</h3>
 
-<p>Markers that are directly adjacent will be merged to a single citation such as (Smith 1776, 1791). Selecting multiple items at once in Zotero and dragging them will automatically produce adjacent markers.</p>
+<p>Citation markers that are directly adjacent will be merged into a single Zotero citation, such as "(Smith 1776, 1791)". RTF/ODF-Scan automatically produces adjacent markers when you create citation markers from multiple items at once in Zotero.</p>
 
+<h3>Customizing the Second Section of Citation Markers</h3>
+<p>You can customize how the second section of citation markers is generated with two so-called hidden preferences. See the <a href="http://www.zotero.org/support/preferences/hidden_preferences">Zotero documentation on hidden preferences</a> for instructions on finding and changing hidden preferences. Both preferences can be toggled with right-click --> Toggle in the <q>about:config</q> settings window of Firefox or Zotero Standalone.
+
+<dl>
+  <dt>extensions.zotero.translators.ODFScan.includeTitle</dt>
+  <dd>Setting this preference to "true" will add the item title to the citation marker (default: "false", i.e. only "author, (date)").</dd>
+  <dt>extensions.zotero.translators.ODFScan.useZoteroSelect</dt>
+  <dd>Setting this preference to "true" will change citation markers to use <q>zotero://select</q> links instead of simple item IDs (default: "false:, i.e. citation markers as displayed above). Select links have the disadvantage of being longer, but can be used to access Zotero items directly, e.g. by pasting them directly into Firefox's URL bar. This preference affects citation markers produced with the <q>Scannable Cite</q> export translator, bookmarklet, and reverse conversion. Because of the way library IDs are constructed in Zotero, the group IDs used in default markers and select links differ. Trying to switch formats manually will break RTF/ODF-Scan.</dd>
+</dl>
 
 <h2>Saving and Converting your Document</h2>
 
@@ -131,15 +212,6 @@ Click <q>Next</q> and the plugin will convert your document.</p>
 <h2>Reverse Conversion</h2>
 
 <p>RTF/ODF Scan can also take an existing ODF document with Zotero citations inserted by the LibreOffice plugin and convert citations to markers. This could be useful if you started writing in LibreOffice but want to switch to a word processor without a dedicated Zotero plugin. For this option, select ODF (to markers) as File type in the conversion dialog.</p>
-
-<h2 id="hidden_preferences">Hidden Preferences</h2>
-You can modify markers with two hidden preferences. See <a href="http://www.zotero.org/support/preferences/hidden_preferences">here</a> for general instructions on accessing hidden preferences. Both of these preferences can be toggled back and forth using right-click --> Toggle in the about:config settings of Firefox/Zotero.
-<p><code>extensions.zotero.translators.ODFScan.includeTitle</code></br> 
-will include the title of the item in the marker (default: false, i.e. only author, (date))</p>
-<p><code>extensions.zotero.translators.ODFScan.useZoteroSelect</code></br>
-will use zotero://select links instead of simple item ids. These have the disadvantage of being longer, but can be used to access Zotero items directly (e.g. by pasting them in Firefox's URL bar). This preference affects both the translator and the markers produced by reverse conversion. (default: false, i.e. citation markers as displayed above). 
-Because of the way library IDs are constructed in Zotero, the group IDs used in the default markers and those in zotero://select differ. Trying to adjust them manually will break ODF scan</p>
-
 
 <h2>Support</h2>
 <p>Please ask any questions and report problems to the <a href="https://forums.zotero.org/discussion/29308/announcing-rtfodf-scan-for-zotero/">RTF/ODF - Scan thread</a> on the Zotero forums.
