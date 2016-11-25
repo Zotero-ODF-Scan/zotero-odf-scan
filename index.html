@@ -26,7 +26,7 @@
       <section>
         <h2>Overview</h2>
 
-<p><i>RTF/ODF-Scan for Zotero</i> is an add-on for the <a href="https://www.zotero.org/">Zotero</a> reference manager, which allows you to insert plain-text citation markers into documents you write with any word processor. After saving such a document in the OpenDocument Text (.odt) format, RTF/ODF Scan can then convert these plain-text markers into regular, active Zotero citations. With this workflow, the add-on provides Zotero citation support for word processors for which no dedicated Zotero plugins exist, such as <a href="https://www.google.com/docs/about/">Google Docs</a> and <a href="https://www.literatureandlatte.com/scrivener.php">Scrivener</a>.</p>
+<p><i>RTF/ODF-Scan for Zotero</i> is an add-on for the <a href="https://www.zotero.org/">Zotero</a> reference manager, which allows you to insert plain-text citation markers into documents you write with any word processor. After saving such a document in the OpenDocument Text (.odt) format, RTF/ODF-Scan can then convert these plain-text markers into regular, active Zotero citations. With this workflow, the add-on provides Zotero citation support for word processors for which no dedicated Zotero plugins exist, such as <a href="https://www.google.com/docs/about/">Google Docs</a> and <a href="https://www.literatureandlatte.com/scrivener.php">Scrivener</a>.</p>
 <p>RTF/ODF-Scan requires <a href="https://www.zotero.org/">Zotero</a>, <a href="https://www.libreoffice.org/">LibreOffice</a> and Zotero's LibreOffice plugin.</p>
 
 <h2>Installation</h2>
@@ -201,17 +201,18 @@
 
 <h2>Saving and Converting your Document</h2>
 
-<p>Once you are done writing and inserting citations, save your document as .odt (Open Document Format-ODF). This is an option in Google Docs and Scrivener among others. If your word processing software does not support .odt, you can save the document as .doc or .rtf, open it in LibreOffice and save it as .odt, though this may lead to some losses in formatting.
-Then, in Zotero, click on RTF/ODF Scan in the gears/action menu. Select <q>ODF (to citations)</q> as file type and select your saved file as the input and your desired output file.
-Click <q>Next</q> and the plugin will convert your document.</p>
+<p>Once you are done writing and inserting citation markers, save your document in the OpenDocument Text (.odt) format. If your word processor does not export to the ODT format, you can save the document into a format like .doc, .docx, or .rtf, open that file in LibreOffice and resave it to .odt. Be careful though, since every file format conversion may cause undesirable changes in formatting.</p>
+<p>Then, select <q>RTF/ODF Scan</q> in Zotero's gear/action menu. Select <q>ODF (to citations)</q> as file type, select your saved .odt file as the input file, and set a target destination for the output file.
+Finally, click <q>Next</q> to convert your document.</p>
 
-<h2>Setting a Citation Style</h2>
+<h3>Setting a Citation Style</h3>
 
-<p>Now open the converted document &mdash; by default it will have (citation) in its file name &mdash; in LibreOffice. You will need the <a href="https://www.zotero.org/support/word_processor_plugin_installation#libreoffice">Zotero LibreOffice plugin</a> installed. In Zotero's LibreOffice plugin toolbar, click on <q>Set Document Preferences</q> and choose the citation style. Click OK and Zotero will format all references in your document. If you want a bibliography, move the cursor to the location where it should be inserted and click <q>Insert Bibliography.</q> The citations in the Libre Office document are <q>live</q> &mdash; they will update to changes in your Zotero database and, if you want to, you can change citation styles or add items to your document as if it had been authored using the LibreOffice plugin all along.</p>
+<p>Now open the converted document &mdash; by default it will have <q>(citation)</q> in its file name &mdash; in LibreOffice. In the toolbar of the Zotero LibreOffice plugin, click the <q>Set Document Preferences</q> button and choose a citation style. Click <q>OK</q> and Zotero will format all references in your document. If you want a bibliography, move the cursor to the desired location and click <q>Insert Bibliography</q>.<p>
+<p>After conversion of citation markers with RTF/ODF-Scan, the Zotero citations in the new LibreOffice document are now <q>active</q> &mdash; they will update to reflect changes made in your Zotero database and, if you want to, you can change citation styles or add items to your document as if it had been authored using the Zotero LibreOffice plugin all along.</p>
 
-<h2>Reverse Conversion</h2>
+<h3>Reverse Conversion</h3>
 
-<p>RTF/ODF Scan can also take an existing ODF document with Zotero citations inserted by the LibreOffice plugin and convert citations to markers. This could be useful if you started writing in LibreOffice but want to switch to a word processor without a dedicated Zotero plugin. For this option, select ODF (to markers) as File type in the conversion dialog.</p>
+<p>RTF/ODF-Scan can also convert active Zotero citations in an ODF document back to citation markers. This can be useful if you started writing in LibreOffice but want to switch to a word processor without a dedicated Zotero plugin. For this option, select <q>ODF (to markers)</q> as file type during the document conversion.</p>
 
 <h2>Support</h2>
 <p>Please ask any questions and report problems to the <a href="https://forums.zotero.org/discussion/29308/announcing-rtfodf-scan-for-zotero/">RTF/ODF - Scan thread</a> on the Zotero forums.
