@@ -36,10 +36,12 @@ To suppress the author &emdash; most typically in the case of a parenthetical ci
 This is a list of locators and the labels RTF/ODF-scan will recognize for them. Note that a space is *required* between locator label and number, i.e. "ch. 6" **not** "ch.6". The actual labels printed in your citations depend on your citation style and locale in Zotero.
 
 article: "art."\
+book: "bk."\
 chapter: "ch." or "Ch."\
 subchapter: "subch."\
 column: "col."\
 figure: "fig."\
+folio: "fol."\
 line: "l."\
 note: "n."\
 issue: "no."\
@@ -52,7 +54,7 @@ rule: "r."\
 section: "sec."\
 subsection: "subsec."\
 Section: "Sec."\
-sub verbo: "sv."\
+sub-verbo: "sv."\
 schedule: "sch."\
 title: "tit."\
 verse: "vrs."\
