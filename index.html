@@ -31,13 +31,15 @@
 
 <h2>Installation</h2>
 
-<p>Installing the RTF/ODF-Scan add-on will add a <q>Scannable Cite</q> export translator to the Zotero client and change the <q>RTF Scan</q> option to <q>RTF/ODF Scan</q>.</p>
+<p>Installing the RTF/ODF-Scan add-on will add a <q>Scannable Cite</q> export translator to the Zotero client (<em>note: the automated install is currently broken. See below for manual install instructions</em>) and change the <q>RTF Scan</q> option to <q>RTF/ODF Scan</q> <em>or</em> add a separate ODF Scan option.</p>
 
 
 <h3>Zotero</h3>
 <dl>
   <dt>RTF/ODF-Scan</dt>
-  <dd>Download the add-on by clicking the <q>Download Add-on</q> button to the left. On the next page, right-click the download link to the .xpi file (e.g. "zotero-odf-scan-v1.0.32-fx.xpi") and select <q>Save Link As...</q>. Then, in Zotero, go to Tools --> Add-ons, click the gear icon, and select <q>Install Add-on From File...</q>, and select the downloaded .xpi file.</dd>
+  <dd>Download the add-on by clicking the <q>Download Add-on</q> button to the left. On the next page, right-click the download link to the .xpi file (e.g. "zotero-odf-scan-v1.0.32-fx.xpi") and select <q>Save Link As...</q>. Then, in Zotero, go to Tools --> Add-ons, click the gear icon, and select <q>Install Add-on From File...</q>, and select the downloaded .xpi file.
+    <br/><strong>Additional step:</strong> Currently, the automated installation of the Scannable Cite translator is broken. To manually install the translator, download the <a href="https://raw.githubusercontent.com/Juris-M/zotero-odf-scan-plugin/master/resource/translators/Scannable%20Cite.js">Scannable Cite translator</a> (right-click on the link and use "Save link as") and place the downloaded file "Scannable Cite.js" in the <a href="https://www.zotero.org/support/zotero_data">Zotero data directory</a>. Scannable Cite will appear as a translator after restarting Zotero. Under Windows, make sure that the system has not ended a .txt file extension after download. 
+  </dd>
   <dt>Zotero LibreOffice plugin</dt>
   <dd>On its first run, Zotero will automatically install the Zotero LibreOffice plugin. If necessary, the plugin can be reinstalled from the Cite tab of the <a href="https://www.zotero.org/support/preferences/cite">Zotero preferences</a>.</dd>
 </dl>
@@ -55,6 +57,7 @@
 </ul>
 
 <h3>From the Zotero Website</h3>
+<p><em>The bookmarklet does not currently work and we're not actively trying to fix it. Patches welcome</em></p>
 <p>It is also possible to generate citation markers directly from personal or group libraries on <a href="https://www.zotero.org/">www.zotero.org</a> using the <q>Cite Item(s)</q> bookmarklet. To install the bookmarklet, drag and drop the following link to your bookmarks bar:</p>
 <p><a href="javascript:(function(){%22undefined%22==typeof%20BookmarkletLoader%26%26(BookmarkletLoader=new%20function(){this.loading={},this.run=function(o,n){if(!this.loading[o]){if(window[o])return%20void%20window[o].run();var%20e=this,t=document.createElement(%22script%22);t.src=n,t.addEventListener(%22load%22,function(){delete%20e.loading[o],window[o].run()}),this.loading[o]=!0,document.body.appendChild(t)}}}),BookmarkletLoader.run(%22ZoteroRtfOdfScan%22,%22//zotero-odf-scan.github.io/zotero-odf-scan/bookmarklet/bookmarklet.js%22)})();">Cite Item(s)</a></p>
 
