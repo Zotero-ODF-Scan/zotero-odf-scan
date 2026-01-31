@@ -1,19 +1,19 @@
 ## Overview
 
-*ODF/DOCX Scan for Zotero* is an add-on for the [Zotero](https://www.zotero.org/) reference manager that lets you insert plain-text citation markers into any document and then convert them into active Zotero citations. This provides Zotero citation support for word processors without a dedicated Zotero plugin, such as [Google Docs](https://www.google.com/docs/about/) and [Scrivener](https://www.literatureandlatte.com/scrivener/overview).
+*ODF/DOCX Scan for Zotero* is an add-on for the [Zotero](https://www.zotero.org/) reference manager that lets you insert plain-text citation markers into any document and then convert them into active Zotero citations. This provides Zotero citation support for word processors without a dedicated Zotero plugin, such as [Scrivener](https://www.literatureandlatte.com/scrivener/overview).
 
 The add-on supports two citation marker formats:
 
 - **Scannable Cite** — drag-and-drop markers from the Zotero client
 - **Pandoc citations** — `[@citekey]` syntax using Zotero's [Citation Key](https://www.zotero.org/support/kb/citation_keys) field
 
-Both ODF (.odt) and DOCX (.docx) files are supported. ODF conversion requires [LibreOffice](https://www.libreoffice.org/) and the Zotero LibreOffice plugin.
+Both ODF (.odt) and DOCX (.docx) files are supported. ODF conversion requires [LibreOffice](https://www.libreoffice.org/) and the Zotero LibreOffice plugin, DOCX conversion requires Microsoft Word the Zotero Word plugin.
 
 ## Installation
 
-[Download the latest release](https://github.com/Juris-M/zotero-odf-scan-plugin/releases/latest) (.xpi file). In Zotero, go to Tools &rarr; Add-ons, click the gear icon, and select "Install Add-on From File...".
+[Download the latest release](https://github.com/Juris-M/zotero-odf-scan-plugin/releases/latest) (.xpi file). In Zotero, go to Tools &rarr; Plugins, click the gear icon, and select "Install Plugin From File...".
 
-The add-on installs the *Scannable Cite* export translator and adds an *ODF/DOCX Scan* option under Zotero's Tools menu.
+The add-on installs the *Scannable Cite* export translator and adds an *ODF Scan* option under Zotero's Tools menu.
 
 ## Scannable Cite markers
 
@@ -91,7 +91,7 @@ To use pandoc citations, select one of the pandoc conversion directions in the p
 ## Converting your document
 
 1. Save your document as .odt (OpenDocument) or .docx (Word)
-2. In Zotero, open Tools &rarr; ODF/DOCX Scan
+2. In Zotero, open Tools &rarr; ODF Scan
 3. Select the conversion direction
 4. Choose your input file and output destination
 5. Click "Process Document"
