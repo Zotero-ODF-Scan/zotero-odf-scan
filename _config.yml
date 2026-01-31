@@ -1,6 +1,8 @@
 theme: jekyll-theme-minimal
 title: ODF/DOCX Scan for Zotero
 description: Bringing Zotero citations to any word processor
+show_downloads: true
+xpi_url: "https://github.com/Juris-M/zotero-odf-scan-plugin/releases/latest"
 github:
   repository_url: "https://github.com/Juris-M/zotero-odf-scan-plugin"
   project_title: "Juris-M/zotero-odf-scan-plugin"
